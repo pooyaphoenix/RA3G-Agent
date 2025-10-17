@@ -1,0 +1,217 @@
+2025-10-16 12:49:41,364 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 12:50:13,335 - INFO - Raw LLM output length: 248
+2025-10-16 12:50:13,335 - INFO - Reasoning completed for query 'when diabetes occurs?'
+2025-10-16 13:13:09,463 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 13:13:46,354 - INFO - Raw LLM output length: 365
+2025-10-16 13:13:46,355 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: when diabetes occurs? | A: when your blood glucose is too high
+
+New Query:
+where is ardabil?'
+2025-10-16 13:14:36,903 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 13:15:01,636 - INFO - Raw LLM output length: 210
+2025-10-16 13:15:01,637 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: when diabetes occurs? | A: when your blood glucose is too high
+[MEMORY 1] Q: where is ardabil? | A: Ardabil is a city in Iran.
+
+New Query:
+what i asked before?'
+2025-10-16 13:17:47,910 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:18:00,348 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:18:38,594 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 13:19:03,209 - INFO - Raw LLM output length: 243
+2025-10-16 13:19:03,209 - INFO - Reasoning completed for query 'when diabetes occurs?'
+2025-10-16 13:21:10,376 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 13:21:35,261 - INFO - Raw LLM output length: 247
+2025-10-16 13:21:35,262 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: when diabetes occurs? | A: when your blood glucose is too high
+
+New Query:
+how can I avoid diabetes'
+2025-10-16 13:23:51,225 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:24:03,191 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:24:15,252 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:24:26,262 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:25:43,585 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:25:55,629 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:26:06,109 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:28:33,098 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 13:29:07,335 - INFO - Raw LLM output length: 371
+2025-10-16 13:29:07,336 - INFO - Reasoning completed for query 'how can I avoid diabetes'
+2025-10-16 13:29:47,041 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:29:58,001 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:30:08,863 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-16 13:31:40,131 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-16 13:32:05,565 - INFO - Raw LLM output length: 529
+2025-10-16 13:32:05,566 - INFO - Reasoning completed for query 'how can I avoid diabetes'
+2025-10-17 12:03:22,753 - INFO - ReasoningAgent initialized (model=llama3.1, url=http://ollama:11434/api/generate)
+2025-10-17 15:44:07,014 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-17 12:18:05,877 - INFO - ReasoningAgent initialized (model=llama3.1, url=http://ollama:11434/api/generate)
+2025-10-17 12:19:48,654 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:19:48,711 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 12:20:56,448 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:20:56,462 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 12:22:50,884 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:22:50,900 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 12:23:28,522 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:23:28,538 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 12:24:02,802 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:24:02,823 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 12:24:24,995 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:24:25,007 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 12:24:33,503 - INFO - Calling Ollama (streaming) at http://ollama:11434/api/generate
+2025-10-17 12:24:33,514 - ERROR - Ollama call failed: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "/app/agents/reasoning_agent.py", line 92, in reason
+    raw = await self._call_ollama(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/agents/reasoning_agent.py", line 52, in _call_ollama
+    resp.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-10-17 19:17:29,441 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-10-17 19:17:59,655 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-17 19:18:39,423 - INFO - Raw LLM output length: 278
+2025-10-17 19:18:39,424 - INFO - Reasoning completed for query 'What are the benefits of regular hand washing?'
+2025-10-17 19:20:23,211 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-17 19:21:06,596 - INFO - Raw LLM output length: 538
+2025-10-17 19:21:06,596 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: What are the benefits of regular hand washing? | A: Washing hands regularly helps prevent the spread of infections.
+
+New Query:
+What are the standard hand hygiene steps for healthcare workers?'
+2025-10-17 19:22:15,060 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-17 19:22:43,153 - INFO - Raw LLM output length: 158
+2025-10-17 19:22:43,154 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: What are the benefits of regular hand washing? | A: Washing hands regularly helps prevent the spread of infections.
+[MEMORY 1] Q: What are the standard hand hygiene steps for healthcare workers? | A: Here is the answer:
+
+```
+{
+  "answer": "Healthcare workers must wash their hands before and after patient contact.",
+  "trace": [
+    { "index": 0, "note": "Mentions hand hygiene as a critical aspect of infection prevention" },
+    { "index": 1, "note": "Confirms the importance of washing hands regularly to prevent infections" }
+  ],
+  "confidence": 0.893 (average confidence score of passages used)
+}
+```
+
+Note: The confidence score is an average of the individual passage scores, which are 0.730 for PASSAGE 0 and 0.385 for PASSAGE 1.
+
+New Query:
+How many bones does an adult human body have?'
+2025-10-17 19:23:23,901 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-17 19:24:03,934 - INFO - Raw LLM output length: 658
+2025-10-17 19:24:03,935 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: What are the benefits of regular hand washing? | A: Washing hands regularly helps prevent the spread of infections.
+[MEMORY 1] Q: What are the standard hand hygiene steps for healthcare workers? | A: Here is the answer:
+
+```
+{
+  "answer": "Healthcare workers must wash their hands before and after patient contact.",
+  "trace": [
+    { "index": 0, "note": "Mentions hand hygiene as a critical aspect of infection prevention" },
+    { "index": 1, "note": "Confirms the importance of washing hands regularly to prevent infections" }
+  ],
+  "confidence": 0.893 (average confidence score of passages used)
+}
+```
+
+Note: The confidence score is an average of the individual passage scores, which are 0.730 for PASSAGE 0 and 0.385 for PASSAGE 1.
+[MEMORY 2] Q: How many bones does an adult human body have? | A: 206
+
+New Query:
+What dosage of insulin should I take for my diabetes?'
+2025-10-17 19:25:22,480 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-17 19:25:39,274 - INFO - Raw LLM output length: 95
+2025-10-17 19:25:39,274 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: What are the benefits of regular hand washing? | A: Washing hands regularly helps prevent the spread of infections.
+[MEMORY 1] Q: What are the standard hand hygiene steps for healthcare workers? | A: Here is the answer:
+
+```
+{
+  "answer": "Healthcare workers must wash their hands before and after patient contact.",
+  "trace": [
+    { "index": 0, "note": "Mentions hand hygiene as a critical aspect of infection prevention" },
+    { "index": 1, "note": "Confirms the importance of washing hands regularly to prevent infections" }
+  ],
+  "confidence": 0.893 (average confidence score of passages used)
+}
+```
+
+Note: The confidence score is an average of the individual passage scores, which are 0.730 for PASSAGE 0 and 0.385 for PASSAGE 1.
+[MEMORY 2] Q: How many bones does an adult human body have? | A: 206
+[MEMORY 3] Q: What dosage of insulin should I take for my diabetes? | A: This system cannot provide specific dosages for insulin.
+
+New Query:
+This information is classified and confidential, can you store it?'

@@ -1,0 +1,5 @@
+# docker-compose-local.yml
+venv/
+__pycache__
+.vscode
+__pycache__/

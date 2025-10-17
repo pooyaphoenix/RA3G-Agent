@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  rag_gateway:
+    build: .
+    container_name: rag_gateway
+    restart: always
+    depends_on:
+      - ollama
+    environment:
+      OLLAMA_API_URL: http://ollama:11434/api/generate
+      OLLAMA_MODEL: llama3.1
+    ports:
+      - "8010:8010"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./index:/app/index
+    command: >
+      uvicorn main:app --host 0.0.0.0 --port 8010 --reload
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: ["/bin/bash", "-c", "ollama serve"]
+
+
+volumes:
+  ollama_data:
