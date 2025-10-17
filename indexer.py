@@ -1,5 +1,5 @@
 from pathlib import Path
-from agents.retriever_agent import RetrieverAgent
+from app.agents.retriever_agent import RetrieverAgent
 import os
 import argparse
 

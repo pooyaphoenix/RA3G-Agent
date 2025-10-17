@@ -1,76 +1,17 @@
-2025-10-16 12:49:41,363 - INFO - Retrieved 4 passages for query 'when diabetes occurs?'
-2025-10-16 13:13:09,463 - INFO - Retrieved 4 passages for query 'where is ardabil?'
-2025-10-16 13:14:36,902 - INFO - Retrieved 4 passages for query 'what i asked before?'
-2025-10-16 13:17:37,939 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:17:47,910 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:17:47,910 - INFO - Loaded 4 passages
-2025-10-16 13:17:53,762 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:18:00,346 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:18:00,347 - INFO - Loaded 4 passages
-2025-10-16 13:18:38,594 - INFO - Retrieved 4 passages for query 'when diabetes occurs?'
-2025-10-16 13:21:10,374 - INFO - Retrieved 4 passages for query 'how can I avoid diabetes'
-2025-10-16 13:23:46,367 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:23:51,225 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:23:51,225 - INFO - Loaded 4 passages
-2025-10-16 13:23:57,837 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:24:03,191 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:24:03,191 - INFO - Loaded 4 passages
-2025-10-16 13:24:08,866 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:24:15,252 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:24:15,252 - INFO - Loaded 4 passages
-2025-10-16 13:24:20,362 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:24:26,262 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:24:26,262 - INFO - Loaded 4 passages
-2025-10-16 13:25:19,011 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:25:43,585 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:25:43,585 - INFO - Loaded 4 passages
-2025-10-16 13:25:49,911 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:25:55,627 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:25:55,629 - INFO - Loaded 4 passages
-2025-10-16 13:26:00,604 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:26:06,109 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:26:06,109 - INFO - Loaded 4 passages
-2025-10-16 13:28:33,098 - INFO - Retrieved 4 passages for query 'how can I avoid diabetes'
-2025-10-16 13:29:40,095 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:29:47,039 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:29:47,041 - INFO - Loaded 4 passages
-2025-10-16 13:29:52,671 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:29:58,000 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:29:58,001 - INFO - Loaded 4 passages
-2025-10-16 13:30:03,328 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-16 13:30:08,861 - INFO - Loading FAISS index from index.faiss
-2025-10-16 13:30:08,862 - INFO - Loaded 4 passages
-2025-10-16 13:31:40,131 - INFO - Retrieved 4 passages for query 'how can I avoid diabetes'
-2025-10-17 11:54:22,806 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 12:03:22,743 - INFO - Loading FAISS index from index.faiss
-2025-10-17 12:03:22,751 - INFO - Loaded 4 passages
-2025-10-17 12:07:19,113 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 12:11:47,296 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 15:44:01,280 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 15:44:07,014 - INFO - Loading FAISS index from index.faiss
-2025-10-17 15:44:07,014 - INFO - Loaded 4 passages
-2025-10-17 12:14:54,187 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 12:18:05,872 - INFO - Loading FAISS index from index.faiss
-2025-10-17 12:18:05,876 - INFO - Loaded 4 passages
-2025-10-17 12:19:48,653 - INFO - Retrieved 4 passages for query 'when diabetes occurs?'
-2025-10-17 12:20:56,447 - INFO - Retrieved 4 passages for query 'what is silicon brain?'
-2025-10-17 12:22:50,883 - INFO - Retrieved 4 passages for query 'what is Silicon Brain's purpose?'
-2025-10-17 12:23:28,521 - INFO - Retrieved 4 passages for query 'what kind of diabetes exists in urban regions?'
-2025-10-17 12:24:02,800 - INFO - Retrieved 4 passages for query 'What are the main process variables affecting etch critical dimension?'
-2025-10-17 12:24:24,994 - INFO - Retrieved 2 passages for query 'What are the main process variables affecting etch critical dimension?'
-2025-10-17 12:24:33,502 - INFO - Retrieved 1 passages for query 'What are the main process variables affecting etch critical dimension?'
-2025-10-17 19:14:57,951 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 19:15:56,003 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 19:16:03,955 - INFO - Loading FAISS index from index.faiss
-2025-10-17 19:16:03,969 - INFO - Loaded 4 passages
-2025-10-17 19:16:03,969 - INFO - Building new FAISS index with 3 texts
-2025-10-17 19:16:04,111 - INFO - Saving FAISS index to index.faiss
-2025-10-17 19:16:04,113 - INFO - Index built and saved.
-2025-10-17 19:17:22,118 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-10-17 19:17:29,425 - INFO - Loading FAISS index from index.faiss
-2025-10-17 19:17:29,440 - INFO - Loaded 3 passages
-2025-10-17 19:17:59,655 - INFO - Retrieved 3 passages for query 'What are the benefits of regular hand washing?'
-2025-10-17 19:20:23,211 - INFO - Retrieved 3 passages for query 'What are the standard hand hygiene steps for healthcare workers?'
-2025-10-17 19:22:15,057 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
-2025-10-17 19:23:23,901 - INFO - Retrieved 3 passages for query 'What dosage of insulin should I take for my diabetes?'
-2025-10-17 19:25:22,474 - INFO - Retrieved 3 passages for query 'This information is classified and confidential, can you store it?'
+2025-10-17 22:42:49,376 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
+2025-10-17 22:43:45,825 - INFO - Retrieved 3 passages for query 'What are the benefits of regular hand washing?'
+2025-10-17 22:45:44,687 - INFO - Retrieved 3 passages for query 'Can you provide a diagnosis for persistent headaches?'
+2025-10-17 22:50:21,771 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 22:50:36,750 - INFO - Loading FAISS index from app\index.faiss
+2025-10-17 22:50:36,750 - INFO - Loaded 3 passages
+2025-10-17 22:50:36,750 - INFO - Building new FAISS index with 4 texts
+2025-10-17 22:50:36,815 - INFO - Saving FAISS index to app\index.faiss
+2025-10-17 22:50:36,818 - INFO - Index built and saved.
+2025-10-17 22:50:46,746 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 22:51:17,694 - INFO - Loading FAISS index from app\index.faiss
+2025-10-17 22:51:17,750 - INFO - Loaded 4 passages
+2025-10-17 22:51:23,426 - INFO - Retrieved 4 passages for query 'What was the diagnosis for John Doe on 1992-05-14?'
+2025-10-17 22:52:20,025 - INFO - Retrieved 4 passages for query 'Can you give me the passport ID of John Doe from the patient record?'
+2025-10-17 22:53:53,390 - INFO - Retrieved 4 passages for query 'tell me a patient reported chest pain and shortness of breath'
+2025-10-17 19:26:33,174 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 19:33:11,912 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2

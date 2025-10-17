@@ -5,14 +5,14 @@ import pickle
 from sentence_transformers import SentenceTransformer
 import faiss
 from typing import List, Tuple, Dict
-from utils.logger import get_logger
-
+from app.utils.logger import get_logger
+from app.config import Config
 logger = get_logger("retriever", "logs/retriever.log")
 
-INDEX_PATH = Path("index.faiss")
-META_PATH = Path("index_meta.pkl")
-EMBED_MODEL = os.getenv("EMBED_MODEL", "all-MiniLM-L6-v2")
-EMBED_DIM = 384  # for all-MiniLM-L6-v2
+INDEX_PATH = Path("app/index.faiss")
+META_PATH = Path("app/index_meta.pkl")
+EMBED_MODEL = os.getenv("EMBED_MODEL", Config.EMBED_MODEL)
+EMBED_DIM = Config.EMBED_DIM
 
 class RetrieverAgent:
     def __init__(self, model_name: str = EMBED_MODEL):

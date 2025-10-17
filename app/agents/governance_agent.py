@@ -1,7 +1,7 @@
 import re
 from typing import Dict, List
-from utils.logger import get_logger
-from ..config import Config
+from app.utils.logger import get_logger
+from app.config import Config
 logger = get_logger("governance", "logs/governance.log")
 
 BANNED_PHRASES = Config.BANNED_PHRASES

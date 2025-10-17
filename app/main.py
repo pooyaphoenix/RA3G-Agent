@@ -1,11 +1,11 @@
 from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
 from typing import Optional
-from agents.retriever_agent import RetrieverAgent
-from agents.reasoning_agent import ReasoningAgent
-from agents.governance_agent import GovernanceAgent
-from utils.logger import get_logger
-from utils.memory import memory_store
+from app.agents.retriever_agent import RetrieverAgent
+from app.agents.reasoning_agent import ReasoningAgent
+from app.agents.governance_agent import GovernanceAgent
+from app.utils.logger import get_logger
+from app.utils.memory import memory_store
 
 logger = get_logger("gateway", "logs/gateway.log")
 
@@ -47,7 +47,7 @@ async def query(req: QueryRequest, session_id: Optional[str] = Header(default="d
     decision = governor.evaluate(answer, trace, confidence)
     final_answer = decision.get("redacted_answer", answer)
 
-    # 4) 🧠 Save memory
+    # 4) Save memory
     memory_store.add(session_id, req.query, final_answer, trace)
 
     response = {

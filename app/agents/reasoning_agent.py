@@ -1,14 +1,15 @@
 import os
 import httpx
 from typing import List, Dict
-from utils.logger import get_logger
+from app.utils.logger import get_logger
 import json
 import re
+from app.config import Config
 
 logger = get_logger("reasoning", "logs/reasoning.log")
 
-OLLAMA_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/generate")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:latest")
+OLLAMA_URL = os.getenv("OLLAMA_API_URL", Config.OLLAMA_URL)
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", Config.OLLAMA_MODEL)
 
 
 class ReasoningAgent:
