@@ -81,7 +81,7 @@ The project is containerized and will use **Docker Compose** for multi-agent orc
 - `retriever` — FAISS indexing + retrieval
 - `reasoner` — Ollama worker
 - `governance` — policy enforcement
-- `memory` (future) — context store
+- `memory` — context store
 - `logger` — centralized log aggregation
 
 This separation allows easy scaling and swapping of components without modifying the core logic.

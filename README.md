@@ -29,7 +29,7 @@ source venv/bin/activate       # (Windows: venv\Scripts\activate)
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
-
+---
 ## Example cURL Requests
 ```bash
 curl -X 'POST' \
@@ -86,7 +86,7 @@ Response
   "session_id": "default"
 }
 ```
-
+---
 ### Governance Rules
 
 ❌ Block queries containing personal names, phone numbers, addresses, or medical records.
@@ -101,6 +101,13 @@ Response
 | GET    | `/docs`   | Interactive Swagger UI     |
 
 Also you can see **Swagger** in your local address: **http://localhost:8010/docs**
+---
+### 📂 Adding or Updating RAG Corpus
+Place your text files (.txt) in data/corpus/ directory then run this command
+```bash 
+python indexer.py --corpus data/corpus
+```
+index.faiss and index_meta.pkl should be generated in app/ directory
 
-
+---
 Developed by Pooya Chavoshi | **pooyachavoshi@gmail.com**
