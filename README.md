@@ -3,8 +3,10 @@
 This project is a **local Retrieval-Augmented Generation (RAG)** system with a built-in **governance agent** that filters sensitive or restricted information.  
 It allows you to:
 - Load and manage multiple **local corpora** (datasets)
-- Interact with the system using REST APIs
+- Multi-agent orchestration
+- Shared memory to recall previous queries and reasoning chains
 - Block or approve queries based on governance rules
+- Interact with the system using REST APIs
 - Easily run locally in Docker or manually with Python
 
 ---
