@@ -12,7 +12,7 @@ It allows you to:
 
 #### Clone the repository
 ```bash
-git clone https://github.com/yourusername/rag_gateway.git
+git clone https://github.com/pooyaphoenix/RAG-Gateway-with-Governance-Agent.git
 cd rag_gateway
 ```
 
