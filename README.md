@@ -13,7 +13,7 @@ It allows you to:
 #### Clone the repository
 ```bash
 git clone https://github.com/pooyaphoenix/RAG-Gateway-with-Governance-Agent.git
-cd rag_gateway
+cd RAG-Gateway-with-Governance-Agent
 ```
 
 Build and run with Docker
