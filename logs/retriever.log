@@ -15,3 +15,30 @@
 2025-10-17 22:53:53,390 - INFO - Retrieved 4 passages for query 'tell me a patient reported chest pain and shortness of breath'
 2025-10-17 19:26:33,174 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
 2025-10-17 19:33:11,912 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 19:48:07,571 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 19:53:14,551 - INFO - Loading FAISS index from app/index.faiss
+2025-10-17 19:53:14,556 - INFO - Loaded 4 passages
+2025-10-17 19:55:46,695 - INFO - Retrieved 4 passages for query 'hi'
+2025-10-17 19:56:26,990 - INFO - Retrieved 4 passages for query 'What was the diagnosis for John Doe on 1992-05-14'
+2025-10-17 19:57:32,813 - INFO - Retrieved 4 passages for query 'How many bones does an adult human body have?'
+2025-10-17 20:00:19,347 - INFO - Retrieved 4 passages for query 'What are the benefits of regular hand washing?'
+2025-10-17 20:00:45,546 - INFO - Retrieved 4 passages for query 'What are the standard hand hygiene steps for healthcare workers?'
+2025-10-17 23:31:20,558 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 23:31:30,368 - INFO - Loading FAISS index from app\index.faiss
+2025-10-17 23:31:30,371 - INFO - Loaded 4 passages
+2025-10-17 23:31:40,074 - INFO - Retrieved 4 passages for query 'How many bones does an adult human body have?'
+2025-10-17 20:02:14,955 - INFO - Retrieved 4 passages for query 'when Antibiotics should be prescribed?'
+2025-10-17 20:04:02,763 - INFO - Retrieved 4 passages for query 'What are the benefits of regular hand washing?'
+2025-10-17 23:34:49,997 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 23:35:00,233 - INFO - Loading FAISS index from app\index.faiss
+2025-10-17 23:35:00,240 - INFO - Loaded 4 passages
+2025-10-17 23:35:00,240 - INFO - Building new FAISS index with 3 texts
+2025-10-17 23:35:00,306 - INFO - Saving FAISS index to app\index.faiss
+2025-10-17 23:35:00,308 - INFO - Index built and saved.
+2025-10-17 23:35:24,773 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-17 23:35:35,638 - INFO - Loading FAISS index from app\index.faiss
+2025-10-17 23:35:35,654 - INFO - Loaded 3 passages
+2025-10-17 23:35:51,174 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
+2025-10-17 23:35:56,877 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
+2025-10-17 23:36:20,228 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
+2025-10-17 23:38:20,223 - INFO - Retrieved 3 passages for query 'What are the benefits of regular hand washing?'

@@ -88,16 +88,6 @@ This separation allows easy scaling and swapping of components without modifying
 
 ---
 
-## 6. References & Inspirations
-
-- RAG architectures from industry deployments (OpenAI, HuggingFace, LlamaIndex patterns)  
-- Barnabus node patterns — distributed agent communication  
-- AXON/NAYAR integration ideas — event-driven memory fabric  
-- FAISS for scalable vector retrieval  
-- Ollama for local LLM reasoning
-
----
-
-🧾 **Author:** Pooya Chavoshi | Pooyachavoshi@gmail.com
-🛠 **Stack:** FastAPI, FAISS, Ollama, Python, Docker  
-📅 **Version:** 1.0.0
+**Author:** Pooya Chavoshi | Pooyachavoshi@gmail.com
+**Stack:** FastAPI, FAISS, Ollama, Python, Docker  
+**Version:** 1.0.0

@@ -5,3 +5,18 @@
 2025-10-17 22:51:52,261 - INFO - Governance evaluated: approved=True reason=approved
 2025-10-17 22:52:45,660 - INFO - Governance evaluated: approved=True reason=approved
 2025-10-17 22:54:35,780 - INFO - Governance evaluated: approved=False reason=banned_phrases_present: ['diagnosis']
+2025-10-17 19:53:14,559 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-10-17 19:55:46,759 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['diagnosis', 'prescription']; pii_redacted
+2025-10-17 19:56:27,006 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['diagnosis', 'prescription']; pii_redacted
+2025-10-17 19:57:32,828 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['diagnosis']; pii_redacted
+2025-10-17 20:00:19,363 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); pii_redacted
+2025-10-17 20:00:45,567 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); pii_redacted
+2025-10-17 23:31:30,372 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-10-17 23:31:40,441 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['diagnosis']; pii_redacted
+2025-10-17 20:02:14,970 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['prescription']
+2025-10-17 20:04:02,778 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); pii_redacted
+2025-10-17 23:35:35,668 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-10-17 23:35:51,502 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['diagnosis']; pii_redacted
+2025-10-17 23:35:57,322 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['diagnosis']; pii_redacted
+2025-10-17 23:37:25,815 - INFO - Governance evaluated: approved=False reason=low_confidence (0.45 < 0.5)
+2025-10-17 23:38:48,598 - INFO - Governance evaluated: approved=True reason=approved
