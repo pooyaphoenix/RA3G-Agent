@@ -8,8 +8,11 @@ It allows you to:
 - Easily run locally in Docker or manually with Python
 
 ---
-## ⚙️ Setup Instructions
 
+
+
+## ⚙️ Setup Instructions
+All project settings are centralized in **app/config.py** to make the system easy to configure and maintain.
 #### Clone the repository
 ```bash
 git clone https://github.com/pooyaphoenix/RAG-Gateway-with-Governance-Agent.git
@@ -101,6 +104,7 @@ Response
 | GET    | `/docs`   | Interactive Swagger UI     |
 
 Also you can see **Swagger** in your local address: **http://localhost:8010/docs**
+
 ---
 ### 📂 Adding or Updating RAG Corpus
 Place your text files (.txt) in data/corpus/ directory then run this command
