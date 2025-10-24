@@ -48,7 +48,7 @@ Governance was designed to be **transparent, auditable, and simple** at first, w
 
 ## 3. Scaling Vision
 
-While the current implementation runs as a **single-node FastAPI service**, the long-term vision is to **scale into a distributed memory and reasoning fabric** inspired by Barnabus/AXON-NAYAR style architectures:
+While the current implementation runs as a **single-node FastAPI service**, the long-term vision is to **scale into a distributed memory and reasoning fabric**
 
 - **Distributed Retriever Shards**: Parallel FAISS nodes for large corpora.
 - **Stateless Reasoning Workers**: Horizontal scaling of LLM inference (Ollama or other backends).
