@@ -11,6 +11,7 @@ It allows you to:
 
 ---
 
+<img width="600" height="400" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/ec6b9b2e-569b-43af-89a5-6c81dbdb9f03" />
 
 
 ## ⚙️ Setup Instructions
