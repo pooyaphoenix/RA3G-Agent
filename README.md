@@ -117,4 +117,9 @@ python indexer.py --corpus data/corpus
 index.faiss and index_meta.pkl should be generated in app/ directory
 
 ---
-Developed by Pooya Chavoshi | **pooyachavoshi@gmail.com**
+## 👥 Contributors
+<a href="https://github.com/pooyaphoenix/RAG-Gateway-with-Governance-Agent/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=pooyaphoenix/RAG-Gateway-with-Governance-Agent" />
+</a>
+
+ **pooyachavoshi@gmail.com**
