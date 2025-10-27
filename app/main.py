@@ -19,6 +19,25 @@ class QueryRequest(BaseModel):
     query: str
     top_k: int = 5
 
+@app.get("/health")
+async def health_check():
+    if retriever and retriever.index is not None:
+        index_loaded = True
+    else:
+        index_loaded = False
+    
+    if reasoner and await reasoner.reason("ping", []):
+        ollama_status = True
+    else:
+        ollama_status = False
+
+    if index_loaded and ollama_status:
+        logger.info("Health check passed")
+        return {"status": "ok", "index_loaded": index_loaded, "ollama_status": ollama_status}
+    else:
+        logger.error("Health check failed")
+        raise HTTPException(status_code=503, detail="Health check failed")
+
 @app.post("/query")
 async def query(req: QueryRequest, session_id: Optional[str] = Header(default="default")):
     q = req.query
