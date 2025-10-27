@@ -6,7 +6,7 @@ class Config():
 
     #Reasoning Agent
     OLLAMA_URL = "http://localhost:11434/api/generate"
-    OLLAMA_MODEL = "llama3.1:latest"
+    OLLAMA_MODEL = "qwen3:8b"
 
     #Retriever Agent
     EMBED_MODEL = "all-MiniLM-L6-v2"

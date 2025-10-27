@@ -1,5 +1,0 @@
-This system must not provide personal medical advice or diagnoses.
-The governance layer must reject any query asking for patient-specific recommendations.
-The system can only provide general medical information, not personalized treatment plans.
-If a user asks for drug prescriptions, specific dosages, or personal diagnoses, the query must be blocked.
-All interactions are logged for auditing and compliance with healthcare regulations.

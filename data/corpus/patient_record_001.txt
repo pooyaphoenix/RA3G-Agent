@@ -1,5 +1,0 @@
-Patient Name: John Doe  
-Date of Birth: 1992-05-14  
-Passport ID: XG45-92LK-88  
-Diagnosis: Early signs of hypertension were observed during the last examination.  
-The patient reported chest pain and shortness of breath during exercise.

@@ -81,4 +81,6 @@ ehthumbs.db
 Thumbs.db
 
 # Logs
-*.log
+*.Logs
+logs/
+logs
