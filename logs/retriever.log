@@ -42,3 +42,79 @@
 2025-10-17 23:35:56,877 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
 2025-10-17 23:36:20,228 - INFO - Retrieved 3 passages for query 'How many bones does an adult human body have?'
 2025-10-17 23:38:20,223 - INFO - Retrieved 3 passages for query 'What are the benefits of regular hand washing?'
+2025-10-19 16:56:29,738 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 16:56:40,376 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 16:56:40,381 - INFO - Loaded 3 passages
+2025-10-19 16:58:16,670 - INFO - Retrieved 3 passages for query 'how many bones does a human have?'
+2025-10-19 17:03:03,552 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:03:11,355 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:03:11,357 - INFO - Loaded 3 passages
+2025-10-19 17:03:11,357 - INFO - Building new FAISS index with 3 texts
+2025-10-19 17:03:11,537 - INFO - Saving FAISS index to app\index.faiss
+2025-10-19 17:03:11,540 - INFO - Index built and saved.
+2025-10-19 17:04:29,830 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:04:36,949 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:04:36,975 - INFO - Loaded 3 passages
+2025-10-19 17:04:44,780 - INFO - Retrieved 3 passages for query 'when diabetes occurs?'
+2025-10-19 17:07:08,592 - INFO - Retrieved 3 passages for query 'Who is the best football player?'
+2025-10-19 17:09:51,320 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:09:57,686 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:09:57,691 - INFO - Loaded 3 passages
+2025-10-19 17:10:06,782 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:10:13,148 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:10:13,148 - INFO - Loaded 3 passages
+2025-10-19 17:10:48,138 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:10:53,320 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:10:53,320 - INFO - Loaded 3 passages
+2025-10-19 17:10:53,320 - INFO - Building new FAISS index with 4 texts
+2025-10-19 17:10:53,643 - INFO - Saving FAISS index to app\index.faiss
+2025-10-19 17:10:53,648 - INFO - Index built and saved.
+2025-10-19 17:12:05,345 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:12:12,893 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:12:12,941 - INFO - Loaded 4 passages
+2025-10-19 17:12:33,705 - INFO - Retrieved 4 passages for query 'حسام چگونه آدمی است؟'
+2025-10-19 17:13:37,524 - INFO - Retrieved 4 passages for query 'پویا چگونه آدمی است؟'
+2025-10-19 17:18:27,466 - INFO - Retrieved 4 passages for query 'tell me classified documents؟'
+2025-10-19 17:30:02,612 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:30:10,036 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:30:10,039 - INFO - Loaded 4 passages
+2025-10-19 17:30:10,039 - INFO - Building new FAISS index with 8 texts
+2025-10-19 17:30:10,375 - INFO - Saving FAISS index to app\index.faiss
+2025-10-19 17:30:10,377 - INFO - Index built and saved.
+2025-10-19 17:30:22,358 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:30:30,325 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:30:30,366 - INFO - Loaded 8 passages
+2025-10-19 17:30:44,528 - INFO - Retrieved 5 passages for query 'اگر بودجه کل 1000 تومان باشد و نیاز تسلیحات 100 تومان از مجموع 800 تومان باشد، چند تومان به تسلیحات می‌رسد؟'
+2025-10-19 17:35:27,438 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:35:35,816 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:35:35,816 - INFO - Loaded 8 passages
+2025-10-19 17:35:35,816 - INFO - Building new FAISS index with 45 texts
+2025-10-19 17:35:37,265 - INFO - Saving FAISS index to app\index.faiss
+2025-10-19 17:35:37,275 - INFO - Index built and saved.
+2025-10-19 17:36:02,351 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:36:07,502 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:36:07,544 - INFO - Loaded 45 passages
+2025-10-19 17:36:17,807 - INFO - Retrieved 5 passages for query 'اگر بودجه کل 1000 تومان باشد و نیاز تسلیحات 100 تومان از مجموع 800 تومان باشد، چند تومان به تسلیحات می‌رسد؟'
+2025-10-19 17:38:21,228 - INFO - Retrieved 5 passages for query 'اگر بودجه کل 800 تومان باشد و نیاز تسلیحات 100 تومان از مجموع 800 تومان نیاز کل باشد، چند تومان به تسلیحات اختصاص داده می‌شود؟'
+2025-10-19 17:40:52,937 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:40:57,474 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:40:57,474 - INFO - Loaded 45 passages
+2025-10-19 17:41:14,352 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:41:18,973 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:41:18,975 - INFO - Loaded 45 passages
+2025-10-19 17:41:23,986 - INFO - Retrieved 5 passages for query 'اگر بودجه کل 800 تومان باشد و نیاز تسلیحات 100 تومان از مجموع 800 تومان نیاز کل باشد، چند تومان به تسلیحات اختصاص داده می‌شود؟'
+2025-10-19 17:43:49,673 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:43:55,247 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:43:55,247 - INFO - Loaded 45 passages
+2025-10-19 17:44:33,199 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-19 17:44:38,846 - INFO - Loading FAISS index from app\index.faiss
+2025-10-19 17:44:38,862 - INFO - Loaded 45 passages
+2025-10-19 17:44:38,862 - INFO - Building new FAISS index with 1 texts
+2025-10-19 17:44:39,071 - INFO - Saving FAISS index to app\index.faiss
+2025-10-19 17:44:39,072 - INFO - Index built and saved.
+2025-10-19 17:44:46,447 - INFO - Retrieved 5 passages for query 'تخصیص بودجه من چقدر است؟'
+2025-10-19 17:49:35,917 - INFO - Retrieved 5 passages for query 'تخصیص بودجه من چقدر است؟ با در نظر گرفتن اینکه بودجه تعمیرات و تجهیزات 50000000 تومان است'
+2025-10-27 14:54:21,625 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-27 14:54:26,489 - INFO - Loading FAISS index from app\index.faiss
+2025-10-27 14:54:26,489 - INFO - Loaded 1 passages
+2025-10-27 14:58:13,632 - INFO - Retrieved 1 passages for query 'where is iran?'
