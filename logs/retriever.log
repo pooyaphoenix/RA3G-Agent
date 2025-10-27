@@ -1,3 +1,17 @@
 2025-10-27 16:04:50,720 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
 2025-10-27 16:04:56,079 - INFO - Loading FAISS index from app\index.faiss
 2025-10-27 16:04:56,081 - INFO - Loaded 1 passages
+2025-10-27 16:16:11,233 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-27 16:16:16,192 - INFO - Loading FAISS index from app\index.faiss
+2025-10-27 16:16:16,196 - INFO - Loaded 1 passages
+2025-10-27 16:16:48,406 - INFO - Retrieved 1 passages for query 'where is iran?'
+2025-10-27 16:23:57,737 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-27 16:24:09,413 - INFO - Loading FAISS index from app\index.faiss
+2025-10-27 16:24:09,413 - INFO - Loaded 1 passages
+2025-10-27 16:24:09,413 - INFO - Building new FAISS index with 1 texts
+2025-10-27 16:24:09,552 - INFO - Saving FAISS index to app\index.faiss
+2025-10-27 16:24:09,555 - INFO - Index built and saved.
+2025-10-27 16:28:43,303 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-27 16:28:50,460 - INFO - Loading FAISS index from app\index.faiss
+2025-10-27 16:28:50,490 - INFO - Loaded 1 passages
+2025-10-27 16:29:15,672 - INFO - Retrieved 1 passages for query 'what is the result of Vaccination?'

@@ -1,1 +1,5 @@
 2025-10-27 16:04:56,082 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-10-27 16:16:16,196 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-10-27 16:18:21,097 - INFO - Governance evaluated: approved=False reason=low_confidence (0.00 < 0.5); pii_redacted
+2025-10-27 16:28:50,490 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-10-27 16:30:23,798 - INFO - Governance evaluated: approved=True reason=approved

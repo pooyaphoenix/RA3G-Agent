@@ -1,1 +1,9 @@
 2025-10-27 16:04:56,082 - INFO - ReasoningAgent initialized (model=qwen3:8b, url=http://localhost:11434/api/generate)
+2025-10-27 16:16:16,196 - INFO - ReasoningAgent initialized (model=qwen3:8b, url=http://localhost:11434/api/generate)
+2025-10-27 16:16:48,408 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-27 16:18:21,093 - INFO - Raw LLM output length: 1315
+2025-10-27 16:18:21,093 - INFO - Reasoning completed for query 'where is iran?'
+2025-10-27 16:28:50,490 - INFO - ReasoningAgent initialized (model=qwen3:8b, url=http://localhost:11434/api/generate)
+2025-10-27 16:29:15,674 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-10-27 16:30:23,791 - INFO - Raw LLM output length: 935
+2025-10-27 16:30:23,796 - INFO - Reasoning completed for query 'what is the result of Vaccination?'
