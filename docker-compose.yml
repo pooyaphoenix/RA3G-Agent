@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   rag_gateway:
     build: .
@@ -9,13 +11,14 @@ services:
       OLLAMA_API_URL: http://ollama:11434/api/generate
       OLLAMA_MODEL: llama3.1
     ports:
-      - "8010:8010"
+      - "8010:8010"   # FastAPI
+      - "8501:8501"   # Streamlit
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
       - ./index:/app/index
     command: >
-      uvicorn app.main:app --host 0.0.0.0 --port 8010 --reload
+      python ra3g.py --api-port 8010 --ui-port 8501
 
   ollama:
     image: ollama/ollama:latest
@@ -26,7 +29,6 @@ services:
     volumes:
       - ollama_data:/root/.ollama
     entrypoint: ["/bin/bash", "-c", "ollama serve"]
-
 
 volumes:
   ollama_data:

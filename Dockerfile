@@ -7,12 +7,13 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DEFAULT_TIMEOUT=300 \
     PIP_RETRIES=10
 
-# Install system dependencies (important for faiss-cpu and other ML libs)
+# Install system dependencies (important for faiss-cpu, streamlit, etc.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     g++ \
     wget \
     curl \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
@@ -28,8 +29,8 @@ RUN pip install --upgrade pip \
 # Copy project files
 COPY . .
 
-# Expose port if needed
-EXPOSE 8010
+# Expose default ports
+EXPOSE 8010 8501
 
-# Run your app (example for FastAPI)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8010"]
+# Default command: run ra3g.py with default ports
+CMD ["python", "ra3g.py", "--api-port", "8010", "--ui-port", "8501"]
