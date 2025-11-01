@@ -33,8 +33,11 @@ Or run locally (without Docker)
 python3 -m venv venv
 source venv/bin/activate       # (Windows: venv\Scripts\activate)
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+python ra3g.py --api-port 8010 --ui-port 8501
 ```
+
+- --api-port: Port for FastAPI backend (default: 8010)
+- --ui-port: Port for Streamlit frontend (default: 8501)
 ---
 ## Example cURL Requests
 ```bash
@@ -100,11 +103,14 @@ Response
 ✅ Allow general medical, scientific, or educational questions.
 
 ### API Endpoints
-| Method | Endpoint  | Description                |
-| ------ | --------- | -------------------------- |
-| POST   | `/query`  | Ask a question through RAG |
-| GET    | `/health` | Health check               |
-| GET    | `/docs`   | Interactive Swagger UI     |
+| Method | Endpoint        | Description                |
+| ------ | --------------- | -------------------------- |
+| POST   | `/query`        | Ask a question through RAG |
+| GET    | `/health`       | Health check               |
+| GET    | `/trace`        | Get session query history  |
+| DELETE | `/memory/clear` | Clear session memory       |
+| GET    | `/docs`         | Interactive Swagger UI     |
+
 
 Also you can see **Swagger** in your local address: **http://localhost:8010/docs**
 
