@@ -1,2 +1,28 @@
 2025-10-27 16:16:48,347 - INFO - Received query: where is iran? [session=default]
 2025-10-27 16:29:15,615 - INFO - Received query: what is the result of Vaccination? [session=default]
+2025-10-27 18:42:40,360 - INFO - Health check passed
+2025-10-27 18:44:12,435 - INFO - Health check passed
+2025-10-27 18:44:21,054 - INFO - Health check passed
+2025-10-27 18:44:25,770 - INFO - Health check passed
+2025-11-01 11:58:26,199 - INFO - Health check passed
+2025-11-01 11:58:53,106 - INFO - Received query: how many bones we have? [session=default]
+2025-11-01 11:59:58,543 - INFO - Received query: how many bones we have? and tell me about benefits of Washing hands [session=default]
+2025-11-01 12:11:42,927 - INFO - Health check passed
+2025-11-01 12:12:35,916 - INFO - Received query: hi tell me about how many bones a human has?  [session=default]
+2025-11-01 12:15:24,649 - INFO - Received query: where is iran? [session=default]
+2025-11-01 12:20:56,489 - INFO - Received query: where is iran? [session=default]
+2025-11-01 12:21:59,367 - INFO - Received query: How many bones we have? [session=default]
+2025-11-01 12:25:01,815 - INFO - Received query: How many bones we have? [session=default]
+2025-11-01 12:25:59,755 - INFO - Received query: tell me top 3 best IT companies  [session=default]
+2025-11-01 12:28:46,446 - INFO - Health check passed
+2025-11-01 12:28:59,902 - INFO - Received query: where is Ardabil? [session=default]
+2025-11-01 12:29:44,127 - INFO - Received query: where is Ardabil? [session=default]
+2025-11-01 12:31:06,706 - INFO - Received query: tell me your knowledge about the corpuse and what we have as a data [session=default]
+2025-11-01 12:42:41,242 - INFO - Received query: hi everyone [session=default]
+2025-11-01 12:45:27,494 - INFO - Received query: مزیت واکسن زدن؟ [session=default]
+2025-11-01 12:46:56,359 - INFO - Received query: منو میشناسی؟ [session=default]
+2025-11-01 12:51:32,773 - INFO - Received query: tell me about yourself [session=default]
+2025-11-01 12:53:57,411 - INFO - Received query: What is the benefit of hand washing? [session=default]
+2025-11-01 13:19:27,693 - INFO - Received query: hi [session=default]
+2025-11-01 13:20:15,232 - INFO - Received query: hi [session=default]
+2025-11-01 13:26:33,824 - INFO - Received query: hi dude [session=default]

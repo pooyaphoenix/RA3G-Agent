@@ -3,3 +3,44 @@
 2025-10-27 16:18:21,097 - INFO - Governance evaluated: approved=False reason=low_confidence (0.00 < 0.5); pii_redacted
 2025-10-27 16:28:50,490 - INFO - GovernanceAgent initialized (threshold=0.50)
 2025-10-27 16:30:23,798 - INFO - Governance evaluated: approved=True reason=approved
+2025-10-27 18:41:38,110 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 11:52:05,454 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 11:56:47,804 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 11:59:14,124 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:00:29,960 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:11:09,553 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:12:58,760 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:15:51,168 - INFO - Governance evaluated: approved=True reason=pii_redacted
+2025-11-01 12:18:55,756 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:19:10,871 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:19:25,093 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:19:40,747 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:21:28,354 - INFO - Governance evaluated: approved=True reason=pii_redacted
+2025-11-01 12:22:20,756 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:24:22,659 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:24:39,526 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:24:55,279 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:25:22,434 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:26:27,043 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:27:36,423 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:27:53,629 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:28:09,213 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:28:24,388 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 12:29:21,157 - INFO - Governance evaluated: approved=True reason=pii_redacted
+2025-11-01 12:30:04,670 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:31:52,635 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:43:31,341 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:45:47,044 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:47:21,605 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 12:52:14,947 - INFO - Governance evaluated: approved=True reason=pii_redacted
+2025-11-01 12:54:19,034 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 13:14:44,248 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 13:19:04,775 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 13:19:50,538 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 13:20:32,564 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 13:21:34,532 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 13:23:59,365 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 13:26:09,070 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 13:26:48,993 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-01 13:27:41,145 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-01 13:28:34,911 - INFO - GovernanceAgent initialized (threshold=0.50)

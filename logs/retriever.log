@@ -15,3 +15,88 @@
 2025-10-27 16:28:50,460 - INFO - Loading FAISS index from app\index.faiss
 2025-10-27 16:28:50,490 - INFO - Loaded 1 passages
 2025-10-27 16:29:15,672 - INFO - Retrieved 1 passages for query 'what is the result of Vaccination?'
+2025-10-27 18:41:31,417 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-10-27 18:41:38,103 - INFO - Loading FAISS index from app\index.faiss
+2025-10-27 18:41:38,108 - INFO - Loaded 1 passages
+2025-11-01 11:51:57,623 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 11:52:05,451 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 11:52:05,453 - INFO - Loaded 1 passages
+2025-11-01 11:56:42,799 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 11:56:47,797 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 11:56:47,797 - INFO - Loaded 1 passages
+2025-11-01 11:58:53,284 - INFO - Retrieved 1 passages for query 'how many bones we have?'
+2025-11-01 11:59:58,623 - INFO - Retrieved 1 passages for query 'how many bones we have? and tell me about benefits of Washing hands'
+2025-11-01 12:11:01,027 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:11:09,551 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:11:09,553 - INFO - Loaded 1 passages
+2025-11-01 12:12:36,140 - INFO - Retrieved 1 passages for query 'hi tell me about how many bones a human has? '
+2025-11-01 12:15:24,719 - INFO - Retrieved 1 passages for query 'where is iran?'
+2025-11-01 12:18:49,901 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:18:55,751 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:18:55,751 - INFO - Loaded 1 passages
+2025-11-01 12:19:04,738 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:19:10,871 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:19:10,871 - INFO - Loaded 1 passages
+2025-11-01 12:19:19,819 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:19:25,090 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:19:25,090 - INFO - Loaded 1 passages
+2025-11-01 12:19:34,657 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:19:40,740 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:19:40,746 - INFO - Loaded 1 passages
+2025-11-01 12:20:56,530 - INFO - Retrieved 1 passages for query 'where is iran?'
+2025-11-01 12:21:59,392 - INFO - Retrieved 1 passages for query 'How many bones we have?'
+2025-11-01 12:24:08,234 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:24:22,614 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:24:22,656 - INFO - Loaded 1 passages
+2025-11-01 12:24:30,963 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:24:39,522 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:24:39,523 - INFO - Loaded 1 passages
+2025-11-01 12:24:46,623 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:24:55,265 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:24:55,265 - INFO - Loaded 1 passages
+2025-11-01 12:25:01,968 - INFO - Retrieved 1 passages for query 'How many bones we have?'
+2025-11-01 12:25:59,765 - INFO - Retrieved 1 passages for query 'tell me top 3 best IT companies '
+2025-11-01 12:27:27,977 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:27:36,422 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:27:36,423 - INFO - Loaded 1 passages
+2025-11-01 12:27:43,717 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:27:53,629 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:27:53,629 - INFO - Loaded 1 passages
+2025-11-01 12:28:00,310 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:28:09,213 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:28:09,213 - INFO - Loaded 1 passages
+2025-11-01 12:28:16,284 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 12:28:24,385 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 12:28:24,387 - INFO - Loaded 1 passages
+2025-11-01 12:28:59,951 - INFO - Retrieved 1 passages for query 'where is Ardabil?'
+2025-11-01 12:29:44,151 - INFO - Retrieved 1 passages for query 'where is Ardabil?'
+2025-11-01 12:31:06,722 - INFO - Retrieved 1 passages for query 'tell me your knowledge about the corpuse and what we have as a data'
+2025-11-01 12:42:41,256 - INFO - Retrieved 1 passages for query 'hi everyone'
+2025-11-01 12:45:27,510 - INFO - Retrieved 1 passages for query 'مزیت واکسن زدن؟'
+2025-11-01 12:46:56,387 - INFO - Retrieved 1 passages for query 'منو میشناسی؟'
+2025-11-01 12:51:32,792 - INFO - Retrieved 1 passages for query 'tell me about yourself'
+2025-11-01 12:53:57,433 - INFO - Retrieved 1 passages for query 'What is the benefit of hand washing?'
+2025-11-01 13:14:38,166 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:14:44,248 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:14:44,248 - INFO - Loaded 1 passages
+2025-11-01 13:18:59,099 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:19:04,772 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:19:04,774 - INFO - Loaded 1 passages
+2025-11-01 13:19:27,724 - INFO - Retrieved 1 passages for query 'hi'
+2025-11-01 13:20:15,243 - INFO - Retrieved 1 passages for query 'hi'
+2025-11-01 13:21:28,268 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:21:34,532 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:21:34,532 - INFO - Loaded 1 passages
+2025-11-01 13:23:53,862 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:23:59,363 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:23:59,363 - INFO - Loaded 1 passages
+2025-11-01 13:26:01,916 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:26:09,057 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:26:09,057 - INFO - Loaded 1 passages
+2025-11-01 13:26:33,889 - INFO - Retrieved 1 passages for query 'hi dude'
+2025-11-01 13:27:35,637 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:27:41,144 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:27:41,145 - INFO - Loaded 1 passages
+2025-11-01 13:28:28,338 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-01 13:28:34,909 - INFO - Loading FAISS index from app\index.faiss
+2025-11-01 13:28:34,910 - INFO - Loaded 1 passages
