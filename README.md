@@ -116,11 +116,27 @@ Also you can see **Swagger** in your local address: **http://localhost:8010/docs
 
 ---
 ### 📂 Adding or Updating RAG Corpus
-Place your text files (.txt) in data/corpus/ directory then run this command
+
+Place your text files (`.txt` or `.md`) in `data/corpus/` directory.
+
+**Automatic Index Building (Default):**
+By default, the system automatically builds the FAISS index on startup if it doesn't exist. This feature is controlled by `AUTO_BUILD_FAISS = True` in `app/config.py`.
+
+When the FastAPI server starts, if the index is missing:
+- The system will automatically scan `data/corpus/` for documents
+- Build and save the FAISS index to `app/index.faiss` and `app/index_meta.pkl`
+- Log the indexing process
+
+**Manual Index Building (Optional):**
+If you prefer to build the index manually or need to rebuild after updating corpus files:
+
 ```bash 
 python indexer.py --corpus data/corpus
 ```
-index.faiss and index_meta.pkl should be generated in app/ directory
+
+**Configuration:**
+- Set `AUTO_BUILD_FAISS = False` in `app/config.py` to disable auto-building
+- Configure the corpus directory via `CORPUS_DIR = "data/corpus"` in `app/config.py`
 
 ---
 

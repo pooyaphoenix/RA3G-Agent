@@ -87,3 +87,7 @@ Thumbs.db
 # Ignore all contents of logs directory except .gitkeep
 logs/*
 !logs/.gitkeep
+
+# FAISS Index files (can be regenerated from corpus)
+app/index.faiss
+app/index_meta.pkl
