@@ -20,8 +20,63 @@ class RetrieverAgent:
         self.model = SentenceTransformer(model_name)
         self.index = None
         self.meta = []
-        if INDEX_PATH.exists() and META_PATH.exists():
+        
+        # Check if index exists, auto-build if enabled and missing
+        if not (INDEX_PATH.exists() and META_PATH.exists()):
+            if Config.AUTO_BUILD_FAISS:
+                logger.info("FAISS index not found. Auto-building from corpus...")
+                self._auto_build_index()
+            else:
+                logger.warning("FAISS index not found. Set AUTO_BUILD_FAISS=True to auto-build.")
+        else:
             self._load_index()
+    
+    def _auto_build_index(self):
+        """Automatically build FAISS index from corpus directory if missing."""
+        corpus_dir = Path(Config.CORPUS_DIR)
+        
+        if not corpus_dir.exists():
+            logger.error("Corpus directory not found: %s", corpus_dir)
+            logger.warning("Cannot auto-build index. Please create the corpus directory and add documents.")
+            return
+        
+        logger.info("Loading corpus from %s", corpus_dir)
+        docs = self._load_corpus(corpus_dir)
+        
+        if not docs:
+            logger.error("No documents found in %s. Cannot build index.", corpus_dir)
+            return
+        
+        logger.info("Building FAISS index with %d passages", len(docs))
+        self.build_index_from_texts(docs)
+        logger.info("Auto-build complete. Index created with %d passages", len(docs))
+    
+    def _load_corpus(self, corpus_dir: Path) -> List[Dict[str, str]]:
+        """Load documents from corpus directory."""
+        docs = []
+        
+        # Find all .txt and .md files in corpus directory
+        for p in sorted(corpus_dir.glob("*")):
+            if p.suffix.lower() not in [".txt", ".md"]:
+                continue
+            
+            try:
+                text = p.read_text(encoding='utf-8').strip()
+                if not text:
+                    continue
+                
+                # Naive chunking by paragraphs to create smaller passages
+                paras = [para.strip() for para in text.split("\n\n") if para.strip()]
+                for i, para in enumerate(paras):
+                    docs.append({
+                        "id": f"{p.name}#p{i}",
+                        "text": para,
+                        "source": str(p.name)
+                    })
+            except Exception as e:
+                logger.warning("Failed to load file %s: %s", p, e)
+        
+        return docs
 
     def _load_index(self):
         logger.info("Loading FAISS index from %s", INDEX_PATH)
