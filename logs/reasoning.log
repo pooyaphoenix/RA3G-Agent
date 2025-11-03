@@ -368,3 +368,18 @@ Medical information must be shared only with who?'
 
 New Query:
 tell me Dr. Robert Wilson informations'
+2025-11-03 15:26:20,853 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-11-03 15:27:25,501 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-11-03 15:28:49,309 - INFO - Raw LLM output length: 243
+2025-11-03 15:28:49,310 - INFO - Reasoning completed for query 'when genetic disorders can occurs?'
+2025-11-03 15:29:56,706 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-11-03 15:31:14,154 - INFO - Raw LLM output length: 248
+2025-11-03 15:31:14,155 - INFO - Reasoning completed for query 'Previous context:
+[MEMORY 0] Q: when genetic disorders can occurs? | A: Genetic disorders can occur when there is a mutation in DNA.
+
+New Query:
+who is John Smith's doctor?'
+2025-11-03 15:34:32,281 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-11-03 15:36:11,927 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-11-03 15:37:02,751 - INFO - Raw LLM output length: 345
+2025-11-03 15:37:02,751 - INFO - Reasoning completed for query 'what is drug prescriptions?'
