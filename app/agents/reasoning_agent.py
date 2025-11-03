@@ -47,6 +47,7 @@ class ReasoningAgent:
         logger.info("Calling Ollama (streaming) at %s", self.ollama_url)
         response_text = ""
 
+        timeout = httpx.Timeout(300.0, read=300.0)  # 5 minutes
         async with httpx.AsyncClient(timeout=timeout) as client:
             async with client.stream("POST", self.ollama_url, json=payload) as resp:
                 resp.raise_for_status()

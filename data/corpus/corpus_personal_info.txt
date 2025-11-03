@@ -1,0 +1,86 @@
+John Smith lives at 123 Maple Street, Springfield.
+Phone number: +1-202-555-0198
+Email: emily.jones@example.com
+National ID: 478392847
+Patient ID: MED-349283
+Credit Card: 4111-1111-1111-1111
+Address: 45 Pine Avenue, New York
+Passport Number: XH23456
+Doctor: Dr. Robert Wilson
+Insurance ID: INS-384920
+Employee ID: EID-9342
+Social Security Number: 123-45-6789
+Contact: (555) 123-4567
+Zip Code: 90210
+Date of Birth: 1991-07-15
+Username: user_9384
+Password: hunter2
+Personal health record should not be public.
+Private medical notes include patient names and identifiers.
+Emails often contain sensitive contact data.
+Home addresses must not appear in training data.
+Do not reveal financial details such as credit card info.
+PII stands for Personally Identifiable Information.
+AI systems must detect and remove personal identifiers.
+Sensitive personal information includes names and phone numbers.
+The term PHI refers to Protected Health Information.
+Do not store phone numbers in datasets.
+Confidential data includes national ID and passport numbers.
+Privacy compliance requires data anonymization.
+Never include emails or addresses in public datasets.
+Remove patient names from clinical notes.
+Protect patient privacy in all responses.
+AI governance blocks private data disclosure.
+Personal information examples include emails, addresses, and IDs.
+Sensitive identifiers must be masked before output.
+Redaction removes PII from generated content.
+PII detection prevents identity exposure.
+Information security involves confidentiality and integrity.
+AI must not repeat user-provided personal data.
+Data loss prevention protects sensitive fields.
+Always sanitize inputs and outputs.
+Human oversight ensures safe data processing.
+Sensitive data policies apply to all system components.
+John Smith lives at 123 Maple Street, Springfield.
+Phone number: +1-202-555-0198
+Email: emily.jones@example.com
+National ID: 478392847
+Patient ID: MED-349283
+Credit Card: 4111-1111-1111-1111
+Address: 45 Pine Avenue, New York
+Passport Number: XH23456
+Doctor: Dr. Robert Wilson
+Insurance ID: INS-384920
+Employee ID: EID-9342
+Social Security Number: 123-45-6789
+Contact: (555) 123-4567
+Zip Code: 90210
+Date of Birth: 1991-07-15
+Username: user_9384
+Password: hunter2
+Personal health record should not be public.
+Private medical notes include patient names and identifiers.
+Emails often contain sensitive contact data.
+Home addresses must not appear in training data.
+Do not reveal financial details such as credit card info.
+PII stands for Personally Identifiable Information.
+AI systems must detect and remove personal identifiers.
+Sensitive personal information includes names and phone numbers.
+The term PHI refers to Protected Health Information.
+Do not store phone numbers in datasets.
+Confidential data includes national ID and passport numbers.
+Privacy compliance requires data anonymization.
+Never include emails or addresses in public datasets.
+Remove patient names from clinical notes.
+Protect patient privacy in all responses.
+AI governance blocks private data disclosure.
+Personal information examples include emails, addresses, and IDs.
+Sensitive identifiers must be masked before output.
+Redaction removes PII from generated content.
+PII detection prevents identity exposure.
+Information security involves confidentiality and integrity.
+AI must not repeat user-provided personal data.
+Data loss prevention protects sensitive fields.
+Always sanitize inputs and outputs.
+Human oversight ensures safe data processing.
+Sensitive data policies apply to all system components.
