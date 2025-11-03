@@ -28,5 +28,5 @@ git commit -m "Add feature: your feature name"
 
 Push your branch:
 git push origin feature/your-feature-name
-پ
+
 Create a Pull Request (PR) from your fork to the main repository.
