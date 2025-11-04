@@ -1,47 +1,14 @@
-2025-11-03 14:21:04,361 - INFO - Retrieved 3 passages for query 'how many bones we have?
-'
-2025-11-03 14:24:55,879 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 14:25:02,978 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 14:25:02,978 - INFO - Loaded 3 passages
-2025-11-03 14:25:08,523 - INFO - Retrieved 3 passages for query 'how many bones we have?
-'
-2025-11-03 14:26:50,788 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 14:26:56,935 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 14:26:56,955 - INFO - Loaded 3 passages
-2025-11-03 14:27:04,153 - INFO - Retrieved 3 passages for query 'Received query: how many bones we have?'
-2025-11-03 14:29:40,972 - INFO - Retrieved 3 passages for query 'Received query: how many bones we have?'
-2025-11-03 14:31:28,845 - INFO - Retrieved 3 passages for query 'how many bones we have?'
-2025-11-03 14:36:22,711 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 14:36:27,158 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 14:36:27,169 - INFO - Loaded 3 passages
-2025-11-03 14:36:42,218 - INFO - Retrieved 3 passages for query 'how many bones we have?'
-2025-11-03 14:47:28,772 - INFO - Retrieved 3 passages for query 'who is John Smith?'
-2025-11-03 14:51:34,888 - INFO - Retrieved 3 passages for query 'Medical information must be shared only with who?'
-2025-11-03 15:06:55,756 - INFO - Retrieved 3 passages for query 'tell me Dr. Robert Wilson informations'
-2025-11-03 15:24:54,818 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 15:25:10,226 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 15:25:10,226 - INFO - Loaded 3 passages
-2025-11-03 15:25:10,226 - INFO - Building new FAISS index with 3 texts
-2025-11-03 15:25:10,335 - INFO - Saving FAISS index to app\index.faiss
-2025-11-03 15:25:10,335 - INFO - Index built and saved.
-2025-11-03 15:26:13,003 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 15:26:20,824 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 15:26:20,850 - INFO - Loaded 3 passages
-2025-11-03 15:27:25,500 - INFO - Retrieved 3 passages for query 'when genetic disorders can occurs?'
-2025-11-03 15:29:56,706 - INFO - Retrieved 3 passages for query 'who is John Smith's doctor?'
-2025-11-03 15:33:35,463 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 15:33:40,001 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 15:33:40,007 - INFO - Loaded 3 passages
-2025-11-03 15:33:40,007 - INFO - Building new FAISS index with 3 texts
-2025-11-03 15:33:40,112 - INFO - Saving FAISS index to app\index.faiss
-2025-11-03 15:33:40,112 - INFO - Index built and saved.
-2025-11-03 15:33:59,528 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 15:34:07,043 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 15:34:07,066 - INFO - Loaded 3 passages
-2025-11-03 15:34:07,066 - INFO - Building new FAISS index with 3 texts
-2025-11-03 15:34:07,154 - INFO - Saving FAISS index to app\index.faiss
-2025-11-03 15:34:07,154 - INFO - Index built and saved.
-2025-11-03 15:34:28,242 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
-2025-11-03 15:34:32,259 - INFO - Loading FAISS index from app\index.faiss
-2025-11-03 15:34:32,278 - INFO - Loaded 3 passages
-2025-11-03 15:36:11,926 - INFO - Retrieved 3 passages for query 'what is drug prescriptions?'
+2025-11-04 13:29:45,478 - INFO - Retrieved 3 passages for query 'How many bones do we have? '
+2025-11-04 13:33:19,946 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-04 13:33:28,099 - INFO - Loading FAISS index from app\index.faiss
+2025-11-04 13:33:28,119 - INFO - Loaded 3 passages
+2025-11-04 13:34:45,444 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-04 13:34:51,227 - INFO - Loading FAISS index from app\index.faiss
+2025-11-04 13:34:51,229 - INFO - Loaded 3 passages
+2025-11-04 13:35:34,020 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-04 13:35:56,049 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-04 13:36:00,453 - INFO - Loading FAISS index from app\index.faiss
+2025-11-04 13:36:00,453 - INFO - Loaded 3 passages
+2025-11-04 13:36:40,810 - INFO - Initializing RetrieverAgent with model all-MiniLM-L6-v2
+2025-11-04 13:36:45,961 - INFO - Loading FAISS index from app\index.faiss
+2025-11-04 13:36:45,961 - INFO - Loaded 3 passages

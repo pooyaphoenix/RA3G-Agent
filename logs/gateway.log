@@ -1,14 +1,2 @@
-2025-11-03 14:21:04,331 - INFO - Received query: how many bones we have?
- [session=default]
-2025-11-03 14:25:08,476 - INFO - Received query: how many bones we have?
- [session=default]
-2025-11-03 14:27:03,805 - INFO - Received query: Received query: how many bones we have? [session=default]
-2025-11-03 14:29:40,958 - INFO - Received query: Received query: how many bones we have? [session=default]
-2025-11-03 14:31:28,820 - INFO - Received query: how many bones we have? [session=default]
-2025-11-03 14:36:42,164 - INFO - Received query: how many bones we have? [session=default]
-2025-11-03 14:47:28,740 - INFO - Received query: who is John Smith? [session=default]
-2025-11-03 14:51:34,868 - INFO - Received query: Medical information must be shared only with who? [session=default]
-2025-11-03 15:06:55,732 - INFO - Received query: tell me Dr. Robert Wilson informations [session=default]
-2025-11-03 15:27:25,461 - INFO - Received query: when genetic disorders can occurs? [session=default]
-2025-11-03 15:29:56,683 - INFO - Received query: who is John Smith's doctor? [session=default]
-2025-11-03 15:36:11,871 - INFO - Received query: what is drug prescriptions? [session=default]
+2025-11-04 13:29:45,322 - INFO - Received query: How many bones do we have?  [session=default]
+2025-11-04 13:38:04,921 - INFO - Health check passed

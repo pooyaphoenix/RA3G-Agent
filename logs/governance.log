@@ -1,17 +1,5 @@
-2025-11-03 14:22:05,035 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['prescription', 'confidential']; pii_redacted
-2025-11-03 14:25:02,978 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-03 14:26:09,352 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['prescription', 'confidential']; pii_redacted
-2025-11-03 14:26:56,955 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-03 14:28:05,540 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['prescription', 'confidential']; pii_redacted
-2025-11-03 14:30:41,672 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['prescription', 'confidential']; pii_redacted
-2025-11-03 14:32:29,633 - INFO - Governance evaluated: approved=False reason=low_confidence (0.40 < 0.5); banned_phrases_present: ['prescription', 'confidential']; pii_redacted
-2025-11-03 14:36:27,170 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-03 14:38:54,562 - INFO - Governance evaluated: approved=True reason=approved
-2025-11-03 14:49:33,776 - INFO - Governance evaluated: approved=False reason=low_confidence (0.00 < 0.5)
-2025-11-03 14:53:44,848 - INFO - Governance evaluated: approved=True reason=approved
-2025-11-03 15:09:23,913 - INFO - Governance evaluated: approved=True reason=pii_redacted
-2025-11-03 15:26:20,853 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-03 15:28:49,310 - INFO - Governance evaluated: approved=True reason=approved
-2025-11-03 15:31:14,155 - INFO - Governance evaluated: approved=False reason=low_confidence (0.47 < 0.5); pii_redacted
-2025-11-03 15:34:32,281 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-03 15:37:02,751 - INFO - Governance evaluated: approved=False reason=banned_phrases_present: ['prescription']
+2025-11-04 13:30:46,710 - INFO - Governance evaluated: approved=True reason=approved
+2025-11-04 13:33:28,119 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-04 13:34:51,229 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-04 13:36:00,453 - INFO - GovernanceAgent initialized (threshold=0.50)
+2025-11-04 13:36:45,961 - INFO - GovernanceAgent initialized (threshold=0.50)
