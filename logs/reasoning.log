@@ -8,3 +8,8 @@
 2025-11-04 13:37:40,632 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
 2025-11-04 13:38:04,920 - INFO - Raw LLM output length: 184
 2025-11-04 13:38:04,921 - INFO - Reasoning completed for query 'ping'
+2025-11-04 13:39:15,893 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-11-04 13:50:57,660 - INFO - ReasoningAgent initialized (model=llama3.1:latest, url=http://localhost:11434/api/generate)
+2025-11-04 13:51:08,600 - INFO - Calling Ollama (streaming) at http://localhost:11434/api/generate
+2025-11-04 13:52:10,492 - INFO - Raw LLM output length: 229
+2025-11-04 13:52:10,493 - INFO - Reasoning completed for query 'hi there'
