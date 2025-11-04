@@ -1,8 +1,0 @@
-2025-11-04 13:30:46,710 - INFO - Governance evaluated: approved=True reason=approved
-2025-11-04 13:33:28,119 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-04 13:34:51,229 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-04 13:36:00,453 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-04 13:36:45,961 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-04 13:39:15,893 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-04 13:50:57,660 - INFO - GovernanceAgent initialized (threshold=0.50)
-2025-11-04 13:52:10,493 - INFO - Governance evaluated: approved=False reason=low_confidence (0.14 < 0.5)
