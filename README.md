@@ -12,8 +12,8 @@ It allows you to:
 
 ---
 ## Interface
-![Recording2025-11-04140044-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/191e8eb2-ac5a-44e2-9090-b02f39a6ab3b)
 
+![Recording2025-11-04140044-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/15462366-45d2-43a4-a014-a06bb9be94fe)
 
 ## Architecture
 <img width="600" height="400" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/ec6b9b2e-569b-43af-89a5-6c81dbdb9f03" />
