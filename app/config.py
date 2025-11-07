@@ -11,7 +11,7 @@ class Config():
     #Retriever Agent
     EMBED_MODEL = "all-MiniLM-L6-v2"
     EMBED_DIM = 384  # for all-MiniLM-L6-v2
-    AUTO_BUILD_FAISS = True  # Automatically build FAISS index if missing
+    AUTO_BUILD_FAISS = False  # Automatically build FAISS index if missing
     CORPUS_DIR = "data/corpus"  # Corpus directory for auto-indexing
 
 

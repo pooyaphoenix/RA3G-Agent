@@ -151,4 +151,4 @@ with tab2:
     if df.empty:
         st.warning("No log entries match your filters.")
     else:
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width='stretch', hide_index=True)
