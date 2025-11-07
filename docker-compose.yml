@@ -28,7 +28,6 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
-    entrypoint: ["/bin/bash", "-c", "ollama serve"]
 
 volumes:
   ollama_data:

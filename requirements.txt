@@ -12,6 +12,4 @@ numpy == 1.26.4
 streamlit
 requests
 pytest>=7.0.0
-sseclient-py
-
 

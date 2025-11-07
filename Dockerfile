@@ -1,13 +1,13 @@
 # Use a lightweight Python base image
 FROM python:3.11-slim
 
-# Set environment variables to avoid interactive prompts and improve pip reliability
+# Environment setup
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DEFAULT_TIMEOUT=300 \
     PIP_RETRIES=10
 
-# Install system dependencies (important for faiss-cpu, streamlit, etc.)
+# Install system dependencies (needed for faiss-cpu, streamlit, etc.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     g++ \
@@ -19,18 +19,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Set working directory
 WORKDIR /app
 
-# Copy dependency file first to leverage Docker layer caching
+# Copy dependency file first (for Docker cache)
 COPY requirements.txt .
 
-# Upgrade pip and install Python dependencies with increased timeout
-RUN pip install --upgrade pip \
-    && pip install --default-timeout=300 -r requirements.txt
+# Install PyTorch from the official CPU wheel index first (fastest way)
+RUN pip install --upgrade pip
+RUN pip install torch==2.2.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install --default-timeout=300 -r requirements.txt
 
-# Copy project files
+# Copy all project files
 COPY . .
 
-# Expose default ports
+# Expose ports
 EXPOSE 8010 8501
 
-# Default command: run ra3g.py with default ports
+# Default command
 CMD ["python", "ra3g.py", "--api-port", "8010", "--ui-port", "8501"]
