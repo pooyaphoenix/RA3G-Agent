@@ -1,4 +1,23 @@
-# 🧠 RAG Gateway with Governance Agent
+<p align="center">
+<img width="468" height="190" alt="RA3G-logo" src="https://github.com/user-attachments/assets/60e2bf53-e417-4bcb-ae48-12ef268b20da" />
+</p>
+<p align="center">
+   Policy-Aware RAG Multi-Agent AI System
+</p>
+
+<p align="center">
+  <a href="https://github.com/pooyaphoenix/RA3G-Agent/releases">
+    <img src="https://img.shields.io/github/v/release/pooyaphoenix/RA3G-Agent?color=blue&label=version" alt="Release Version"/>
+  </a>
+  <a href="https://github.com/pooyaphoenix/RA3G-Agent/stargazers">
+    <img src="https://img.shields.io/github/stars/pooyaphoenix/RA3G-Agent?style=social" alt="GitHub stars"/>
+  </a>
+ <a href="mailto:pooyachavoshi@gmail.com">
+    <img src="https://img.shields.io/badge/Email-Contact-blue?style=flat&logo=gmail" alt="Email"/>
+  </a>
+</p>
+
+---
 
 This project is a **local Retrieval-Augmented Generation (RAG)** system with a built-in **governance agent** that filters sensitive or restricted information.  
 It allows you to:
