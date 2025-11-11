@@ -12,8 +12,8 @@ st.set_page_config(page_title="Policy-Aware RAG", page_icon="🧠", layout="wide
 st.title("RA3G")
 st.text("🧠 Policy-Aware RAG System with Governance Control")
 
-# Tabs: Chat | Logs
-tab1, tab2 = st.tabs(["💬 Chat Interface", "Logs"])
+# Tabs: Chat | Logs | Configuration
+tab1, tab2, tab3 = st.tabs(["💬 Chat Interface", " Logs", "⚙️ Configuration"])
 
 # ---------------------------------------------------
 # TAB 1 — CHAT INTERFACE
@@ -152,3 +152,55 @@ with tab2:
         st.warning("No log entries match your filters.")
     else:
         st.dataframe(df, width='stretch', hide_index=True)
+
+
+# ---------------------------------------------------
+# TAB 3 — CONFIGURATION EDITOR
+# ---------------------------------------------------
+with tab3:
+    st.subheader("⚙️ Configuration Settings")
+
+    CONFIG_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "config.yml"))
+
+    if not os.path.exists(CONFIG_PATH):
+        st.error(f"Configuration file not found: {CONFIG_PATH}")
+        st.stop()
+
+    import yaml
+
+    # --- Load current configuration
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        config_data = yaml.safe_load(f)
+
+    st.caption("Modify the configuration values below and click **Save Changes**.")
+
+    # Editable YAML fields
+    editable_config = {}
+    for key, value in config_data.items():
+        if isinstance(value, bool):
+            editable_config[key] = st.checkbox(key, value=value)
+        elif isinstance(value, (int, float)):
+            editable_config[key] = st.number_input(key, value=value)
+        elif isinstance(value, list):
+            editable_config[key] = st.text_area(
+                key, value=", ".join(map(str, value)), help="Comma-separated list"
+            )
+        else:
+            editable_config[key] = st.text_input(key, value=value)
+
+    if st.button("💾 Save Changes", key="save_config_btn"):
+        # Convert comma-separated strings back to lists
+        for key, value in editable_config.items():
+            if isinstance(config_data.get(key), list):
+                editable_config[key] = [v.strip() for v in value.split(",") if v.strip()]
+
+        # Save updated YAML
+        with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+            yaml.safe_dump(editable_config, f, sort_keys=False, allow_unicode=True)
+
+        st.success("✅ Configuration saved successfully!")
+        st.info("Please restart the service for changes to take effect.")
+        st.json(editable_config)
+
+    if st.button("🔄 Reload from File", key="reload_config_btn"):
+        st.rerun()

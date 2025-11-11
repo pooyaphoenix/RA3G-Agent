@@ -82,7 +82,7 @@ class ReasoningAgent:
             return {
                 "answer": raw_text.strip(),
                 "trace": [],
-                "confidence": 0.5
+                "confidence": Config.CONFIDENCE_THRESHOLD
             }
 
     async def reason(self, query: str, passages: List[Dict]) -> Dict:
