@@ -1,17 +1,29 @@
+import os
+import yaml
 
-class Config():
-    #Governance Agent
-    BANNED_PHRASES = ["diagnosis", "prescription", "classified", "confidential"]
-    CONFIDENCE_THRESHOLD = 0.5
+class Config:
+    _config_data = None
 
-    #Reasoning Agent
-    OLLAMA_URL = "http://localhost:11434/api/generate"
-    OLLAMA_MODEL = "llama3.1:latest"
+    @classmethod
+    def load_config(cls, path: str = "config.yml"):
+        """Load YAML configuration file once."""
+        if cls._config_data is None:
+            if not os.path.exists(path):
+                raise FileNotFoundError(f"Configuration file not found: {path}")
+            with open(path, "r", encoding="utf-8") as file:
+                cls._config_data = yaml.safe_load(file)
 
-    #Retriever Agent
-    EMBED_MODEL = "all-MiniLM-L6-v2"
-    EMBED_DIM = 384  # for all-MiniLM-L6-v2
-    AUTO_BUILD_FAISS = False  # Automatically build FAISS index if missing
-    CORPUS_DIR = "data/corpus"  # Corpus directory for auto-indexing
+    @classmethod
+    def get(cls, key: str, default=None):
+        """Retrieve a configuration value by key."""
+        if cls._config_data is None:
+            cls.load_config()
+        return cls._config_data.get(key, default)
 
 
+# Load configuration on import
+Config.load_config()
+
+# Assign class attributes dynamically (so Config.<var> works)
+for key, value in Config._config_data.items():
+    setattr(Config, key, value)
