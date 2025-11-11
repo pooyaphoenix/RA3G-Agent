@@ -3,10 +3,10 @@ BANNED_PHRASES:
 - prescription
 - classified
 - confidential
-CONFIDENCE_THRESHOLD: 0.3
+CONFIDENCE_THRESHOLD: 0.5
 OLLAMA_URL: http://localhost:11434/api/generate
 OLLAMA_MODEL: llama3.1:latest
 EMBED_MODEL: all-MiniLM-L6-v2
-EMBED_DIM: 383
-AUTO_BUILD_FAISS: false
+EMBED_DIM: 384
+AUTO_BUILD_FAISS: true
 CORPUS_DIR: data/corpus
