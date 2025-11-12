@@ -1,6 +1,7 @@
 import os
 import yaml
 
+
 class Config:
     _config_data = None
 
@@ -27,3 +28,14 @@ Config.load_config()
 # Assign class attributes dynamically (so Config.<var> works)
 for key, value in Config._config_data.items():
     setattr(Config, key, value)
+
+# Provide sensible defaults if not supplied in config.yml
+if not hasattr(Config, "THRESHOLDS"):
+    setattr(
+        Config,
+        "THRESHOLDS",
+        {
+            "retriever": 0.6,
+            "reasoner": 0.7,
+        },
+    )

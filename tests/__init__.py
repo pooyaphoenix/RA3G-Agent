@@ -1,2 +1,1 @@
-# Tests package
-
+"""Test package for RA3G governance logic."""

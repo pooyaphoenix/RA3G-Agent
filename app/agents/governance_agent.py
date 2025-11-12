@@ -1,11 +1,14 @@
 import re
-from typing import Dict, List
+from typing import Dict, List, Optional
+
 from app.utils.logger import get_logger
 from app.config import Config
+
 logger = get_logger("governance", "logs/governance.log")
 
-BANNED_PHRASES = Config.BANNED_PHRASES
-CONFIDENCE_THRESHOLD = Config.CONFIDENCE_THRESHOLD
+BANNED_PHRASES = getattr(Config, "BANNED_PHRASES", [])
+CONFIDENCE_THRESHOLD = getattr(Config, "CONFIDENCE_THRESHOLD", 0.5)
+THRESHOLDS = getattr(Config, "THRESHOLDS", {})
 
 # Simple regexes for crude PII detection/redaction
 RE_DATE = re.compile(r'\b(?:\d{4}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}[-/]\d{1,2}[-/]\d{2,4})\b')
@@ -16,15 +19,34 @@ RE_NAME = re.compile(r'\b([A-Z][a-z]{1,20}\s[A-Z][a-z]{1,20})\b')
 RE_EMAIL = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
 # Phone pattern: supports various formats (US: (123) 456-7890, 123-456-7890, 123.456.7890, international: +1-123-456-7890)
 # Matches phone numbers with optional country code, parentheses, and various separators
-RE_PHONE = re.compile(r'\b(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b')
+RE_PHONE = re.compile(r"\b(?:\+?1[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}\b")
 # IP address pattern: IPv4 addresses
 RE_IP = re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b')
 
 class GovernanceAgent:
-    def __init__(self, banned_phrases=None, threshold: float = CONFIDENCE_THRESHOLD):
+    def __init__(
+        self,
+        banned_phrases=None,
+        threshold: Optional[float] = None,
+        thresholds: Optional[Dict[str, float]] = None,
+    ):
         self.banned_phrases = banned_phrases or BANNED_PHRASES
-        self.threshold = threshold
-        logger.info("GovernanceAgent initialized (threshold=%.2f)", threshold)
+        self.thresholds = dict(THRESHOLDS or {})
+
+        if thresholds:
+            self.thresholds.update(thresholds)
+        if threshold is not None:
+            # Backwards compatibility for existing single-threshold usage
+            self.thresholds["reasoner"] = threshold
+
+        self.reasoner_threshold = self.thresholds.get("reasoner", CONFIDENCE_THRESHOLD)
+        self.retriever_threshold = self.thresholds.get("retriever")
+
+        logger.info(
+            "GovernanceAgent initialized (reasoner_threshold=%.2f, retriever_threshold=%s)",
+            self.reasoner_threshold,
+            f"{self.retriever_threshold:.2f}" if self.retriever_threshold is not None else "None",
+        )
 
     def _check_banned_phrases(self, text: str) -> List[str]:
         matches = []
@@ -97,14 +119,33 @@ class GovernanceAgent:
         except ValueError:
             return False
 
-    def evaluate(self, answer: str, trace: list, confidence: float) -> Dict:
+    def evaluate(
+        self,
+        answer: str,
+        trace: list,
+        confidence: float,
+        retriever_confidence: Optional[float] = None,
+    ) -> Dict:
         reasons = []
         approved = True
         if confidence is None:
             confidence = 0.0
-        if confidence < self.threshold:
+        if confidence < self.reasoner_threshold:
             approved = False
-            reasons.append(f"low_confidence ({confidence:.2f} < {self.threshold})")
+            reasons.append(
+                f"reasoner_low_confidence ({confidence:.2f} < {self.reasoner_threshold})"
+            )
+
+        if (
+            retriever_confidence is not None
+            and self.retriever_threshold is not None
+            and retriever_confidence < self.retriever_threshold
+        ):
+            approved = False
+            reasons.append(
+                f"retriever_low_confidence ({retriever_confidence:.2f} < {self.retriever_threshold})"
+            )
+
         banned = self._check_banned_phrases(answer)
         if banned:
             approved = False
@@ -113,5 +154,13 @@ class GovernanceAgent:
         if redacted_answer != answer:
             reasons.append("pii_redacted")
         reason = "; ".join(reasons) if reasons else "approved"
-        logger.info("Governance evaluated: approved=%s reason=%s", approved, reason)
+        logger.info(
+            "Governance evaluated: approved=%s reason=%s (thresholds=%s)",
+            approved,
+            reason,
+            {
+                "reasoner": self.reasoner_threshold,
+                "retriever": self.retriever_threshold,
+            },
+        )
         return {"approved": approved, "reason": reason, "redacted_answer": redacted_answer}

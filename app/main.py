@@ -46,6 +46,12 @@ async def query(req: QueryRequest, session_id: Optional[str] = Header(default="d
 
     # 1) Retrieve
     passages = retriever.retrieve(q, top_k=top_k)
+    retriever_confidence = 0.0
+    if passages:
+        try:
+            retriever_confidence = max((p.get("score", 0.0) for p in passages), default=0.0)
+        except ValueError:
+            retriever_confidence = 0.0
 
     # Memory context to reasoning
     previous_turns = memory_store.get(session_id)
@@ -63,7 +69,12 @@ async def query(req: QueryRequest, session_id: Optional[str] = Header(default="d
     confidence = float(reasoning_result.get("confidence", 0.0))
 
     # 3) Govern
-    decision = governor.evaluate(answer, trace, confidence)
+    decision = governor.evaluate(
+        answer,
+        trace,
+        confidence,
+        retriever_confidence=retriever_confidence,
+    )
     final_answer = decision.get("redacted_answer", answer)
 
     # 4) Save memory
