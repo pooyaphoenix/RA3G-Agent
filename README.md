@@ -39,16 +39,7 @@ It allows you to:
 
 
 ## ⚙️ Setup Instructions
-All project settings are centralized in **app/config.py** to make the system easy to configure and maintain.
 
-Per-agent confidence thresholds can be tuned via the `THRESHOLDS` dictionary:
-
-```python
-THRESHOLDS = {
-    "retriever": 0.6,
-    "reasoner": 0.7,
-}
-```
 
 #### Clone the repository
 ```bash
@@ -72,6 +63,17 @@ python ra3g.py --api-port 8010 --ui-port 8501
 
 - --api-port: Port for FastAPI backend (default: 8010)
 - --ui-port: Port for Streamlit frontend (default: 8501)
+
+All project settings are centralized in **config.yml** to make the system easy to configure and maintain.
+
+Per-agent confidence thresholds can be tuned via the `THRESHOLDS` dictionary:
+
+```python
+THRESHOLDS = {
+    "retriever": 0.6,
+    "reasoner": 0.7,
+}
+```
 ---
 ## Example cURL Requests
 ```bash
