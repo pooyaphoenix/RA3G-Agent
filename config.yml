@@ -5,11 +5,11 @@ BANNED_PHRASES:
 - confidential
 CONFIDENCE_THRESHOLD: 0.5
 OLLAMA_URL: http://localhost:11434/api/generate
-OLLAMA_MODEL: llama3.1:latest
+OLLAMA_MODEL: qwen3:8b
 EMBED_MODEL: all-MiniLM-L6-v2
 EMBED_DIM: 384
-AUTO_BUILD_FAISS: false
+AUTO_BUILD_FAISS: true
 CORPUS_DIR: data/corpus
 THRESHOLDS:
-  retriever: 0.35000000000000014
-  reasoner: 0.32000000000000006
+  retriever: 0.72
+  reasoner: 0.81

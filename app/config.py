@@ -21,7 +21,6 @@ class Config:
             cls.load_config()
         return cls._config_data.get(key, default)
 
-
 # Load configuration on import
 Config.load_config()
 

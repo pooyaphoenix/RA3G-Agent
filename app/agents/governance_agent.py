@@ -9,7 +9,6 @@ logger = get_logger("governance", "logs/governance.log")
 BANNED_PHRASES = getattr(Config, "BANNED_PHRASES", [])
 CONFIDENCE_THRESHOLD = getattr(Config, "CONFIDENCE_THRESHOLD", 0.5)
 THRESHOLDS = getattr(Config, "THRESHOLDS", {})
-
 # Simple regexes for crude PII detection/redaction
 RE_DATE = re.compile(r'\b(?:\d{4}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}[-/]\d{1,2}[-/]\d{2,4})\b')
 RE_ID = re.compile(r'\b(?:id|ssn|passport|card)[\s:]*[A-Za-z0-9-]{4,}\b', re.IGNORECASE)
