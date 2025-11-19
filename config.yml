@@ -8,8 +8,8 @@ OLLAMA_URL: http://localhost:11434/api/generate
 OLLAMA_MODEL: llama3.1:latest
 EMBED_MODEL: all-MiniLM-L6-v2
 EMBED_DIM: 384
-AUTO_BUILD_FAISS: true
+AUTO_BUILD_FAISS: false
 CORPUS_DIR: data/corpus
 THRESHOLDS:
-  retriever: 0.6
-  reasoner: 0.7
+  retriever: 0.35000000000000014
+  reasoner: 0.32000000000000006

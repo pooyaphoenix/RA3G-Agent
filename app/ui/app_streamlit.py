@@ -174,33 +174,61 @@ with tab3:
 
     st.caption("Modify the configuration values below and click **Save Changes**.")
 
-    # Editable YAML fields
     editable_config = {}
+
     for key, value in config_data.items():
-        if isinstance(value, bool):
+
+        # Handle THRESHOLDS (nested dictionary)
+        if key == "THRESHOLDS" and isinstance(value, dict):
+            st.markdown("### 🔍 AI Policy Thresholds")
+            editable_config[key] = {}
+            for sub_key, sub_value in value.items():
+                editable_config[key][sub_key] = st.number_input(
+                    f"{key} → {sub_key}",
+                    value=float(sub_value),
+                    min_value=0.0,
+                    max_value=1.0,
+                    step=0.01,
+                    help="Confidence threshold between 0 and 1",
+                )
+
+        # Handle boolean
+        elif isinstance(value, bool):
             editable_config[key] = st.checkbox(key, value=value)
+
+        # Handle numeric
         elif isinstance(value, (int, float)):
             editable_config[key] = st.number_input(key, value=value)
+
+        # Handle list
         elif isinstance(value, list):
             editable_config[key] = st.text_area(
                 key, value=", ".join(map(str, value)), help="Comma-separated list"
             )
-        else:
-            editable_config[key] = st.text_input(key, value=value)
 
+        # Handle string & other simple types
+        else:
+            editable_config[key] = st.text_input(key, value=str(value))
+
+    # -- Save Button --
     if st.button("💾 Save Changes", key="save_config_btn"):
-        # Convert comma-separated strings back to lists
+        # Convert string lists back to lists
         for key, value in editable_config.items():
             if isinstance(config_data.get(key), list):
                 editable_config[key] = [v.strip() for v in value.split(",") if v.strip()]
 
-        # Save updated YAML
-        with open(CONFIG_PATH, "w", encoding="utf-8") as f:
-            yaml.safe_dump(editable_config, f, sort_keys=False, allow_unicode=True)
+        # Safely save the new configuration
+        try:
+            with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+                yaml.safe_dump(editable_config, f, sort_keys=False, allow_unicode=True)
 
-        st.success("✅ Configuration saved successfully!")
-        st.info("Please restart the service for changes to take effect.")
-        st.json(editable_config)
+            st.success("✅ Configuration saved successfully!")
+            st.info("🔁 Please restart the service for changes to take effect.")
+            st.json(editable_config)
 
+        except Exception as e:
+            st.error(f"❌ Failed to save configuration: {str(e)}")
+
+    # -- Reload Button --
     if st.button("🔄 Reload from File", key="reload_config_btn"):
         st.rerun()

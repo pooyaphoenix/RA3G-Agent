@@ -1,5 +1,4 @@
 fastapi
-# torch==2.6.0
 uvicorn[standard]
 python-multipart
 pydantic
