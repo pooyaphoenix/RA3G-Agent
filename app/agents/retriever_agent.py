@@ -2,7 +2,8 @@ import os
 import numpy as np
 from pathlib import Path
 import pickle
-from sentence_transformers import SentenceTransformer
+# Lazy import to avoid mutex issues
+# from sentence_transformers import SentenceTransformer
 import faiss
 from typing import List, Tuple, Dict
 from app.utils.logger import get_logger
@@ -17,6 +18,8 @@ EMBED_DIM = Config.EMBED_DIM
 class RetrieverAgent:
     def __init__(self, model_name: str = EMBED_MODEL):
         logger.info("Initializing RetrieverAgent with model %s", model_name)
+        # Lazy import to avoid mutex issues during module import
+        from sentence_transformers import SentenceTransformer
         self.model = SentenceTransformer(model_name)
         self.index = None
         self.meta = []
