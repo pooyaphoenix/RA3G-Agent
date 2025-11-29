@@ -22,9 +22,12 @@ WORKDIR /app
 # Copy dependency file first (for Docker cache)
 COPY requirements.txt .
 
-# Install PyTorch from the official CPU wheel index first (fastest way)
-RUN pip install --upgrade pip
-RUN pip install torch==2.2.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+# Install dependencies (split into separate RUN for better caching)
+# Install heavy ML dependencies first (these change less frequently)
+RUN pip install --upgrade pip && \
+    pip install --default-timeout=300 torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# Install remaining dependencies
 RUN pip install --default-timeout=300 -r requirements.txt
 
 # Copy all project files

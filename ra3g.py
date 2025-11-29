@@ -16,8 +16,9 @@ def run_streamlit(api_port: int, ui_port: int):
     print(f"🎨 Starting Streamlit UI on port {ui_port} (connecting to API {api_port}) ...")
     env = os.environ.copy()
     env["FASTAPI_PORT"] = str(api_port)
+    import sys
     subprocess.run([
-        "streamlit", "run", "app/ui/app_streamlit.py",
+        sys.executable, "-m", "streamlit", "run", "app/ui/app_streamlit.py",
         "--server.port", str(ui_port),
         "--server.headless", "true"
     ], env=env)

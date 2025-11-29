@@ -5,7 +5,7 @@ pydantic
 pydantic-settings 
 httpx
 sentence-transformers
-faiss-cpu==1.8.0
+faiss-cpu==1.13.0
 orjson==3.9.0
 numpy == 1.26.4
 streamlit
