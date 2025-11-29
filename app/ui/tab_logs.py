@@ -1,23 +1,9 @@
 import streamlit as st
-import os
+import os, re
+import pandas as pd
+from datetime import datetime
 
-from tab_chat import render_chat_tab
-from tab_logs import render_logs_tab
-from tab_config import render_config_tab
-
-FASTAPI_PORT = os.getenv("FASTAPI_PORT", "8000")
-FASTAPI_URL = f"http://localhost:{FASTAPI_PORT}"
-
-st.set_page_config(page_title="Policy-Aware RAG", page_icon="🧠", layout="wide")
-st.title("RA3G")
-st.text("🧠 Policy-Aware RAG System with Governance Control")
-
-tab1, tab2, tab3 = st.tabs(["💬 Chat Interface", " Logs", "⚙️ Configuration"])
-
-with tab1:
-    render_chat_tab(FASTAPI_URL)
-
-with tab2:
+def render_logs_tab():
     BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     LOG_DIR = os.path.join(BASE_DIR, "logs")
 
@@ -30,19 +16,14 @@ with tab2:
 
     st.subheader("Logs")
 
-    # --- Button to clear all logs ---
     if st.button("Clear All Logs", key="clear_all_logs_btn"):
         deleted_files = []
         for name, path in LOG_FILES.items():
             if os.path.exists(path):
-                open(path, "w").close()  # truncate file content
+                open(path, "w").close()
                 deleted_files.append(name)
-        if deleted_files:
-            st.success(f"✅ Cleared logs for: {', '.join(deleted_files)}")
-        else:
-            st.warning("No log files found to clear.")
+        st.success(f"Cleared logs: {', '.join(deleted_files)}") if deleted_files else st.warning("No log files found.")
 
-    # --- Log selection and display ---
     log_choice = st.selectbox("Select a log file:", list(LOG_FILES.keys()), key="log_choice_tab2")
     log_path = LOG_FILES[log_choice]
 
@@ -51,7 +32,7 @@ with tab2:
             log_content = f.readlines()
     except FileNotFoundError:
         st.error(f"❌ Log file not found: `{log_path}`")
-        st.stop()
+        return
 
     search_term = st.text_input("Search keyword:", key="log_search_term_tab2")
     show_errors_only = st.checkbox("Show only errors", key="errors_only_checkbox_tab2")
@@ -77,15 +58,4 @@ with tab2:
         df = df[df["level"].isin(["ERROR", "CRITICAL"])]
 
     st.caption(f"Showing last {len(df)} lines (filtered)")
-
-    if df.empty:
-        st.warning("No log entries match your filters.")
-    else:
-        st.dataframe(df, width='stretch', hide_index=True)
-
-
-# ---------------------------------------------------
-# TAB 3 — CONFIGURATION EDITOR
-# ---------------------------------------------------
-with tab3:
-    render_config_tab()
+    st.dataframe(df, width='stretch', hide_index=True) if not df.empty else st.warning("No log entries match your filters.")

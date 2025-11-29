@@ -5,7 +5,7 @@ BANNED_PHRASES:
 - confidential
 CONFIDENCE_THRESHOLD: 0.5
 OLLAMA_URL: http://localhost:11434/api/generate
-OLLAMA_MODEL: qwen3:8b
+OLLAMA_MODEL: qwen2.5:7b-instruct
 EMBED_MODEL: all-MiniLM-L6-v2
 EMBED_DIM: 384
 AUTO_BUILD_FAISS: true
