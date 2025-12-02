@@ -5,7 +5,7 @@ from tab_chat import render_chat_tab
 from tab_logs import render_logs_tab
 from tab_config import render_config_tab
 
-FASTAPI_PORT = os.getenv("FASTAPI_PORT", "8000")
+FASTAPI_PORT = os.getenv("FASTAPI_PORT", "8010")
 FASTAPI_URL = f"http://localhost:{FASTAPI_PORT}"
 
 st.set_page_config(page_title="Policy-Aware RAG", page_icon="🧠", layout="wide")
