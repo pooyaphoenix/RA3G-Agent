@@ -20,7 +20,6 @@ with tab1:
 with tab2:
     render_logs_tab(FASTAPI_URL)
 
-
 # ---------------------------------------------------
 # TAB 3 — CONFIGURATION EDITOR
 # ---------------------------------------------------
