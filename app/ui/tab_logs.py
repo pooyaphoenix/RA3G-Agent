@@ -74,13 +74,6 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
             else:
                 st.success("🔴 Live logs streaming active")
 
-    try:
-        with open(log_path, "r", encoding="utf-8") as f:
-            log_content = f.readlines()
-    except FileNotFoundError:
-        st.error(f"❌ Log file not found: `{log_path}`")
-        return
-
     # Filters
     search_term = st.text_input("Search keyword:", key="log_search_term_tab2")
     show_errors_only = st.checkbox("Show only errors", key="errors_only_checkbox_tab2")
@@ -108,7 +101,9 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
         
         html_code = f"""
         <div id="log-container" style="font-family: monospace; background: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 5px; max-height: 600px; overflow-y: auto;">
-            <div id="log-content"></div>
+            <div id="log-content" style="min-height: 50px;">
+                <div style="color: #888; padding: 10px;">Loading logs...</div>
+            </div>
         </div>
         <script>
             (function() {{
@@ -118,17 +113,35 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
                 const showErrorsOnly = {show_errors_js};
                 let lines = [];
                 let eventSource = null;
+                let renderPending = false;
+                let initialLoad = true;
+                
+                // Batch rendering for performance
+                function scheduleRender() {{
+                    if (renderPending) return;
+                    renderPending = true;
+                    requestAnimationFrame(() => {{
+                        renderLogs();
+                        renderPending = false;
+                    }});
+                }}
                 
                 function addLogLine(line, isError, isWarning) {{
                     if (lines.length >= maxLines) {{
                         lines.shift();
                     }}
                     lines.push({{line: line, isError: isError, isWarning: isWarning}});
-                    renderLogs();
+                    scheduleRender();
                 }}
                 
                 function renderLogs() {{
+                    if (initialLoad && lines.length === 0) {{
+                        return; // Don't clear loading message until we have data
+                    }}
+                    
+                    initialLoad = false;
                     let html = '';
+                    let visibleCount = 0;
                     
                     lines.forEach(item => {{
                         const line = item.line;
@@ -138,6 +151,8 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
                         // Apply filters
                         if (showErrorsOnly && !isError) return;
                         if (searchTerm && !line.toLowerCase().includes(searchTerm)) return;
+                        
+                        visibleCount++;
                         
                         // Determine color
                         let color = '#d4d4d4';
@@ -153,8 +168,12 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
                         html += `<div style="padding: 2px 5px; background: ${{bgColor}}; color: ${{color}}; border-left: 3px solid ${{isError ? '#f48771' : isWarning ? '#dcdcaa' : 'transparent'}};">${{escapeHtml(line)}}</div>`;
                     }});
                     
-                    logContainer.innerHTML = html;
-                    logContainer.scrollTop = logContainer.scrollHeight;
+                    if (html) {{
+                        logContainer.innerHTML = html;
+                        logContainer.scrollTop = logContainer.scrollHeight;
+                    }} else if (lines.length > 0) {{
+                        logContainer.innerHTML = '<div style="color: #888; padding: 10px;">No logs match your filters.</div>';
+                    }}
                 }}
                 
                 function escapeHtml(text) {{
@@ -168,11 +187,24 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
                         eventSource.close();
                     }}
                     
+                    // Reset state
+                    lines = [];
+                    initialLoad = true;
+                    logContainer.innerHTML = '<div style="color: #888; padding: 10px;">Connecting to log stream...</div>';
+                    
                     eventSource = new EventSource('{stream_url}');
+                    
+                    eventSource.onopen = function() {{
+                        console.log('SSE connection opened');
+                    }};
                     
                     eventSource.onmessage = function(event) {{
                         try {{
                             const data = JSON.parse(event.data);
+                            if (data.error) {{
+                                logContainer.innerHTML = `<div style="color: #f48771; padding: 10px;">Error: ${{escapeHtml(data.error)}}</div>`;
+                                return;
+                            }}
                             if (data.line) {{
                                 const line = data.line;
                                 const isError = line.includes('ERROR') || line.includes('CRITICAL');
@@ -185,8 +217,17 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
                     }};
                     
                     eventSource.onerror = function(event) {{
-                        console.error('SSE error:', event);
-                        setTimeout(startStreaming, 3000); // Reconnect after 3 seconds
+                        console.error('SSE error:', event, 'readyState:', eventSource.readyState);
+                        // Only reconnect if connection is actually closed
+                        // CONNECTING = 0, OPEN = 1, CLOSED = 2
+                        if (eventSource.readyState === EventSource.CLOSED) {{
+                            logContainer.innerHTML = '<div style="color: #f48771; padding: 10px;">Connection closed. Reconnecting...</div>';
+                            setTimeout(startStreaming, 2000);
+                        }} else if (eventSource.readyState === EventSource.CONNECTING) {{
+                            // Still connecting, don't show error yet
+                            console.log('Still connecting...');
+                        }}
+                        // If OPEN (1), connection is fine, just a temporary error
                     }};
                 }}
                 
@@ -210,6 +251,7 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
         if st.session_state.live_logs_enabled and st.session_state.logs_paused:
             st.info("💡 Live logs are paused. Click 'Resume' to continue streaming.")
         
+        # Read log file for static display
         try:
             with open(log_path, "r", encoding="utf-8") as f:
                 log_content = f.readlines()
@@ -217,27 +259,28 @@ def render_logs_tab(fastapi_url: str = "http://localhost:8010"):
             st.error(f"❌ Log file not found: `{log_path}`")
             return
 
-    data = [parse_log_line(line) for line in log_content[-limit_lines:]]
-    df = pd.DataFrame(data)
+        # Process and display static logs
+        data = [parse_log_line(line) for line in log_content[-limit_lines:]]
+        df = pd.DataFrame(data)
 
-    if search_term:
-        df = df[df["message"].str.contains(search_term, case=False, na=False)]
-    if show_errors_only:
-        df = df[df["level"].isin(["ERROR", "CRITICAL"])]
+        if search_term:
+            df = df[df["message"].str.contains(search_term, case=False, na=False)]
+        if show_errors_only:
+            df = df[df["level"].isin(["ERROR", "CRITICAL"])]
 
-    st.caption(f"Showing last {len(df)} lines (filtered)")
+        st.caption(f"Showing last {len(df)} lines (filtered)")
 
-    if df.empty:
-        st.warning("No log entries match your filters.")
-    else:
-        # Apply styling for errors/warnings
-        def style_log_row(row):
-            styles = [''] * len(row)
-            if row['level'] in ['ERROR', 'CRITICAL']:
-                return ['background-color: #3c1e1e; color: #f48771'] * len(row)
-            elif row['level'] in ['WARNING', 'WARN']:
-                return ['background-color: #3c3c1e; color: #dcdcaa'] * len(row)
-            return [''] * len(row)
-        
-        styled_df = df.style.apply(style_log_row, axis=1)
-        st.dataframe(styled_df, use_container_width=True, hide_index=True)
+        if df.empty:
+            st.warning("No log entries match your filters.")
+        else:
+            # Apply styling for errors/warnings
+            def style_log_row(row):
+                styles = [''] * len(row)
+                if row['level'] in ['ERROR', 'CRITICAL']:
+                    return ['background-color: #3c1e1e; color: #f48771'] * len(row)
+                elif row['level'] in ['WARNING', 'WARN']:
+                    return ['background-color: #3c3c1e; color: #dcdcaa'] * len(row)
+                return [''] * len(row)
+            
+            styled_df = df.style.apply(style_log_row, axis=1)
+            st.dataframe(styled_df, use_container_width=True, hide_index=True)

@@ -153,31 +153,57 @@ async def tail_log_file(log_type: str):
     log_path = LOG_FILES.get(log_type.lower())
     if not log_path:
         yield f"data: {json.dumps({'error': f'Unknown log type: {log_type}'})}\n\n"
-        return
+        # Keep connection alive even after error
+        while True:
+            await asyncio.sleep(30)
+            yield f": keep-alive\n\n"
     
     log_file = Path(log_path)
     if not log_file.exists():
         yield f"data: {json.dumps({'error': f'Log file not found: {log_path}'})}\n\n"
-        return
+        # Keep connection alive and check if file gets created
+        ping_counter = 0
+        while True:
+            ping_counter += 1
+            if ping_counter >= 30:  # Every 15 seconds
+                yield f": keep-alive\n\n"
+                ping_counter = 0
+            # Check if file was created
+            if log_file.exists():
+                break
+            await asyncio.sleep(0.5)
     
-    # Read existing content first (last 100 lines)
+    # Read existing content first (last 50 lines for faster initial load)
     try:
         with open(log_file, 'r', encoding='utf-8') as f:
             lines = f.readlines()
-            # Send last 100 lines
-            for line in lines[-100:]:
-                if line.strip():
-                    yield f"data: {json.dumps({'line': line.rstrip()})}\n\n"
+            # Send last 50 lines in batches for better performance
+            existing_lines = [line.rstrip() for line in lines[-50:] if line.strip()]
+            # Send in batches of 10 to avoid blocking
+            for i in range(0, len(existing_lines), 10):
+                batch = existing_lines[i:i+10]
+                for line in batch:
+                    yield f"data: {json.dumps({'line': line})}\n\n"
+                # Small delay between batches to allow rendering
+                if i + 10 < len(existing_lines):
+                    await asyncio.sleep(0.05)
     except Exception as e:
         yield f"data: {json.dumps({'error': str(e)})}\n\n"
     
     # Now tail the file
     last_position = log_file.stat().st_size if log_file.exists() else 0
+    ping_counter = 0
     
     while True:
         try:
+            # Send keep-alive ping every 15 seconds
+            ping_counter += 1
+            if ping_counter >= 30:  # 30 * 0.5s = 15 seconds
+                yield f": keep-alive\n\n"
+                ping_counter = 0
+            
             if not log_file.exists():
-                await asyncio.sleep(1)
+                await asyncio.sleep(0.5)
                 continue
             
             current_size = log_file.stat().st_size
@@ -214,6 +240,7 @@ async def tail_log_file(log_type: str):
             await asyncio.sleep(0.5)  # Check every 500ms
             
         except Exception as e:
+            # Log error but don't exit - keep connection alive
             yield f"data: {json.dumps({'error': str(e)})}\n\n"
             await asyncio.sleep(1)
 
@@ -233,5 +260,8 @@ async def stream_logs(log_type: str):
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
             "X-Accel-Buffering": "no",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET",
+            "Access-Control-Allow-Headers": "Cache-Control",
         }
     )
