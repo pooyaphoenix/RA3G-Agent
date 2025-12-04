@@ -16,21 +16,30 @@ class ReasoningAgent:
     def __init__(self, ollama_url: str = OLLAMA_URL, model: str = OLLAMA_MODEL):
         self.ollama_url = ollama_url
         self.model = model
+        self.user_instructions = self._load_user_instructions()
+
         logger.info("ReasoningAgent initialized (model=%s, url=%s)", model, ollama_url)
 
     def _build_prompt(self, query: str, passages: List[Dict]) -> str:
-        ctx = "\n\n".join([f"[PASSAGE {i}] (score={p['score']:.3f})\n{p['text']}" for i, p in enumerate(passages)])
+        context = "\n\n".join([
+            f"[PASSAGE {i}] (score={p['score']:.3f})\n{p['text']}"
+            for i, p in enumerate(passages)
+        ])
+
         prompt = (
             "You are a helpful assistant. Use the provided passages (do NOT hallucinate) to answer the query.\n\n"
             f"Query: {query}\n\n"
             "Passages:\n"
-            f"{ctx}\n\n"
-            "Instructions:\n"
+            f"{context}\n\n"
+            "User Instructions:\n"
+            f"{self.user_instructions}\n\n"
+            "System Requirements:\n"
             "1) Provide a concise answer in plain text.\n"
             "2) Provide a trace array listing which passages (by index) you used and a short note per passage.\n"
             "Return a JSON object with keys: 'answer' (string), 'trace' (list of {index:int, note:str}), and 'confidence' (float between 0 and 1).\n"
             "Be concise.\n"
         )
+
         return prompt
 
     async def _call_ollama(self, prompt: str, timeout: int = 60) -> str:
@@ -104,3 +113,18 @@ class ReasoningAgent:
                 ],
                 "confidence": 0.4
             }
+        
+    def _load_user_instructions(self) -> str:
+        """
+        Load user-defined instructions from data/instructions.txt.
+        Returns an empty string on failure.
+        """
+        instructions_path = os.path.join("data", "instructions.txt")
+        try:
+            with open(instructions_path, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                logger.info("Loaded user instructions from %s", instructions_path)
+                return content
+        except Exception as e:
+            logger.error("Failed to load instructions.txt: %s", e)
+            return ""
