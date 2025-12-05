@@ -18,8 +18,7 @@ logger = get_logger("gateway", "logs/gateway.log")
 
 app = FastAPI(title="RA3G Agent Gateway", version="0.1.0")
 
-
-app.include_router(upload_router, prefix="")
+app.include_router(upload_router, tags=["Upload"])
 
 # Lazy initialization to avoid FAISS mutex issues
 _retriever = None
