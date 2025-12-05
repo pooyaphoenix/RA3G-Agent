@@ -1,12 +1,19 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 import fitz  # PyMuPDF
 import os
+from pathlib import Path
+
+from app.agents.retriever_agent import RetrieverAgent
 
 router = APIRouter()
 
-CORPUS_DIR = "data/corpus"
-os.makedirs(CORPUS_DIR, exist_ok=True)
+CORPUS_DIR = Path("data/corpus")
+CORPUS_DIR.mkdir(parents=True, exist_ok=True)
 
+
+# -----------------------------------------------------
+# UPLOAD PDF
+# -----------------------------------------------------
 @router.post("/upload/pdf")
 async def upload_pdf(file: UploadFile = File(...)):
     if not file.filename.lower().endswith(".pdf"):
@@ -14,17 +21,18 @@ async def upload_pdf(file: UploadFile = File(...)):
 
     pdf_bytes = await file.read()
 
-    # Save original PDF
-    pdf_path = os.path.join(CORPUS_DIR, file.filename)
+    pdf_path = CORPUS_DIR / file.filename
+    text_path = pdf_path.with_suffix(".txt")
+
+    # Save PDF
     with open(pdf_path, "wb") as f:
         f.write(pdf_bytes)
 
     # Convert PDF → text
-    text_path = pdf_path.replace(".pdf", ".txt")
-
     try:
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
         text = ""
+
         for page in doc:
             text += page.get_text()
 
@@ -32,20 +40,48 @@ async def upload_pdf(file: UploadFile = File(...)):
             f.write(text)
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"PDF parsing failed: {e}")
+
+    # 🔥 REBUILD FAISS AUTOMATICALLY
+    retriever = RetrieverAgent()
+    retriever._auto_build_index()
 
     return {
         "status": "success",
-        "message": "PDF uploaded and converted to text",
-        "pdf_file": file.filename,
-        "text_file": os.path.basename(text_path),
+        "message": "Uploaded, parsed, and FAISS rebuilt.",
+        "pdf": file.filename,
+        "txt": text_path.name,
     }
 
 
+# -----------------------------------------------------
+# LIST ALL DOCUMENTS
+# -----------------------------------------------------
 @router.get("/documents/list")
 def list_documents():
-    try:
-        files = os.listdir(CORPUS_DIR)
-        return {"documents": files}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    files = sorted([f.name for f in CORPUS_DIR.iterdir()])
+    return {"documents": files}
+
+
+# -----------------------------------------------------
+# DELETE DOCUMENT + REBUILD INDEX
+# -----------------------------------------------------
+@router.delete("/documents/delete/{filename}")
+def delete_document(filename: str):
+    target = CORPUS_DIR / filename
+
+    if not target.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    target.unlink()
+
+    # Also delete paired .txt file
+    txt_version = target.with_suffix(".txt")
+    if txt_version.exists():
+        txt_version.unlink()
+
+    # REBUILD FAISS
+    retriever = RetrieverAgent()
+    retriever._auto_build_index()
+
+    return {"status": "success", "message": f"{filename} deleted and index rebuilt"}

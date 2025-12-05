@@ -25,7 +25,6 @@ class RetrieverAgent:
         self.meta = []
         print("AUTO_BUILD_FAISS: ", Config.AUTO_BUILD_FAISS)
         # Check if index exists, auto-build if enabled and missing
-        # Check if index exists, auto-build if enabled and missing
         if not (INDEX_PATH.exists() and META_PATH.exists()):
             if Config.AUTO_BUILD_FAISS:
                 logger.info("FAISS index not found. Auto-building from corpus...")
