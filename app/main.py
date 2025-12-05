@@ -11,10 +11,15 @@ from app.agents.reasoning_agent import ReasoningAgent
 from app.agents.governance_agent import GovernanceAgent
 from app.utils.logger import get_logger
 from app.utils.memory import memory_store
+from app.routes.upload_routes import router as upload_router
+
 
 logger = get_logger("gateway", "logs/gateway.log")
 
-app = FastAPI(title="Policy-Aware RAG")
+app = FastAPI(title="RA3G Agent Gateway", version="0.1.0")
+
+
+app.include_router(upload_router, prefix="")
 
 # Lazy initialization to avoid FAISS mutex issues
 _retriever = None

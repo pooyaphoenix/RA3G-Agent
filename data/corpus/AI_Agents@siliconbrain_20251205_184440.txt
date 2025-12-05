@@ -1,0 +1,1655 @@
+FREE
+AI AGENTS
+2025 EDITION
+THE ILLUSTRATED
+GUIDEBOOK 
+Avi Chawla & Akshay Pachaar
+DailyDoseofDS.com
+Daily Dose of
+Data Science
+
+ 
+DailyDoseofDS.com 
+How to make the most out of 
+this book and your time? 
+The reading time of this book is about 8 hours. But not all chapters will be of 
+relevance to you. This 2-minute assessment will test your current expertise and 
+recommend chapters that will be most useful to you. 
+ 
+Scan the QR code below or open this link to start the assessment. It will only take 
+2 minutes to complete. 
+ 
+ 
+https://bit.ly/agents-assessment 
+1 
+
+ 
+DailyDoseofDS.com 
+Table of contents 
+ 
+AI Agents....................................................................................................... 4 
+What is an AI Agent?...................................................................................5 
+Agent vs LLM vs RAG...................................................................................8 
+LLM (Large Language Model)..............................................................................8 
+RAG (Retrieval-Augmented Generation).........................................................9 
+Agent.............................................................................................................................. 9 
+Building blocks of AI Agents.....................................................................10 
+1) Role-playing...........................................................................................................10 
+2) Focus/Tasks............................................................................................................11 
+3) Tools..........................................................................................................................11 
+#3.1) Custom tools.................................................................................................. 12 
+#3.2) Custom tools via MCP...............................................................................17 
+4) Cooperation...........................................................................................................21 
+5) Guardrails.............................................................................................................22 
+6) Memory................................................................................................................. 22 
+5 Agentic AI Design Patterns...................................................................24 
+#1) Reﬂection pattern..........................................................................................25 
+#2) Tool use pattern.............................................................................................25 
+#3) ReAct (Reason and Act) pattern........................................................... 26 
+#4) Planning pattern........................................................................................... 28 
+#5) Multi-Agent pattern.....................................................................................29 
+5 Levels of Agentic AI Systems................................................................30 
+#1) Basic responder................................................................................................31 
+#2) Router pattern.................................................................................................31 
+#3) Tool calling.......................................................................................................32 
+#4) Multi-agent pattern.....................................................................................32 
+#5) Autonomous pattern....................................................................................33 
+2 
+
+ 
+DailyDoseofDS.com 
+AI Agents Projects.....................................................................................34 
+#1) Agentic RAG...........................................................................................................35 
+#2) Voice RAG Agent..................................................................................................41 
+#3) Multi-agent Flight ﬁnder................................................................................ 46 
+#4) Financial Analyst.................................................................................................54 
+#5) Brand Monitoring System................................................................................59 
+#6) Multi-agent Hotel Finder.................................................................................67 
+#7) Multi-agent Deep Researcher........................................................................75 
+#8) Human-like Memory for Agents...................................................................82 
+#9) Multi-agent Book Writer................................................................................. 89 
+#10) Multi-agent Content Creation System.....................................................98 
+#11) Documentation Writer Flow.........................................................................106 
+#12) News Generator................................................................................................112 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+AI Agents  
+ 
+4 
+
+ 
+DailyDoseofDS.com 
+What is an AI Agent? 
+Imagine you want to generate a report on the latest trends in AI research. If you 
+use a standard LLM, you might: 
+ 
+1. Ask for a summary of recent AI research papers. 
+2. Review the response and realize you need sources. 
+3. Obtain a list of papers along with citations. 
+4. Find that some sources are outdated, so you reﬁne your query. 
+5. Finally, after multiple iterations, you get a useful output. 
+This iterative process takes time and eﬀort, requiring you to act as the 
+decision-maker at every step. 
+Now, let’s see how AI agents handle this diﬀerently: 
+A Research Agent autonomously searches and retrieves relevant AI research 
+papers from arXiv, Semantic Scholar, or Google Scholar. 
+5 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+● A Filtering Agent scans the retrieved papers, identifying the most relevant 
+ones based on citation count, publication date, and keywords. 
+ 
+ 
+ 
+● A Summarization Agent extracts key insights and condenses them into an 
+easy-to-read report. 
+ 
+ 
+● A Formatting Agent structures the ﬁnal report, ensuring it follows a clear, 
+professional layout. 
+6 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+Here, the AI agents not only execute the research process end-to-end but also 
+self-reﬁne their outputs, ensuring the ﬁnal report is comprehensive, up-to-date, 
+and well-structured - all without requiring human intervention at every step. 
+ 
+ 
+ 
+To formalize AI Agents are  autonomous systems that can reason, think, plan, 
+ﬁgure out the relevant sources and extract information from them when needed, 
+take actions, and even correct themselves if something goes wrong. 
+7 
+
+ 
+DailyDoseofDS.com 
+ 
+Agent vs LLM vs RAG 
+  
+Let’s break it down with a simple analogy: 
+● LLM is the brain. 
+● RAG is feeding that brain with fresh information. 
+● An agent is the decision-maker that plans and acts using the brain and the 
+tools. 
+LLM (Large Language Model) 
+An LLM like GPT-4 is trained on massive text data. 
+It can reason, generate, summarize but only using what it already knows (i.e., its 
+training data). 
+ 
+8 
+
+ 
+DailyDoseofDS.com 
+It’s smart, but static. It can’t access the web, call APIs, or fetch new facts on its 
+own. 
+RAG (Retrieval-Augmented Generation) 
+RAG enhances an LLM by retrieving external documents (from a vector DB, 
+search engine, etc.) and feeding them into the LLM as context before generating 
+a response. 
+ 
+RAG makes the LLM aware of updated, relevant info without retraining. 
+Agent 
+An Agent adds autonomy to the mix. 
+ 
+It doesn’t just answer a question—it decides what steps to take: 
+Should it call a tool? Search the web? Summarize? Store info? 
+An Agent uses an LLM, calls tools, makes decisions, and orchestrates workﬂows 
+just like a real assistant. 
+9 
+
+ 
+DailyDoseofDS.com 
+Building blocks of AI Agents 
+AI agents are designed to reason, plan, and take action autonomously. However, 
+to be eﬀective, they must be built with certain key principles in mind. There are 
+six essential building blocks that make AI agents more reliable, intelligent, and 
+useful in real-world applications: 
+1. Role-playing 
+2. Focus 
+3. Tools 
+4. Cooperation 
+5. Guardrails 
+6. Memory 
+Let’s explore each of these concepts and understand why they are fundamental to 
+building great AI agents. 
+1) Role-playing 
+One of the simplest ways to boost an agent’s performance is by giving it a clear, 
+speciﬁc role. 
+ 
+A generic AI assistant may give vague answers. But deﬁne it as a “Senior contract 
+lawyer,” and it responds with legal precision and context.  
+Why? 
+Because role assignment shapes the agent’s reasoning and retrieval process. The 
+10 
+
+ 
+DailyDoseofDS.com 
+more speciﬁc the role, the sharper and more relevant the output. 
+ 
+2) Focus/Tasks 
+Focus is key to reducing hallucinations and improving accuracy. 
+Giving an agent too many tasks or too much data doesn’t help - it hurts.  
+ 
+Overloading leads to confusion, inconsistency, and poor results. 
+For example, a marketing agent should stick to messaging, tone, and audience 
+not pricing or market analysis. 
+Instead of trying to make one agent do everything, a better approach is to use 
+multiple agents, each with a speciﬁc and narrow focus. 
+Specialized agents perform better - every time. 
+3) Tools 
+Agents get smarter when they can use the right tools. 
+But more tools ≠ better results. 
+11 
+
+ 
+DailyDoseofDS.com 
+ 
+For example, an AI research agent could beneﬁt from: 
+● A web search tool for retrieving recent publications. 
+● A summarization model for condensing long research papers. 
+● A citation manager to properly format references. 
+But if you add unnecessary tools—like a speech-to-text module or a code 
+execution environment—it could confuse the agent and reduce eﬃciency. 
+#3.1) Custom tools 
+While LLM-powered agents are great at reasoning and generating responses, 
+they lack direct access to real-time information, external systems, and specialized 
+computations. 
+Tools allow the Agent to: 
+● Search the web for real-time data. 
+● Retrieve structured information from APIs and databases. 
+● Execute code to perform calculations or data transformations. 
+● Analyze images, PDFs, and documents beyond just text inputs. 
+12 
+
+ 
+DailyDoseofDS.com 
+CrewAI supports several tools that you can integrate with Agents, as depicted 
+below: 
+ 
+However, you may need to build custom tools at times. 
+In this example, we're building a real-time currency conversion tool inside 
+CrewAI. Instead of making an LLM guess exchange rates, we integrate a custom 
+tool that fetches live exchange rates from an external API and provides some 
+insights. 
+Below, let's look at how you can build one for your custom needs in the CrewAI 
+framework. 
+Firstly, make sure the tools package is installed: 
+13 
+
+ 
+DailyDoseofDS.com 
+ 
+You would also need an API key from here: https://www.exchangerate-api.com/ 
+(it's free). Specify it in the .env ﬁle as shown below: 
+ 
+Once that's done, we start with some standard import statements: 
+ 
+Next, we deﬁne the input ﬁelds the tool expects using Pydantic. 
+ 
+14 
+
+ 
+DailyDoseofDS.com 
+Now, we deﬁne the CurrencyConverterTool by inheriting from BaseTool: 
+ 
+Every tool class should have the _run method which we will execute whenever 
+the Agents wants to make use of it. 
+For our use case, we implement it as follows: 
+ 
+In the above code, we fetch live exchange rates using an API request. We also 
+handle errors if the request fails or the currency code is invalid. 
+Now, we deﬁne an agent that uses the tool for real-time currency analysis and 
+attach our CurrencyConverterTool, allowing the agent to call it directly if needed: 
+ 
+15 
+
+ 
+DailyDoseofDS.com 
+We assign a task to the currency_analyst agent. 
+ 
+Finally, we create a Crew, assign the agent to the task, and execute it. 
+ 
+Printing the response, we get the following output: 
+ 
+ 
+Works as expected! 
+16 
+
+ 
+DailyDoseofDS.com 
+#3.2) Custom tools via MCP 
+Now, let’s take it a step further. 
+Instead of embedding the tool directly in every Crew, we’ll expose it as a reusable 
+MCP tool—making it accessible across multiple agents and ﬂows via a simple 
+server. 
+First, install the required packages: 
+ 
+ We’ll continue using ExchangeRate-API in our .env ﬁle: 
+ 
+We’ll now write a lightweight server.py script that exposes the currency converter 
+tool. We start with the standard imports: 
+ 
+Now, we load environment variables and initialize the server: 
+17 
+
+ 
+DailyDoseofDS.com 
+ 
+Next, we deﬁne the tool logic with @mcp.tool(): 
+ 
+This function takes three inputs—amount, source currency, and target 
+currency—and returns the converted result using the real-time exchange rate 
+API. 
+To make the tool accessible, we need to run the MCP server. Add this at the end 
+of your script: 
+ 
+18 
+
+ 
+DailyDoseofDS.com 
+This starts the server and exposes your convert_currency tool at: 
+http://localhost:8081/sse. 
+Now any CrewAI agent can connect to it using MCPServerAdapter. Let’s now 
+consume this tool from within a CrewAI agent. 
+First, we import the required CrewAI classes. We’ll use Agent, Task, and Crew 
+from CrewAI, and MCPServerAdapter to connect to our tool server. 
+ 
+Next, we connect to the MCP tool server. Deﬁne the server parameters to 
+connect to your running tool (from server.py). 
+ 
+Now, we use the discovered MCP tool in an agent: 
+This agent is assigned the convert_currency tool from the remote server. It can 
+now call the tool just like a locally deﬁned one. 
+19 
+
+ 
+DailyDoseofDS.com 
+ 
+We give the agent a task description: 
+ 
+Finally, we create the Crew, pass in the inputs and run it: 
+ 
+Printing the result, we get the following output: 
+ 
+20 
+
+ 
+DailyDoseofDS.com 
+4) Cooperation 
+Multi-agent systems work best when agents collaborate and exchange feedback. 
+Instead of one agent doing everything, a team of specialized agents can split tasks 
+and improve each other’s outputs. 
+ 
+Consider an AI-powered ﬁnancial analysis system: 
+● One agent gathers data 
+●  another assesses risk,  
+● a third builds strategy,  
+● and a fourth writes the report 
+Collaboration leads to smarter, more accurate results. 
+ 
+The best practice is to enable agent collaboration by designing workﬂows where 
+agents can exchange insights and reﬁne their responses together. 
+ 
+21 
+
+ 
+DailyDoseofDS.com 
+5) Guardrails 
+Agents are powerful but without constraints, they can go oﬀ track. They might 
+hallucinate, loop endlessly, or make bad calls. 
+Guardrails ensure that agents stay on track and maintain quality standards. 
+ 
+Examples of useful guardrails include: 
+● Limiting tool usage: Prevent an agent from overusing APIs or generating 
+irrelevant queries. 
+● Setting validation checkpoints: Ensure outputs meet predeﬁned criteria 
+before moving to the next step. 
+● Establishing fallback mechanisms: If an agent fails to complete a task, 
+another agent or human reviewer can intervene. 
+For example, an AI-powered legal assistant should avoid outdated laws or false 
+claims - guardrails ensure that. 
+6) Memory 
+Finally, we have memory, which is one of the most critical components of AI 
+agents. 
+22 
+
+ 
+DailyDoseofDS.com 
+Without memory, an agent would start fresh every time, losing all context from 
+previous interactions. With memory, agents can improve over time, remember 
+past actions, and create more cohesive responses. 
+ 
+Diﬀerent types of memory in AI agents include: 
+● Short-term memory – Exists only during execution (e.g., recalling recent 
+conversation history). 
+● Long-term memory – Persists after execution (e.g., remembering user 
+preferences over multiple interactions). 
+● Entity memory – Stores information about key subjects discussed (e.g., 
+tracking customer details in a CRM agent). 
+For example, in an AI-powered tutoring system, memory allows the agent to 
+recall past lessons, tailor feedback, and avoid repetition. 
+ 
+ 
+ 
+23 
+
+ 
+DailyDoseofDS.com 
+5 Agentic AI Design Patterns 
+Agentic behaviors allow LLMs to reﬁne their output by incorporating 
+self-evaluation, planning, and collaboration! 
+The following visual depicts the 5 most popular design patterns employed in 
+building AI agents. 
+ 
+24 
+
+ 
+DailyDoseofDS.com 
+#1) Reﬂection pattern 
+ 
+The AI reviews its own work to spot mistakes and iterate until it produces the 
+ﬁnal response. 
+#2) Tool use pattern 
+ 
+25 
+
+ 
+DailyDoseofDS.com 
+Tools allow LLMs to gather more information by: 
+● Querying a vector database 
+● Executing Python scripts 
+● Invoking APIs, etc. 
+This is helpful since the LLM is not solely reliant on its internal knowledge. 
+#3) ReAct (Reason and Act) pattern 
+ 
+ReAct combines the above two patterns: 
+● The Agent reﬂects on the generated outputs. 
+● It interacts with the world using tools. 
+A ReAct agent operates in a loop of Thought → Action → Observation, repeating 
+until it reaches a solution or a ﬁnal answer. This is analogous to how humans 
+solve problems: 
+26 
+
+ 
+DailyDoseofDS.com 
+ 
+Note: Frameworks like CrewAI primarily use this by default. 
+To understand this, consider the output of a multi-agent system below: 
+ 
+As shown above, the Agent is going through a series of thought activities before 
+producing a response. 
+This is the ReAct pattern in action! 
+27 
+
+ 
+DailyDoseofDS.com 
+More speciﬁcally, under the hood, many such frameworks use the ReAct 
+(Reasoning and Acting) pattern to let LLM think through problems and use tools 
+to act on the world . 
+For example, an agent in CrewAI typically alternates between reasoning about a 
+task and acting (using a tool) to gather information or execute steps, following 
+the ReAct paradigm . 
+This enhances an LLM agent’s ability to handle complex tasks and decisions by 
+combining chain-of-thought reasoning with external tool use like in this ReAct 
+implementation from scratch. 
+#4) Planning pattern 
+ 
+Instead of solving a task in one go, the AI creates a roadmap by: 
+● Subdividing tasks 
+● Outlining objectives 
+This strategic thinking solves tasks more eﬀectively. 
+Note: In CrewAI, specify `planning=True` to use Planning. 
+28 
+
+ 
+DailyDoseofDS.com 
+#5) Multi-Agent pattern 
+ 
+● There are several agents, each with a speciﬁc role and task. 
+● Each agent can also access tools. 
+All agents work together to deliver the ﬁnal outcome, while delegating tasks to 
+other agents if needed. 
+ 
+ 
+ 
+ 
+ 
+29 
+
+ 
+DailyDoseofDS.com 
+5 Levels of Agentic AI Systems 
+Agentic AI systems don't just generate text; they can make decisions, call 
+functions, and even run autonomous workﬂows. 
+The visual explains 5 levels of AI agency—from simple responders to fully 
+autonomous agents. 
+ 
+30 
+
+ 
+DailyDoseofDS.com 
+#1) Basic responder 
+ 
+A human guides the entire ﬂow. 
+The LLM is just a generic responder that receives an input and produces an 
+output. It has little control over the program ﬂow. 
+#2) Router pattern 
+ 
+A human deﬁnes the paths/functions that exist in the ﬂow. 
+The LLM makes basic decisions on which function or path it can take. 
+31 
+
+ 
+DailyDoseofDS.com 
+#3) Tool calling 
+ 
+A human deﬁnes a set of tools the LLM can access to complete a task. 
+LLM decides when to use them and also the arguments for execution. 
+#4) Multi-agent pattern 
+ 
+A manager agent coordinates multiple sub-agents and decides the next steps 
+iteratively. 
+A human lays out the hierarchy between agents, their roles, tools, etc. 
+32 
+
+ 
+DailyDoseofDS.com 
+The LLM controls execution ﬂow, deciding what to do next. 
+#5) Autonomous pattern 
+ 
+The most advanced pattern, wherein, the LLM generates and executes new code 
+independently, eﬀectively acting as an independent AI developer. 
+33 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+AI Agents 
+Projects 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+34 
+
+ 
+DailyDoseofDS.com 
+#1) Agentic RAG 
+Build a RAG pipeline with agentic capabilities that can dynamically fetch context 
+from diﬀerent sources, like a vector DB and the internet. 
+ 
+Tech stack: 
+● CrewAI for Agent orchestration. 
+● Firecrawl for web search. 
+● LightningAI's LitServe for deployment. 
+Workﬂow: 
+● The Retriever Agent accepts the user query. 
+● It invokes a relevant tool (Firecrawl web search or vector DB tool) to get 
+context and generate insights. 
+● The Writer Agent generates a response. 
+35 
+
+ 
+DailyDoseofDS.com 
+Let's implement it! 
+#1) Set up LLM 
+CrewAI seamlessly integrates with all popular LLMs and providers. Here's how 
+we set up a local Qwen 3 via Ollama: 
+ 
+#2) Deﬁne Research Agent and Task 
+This Agent accepts the user query and retrieves the relevant context using a 
+vectorDB tool and a web search tool powered by Firecrawl. 
+Again, put this in the LitServe setup() method: 
+ 
+36 
+
+ 
+DailyDoseofDS.com 
+#3) Deﬁne Writer Agent and Task 
+Next, the Writer Agent accepts the insights from the Researcher Agent to 
+generate a response.  
+Yet again, we add this in the LitServe setup method: 
+ 
+#4) Set up the Crew 
+Once we have deﬁned the Agents and their tasks, we orchestrate them into a 
+crew using CrewAI and put that into a setup method.  
+Check this code: 
+37 
+
+ 
+DailyDoseofDS.com 
+ 
+#5) Decode request 
+With that, we have orchestrated the Agentic RAG workﬂow, which will be 
+executed upon an incoming request. Next, from the incoming request body, we 
+extract the user query. Check the highlighted code below: 
+ 
+38 
+
+ 
+DailyDoseofDS.com 
+#6) Predict 
+We use the decoded user query and pass it to the Crew deﬁned earlier to generate 
+a response from the model. Check the highlighted code below: 
+ 
+#7) Encode response 
+Here, we can post-process the response & send it back to the client. 
+Note: LitServe internally invokes these methods in order: decode_request → 
+predict → encode_request. Check the highlighted code below: 
+ 
+39 
+
+ 
+DailyDoseofDS.com 
+#8) With that, we are done with the server code. 
+Next, we have the basic client code to invoke the API we created using the 
+requests Python library. Check this: 
+ 
+Done! We have deployed our fully private Qwen 3 Agentic RAG using LitServe. 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/deploy-a-qw
+en-3-agentic-rag/ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+40 
+
+ 
+DailyDoseofDS.com 
+#2) Voice RAG Agent 
+Real-time voice interactions are becoming more and more popular in AI apps. 
+Learn how to build a real-time Voice RAG Agent, step-by-step. 
+ 
+Tech stack: 
+● CartesiaAI for SOTA text-to-speech 
+● AssemblyAI for speech-to-text 
+● LlamaIndex to power RAG 
+● Livekit for orchestration 
+Workﬂow: 
+41 
+
+ 
+DailyDoseofDS.com 
+● Listens to real-time audio 
+● Transcribes it via AssemblyAI 
+● Uses your docs (via LlamaIndex) to craft an answer 
+● Speaks that answer back with Cartesia 
+Let’s implement this! 
+#1) Set up environment and logging  
+This ensures we can load conﬁgurations from .env and keep track of everything 
+in real time.  
+Check this out: 
+ 
+ 
+#2) Setup RAG 
+This is where your documents get indexed for search and retrieval, powered by 
+LlamaIndex. The agent's answers would be grounded to this knowledge base.  
+42 
+
+ 
+DailyDoseofDS.com 
+ 
+#3) Setup Voice Activity Detection 
+We also want Voice Activity Detection (VAD) for smooth real-time 
+experience—so we’ll “prewarm” the Silero VAD model. This helps us detect when 
+someone is actually speaking. Check this out: 
+ 
+#4) The VoicePipelineAgent and Entry Point 
+This is where we bring it all together. The agent: 
+43 
+
+ 
+DailyDoseofDS.com 
+1. Listens to real-time audio. 
+2. Transcribes it using AssemblyAI. 
+3. Craft an answer with your documents via LlamaIndex. 
+4. Speaks that answer back using Cartesia. 
+Check this out: 
+ 
+ 
+#5) Run the app 
+44 
+
+ 
+DailyDoseofDS.com 
+Finally, we tie it all together. We run our agent with, specifying the prewarm 
+function and main entrypoint.  
+ 
+That’s it—your Real-Time Voice RAG Agent is ready to roll! 
+ 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/building-a-r
+eal-time-voice-rag-agent/ 
+ 
+ 
+45 
+
+ 
+DailyDoseofDS.com 
+#3) Multi-agent Flight ﬁnder 
+Build a ﬂight search pipeline with agentic capabilities that can parse natural 
+language queries and fetch live results from Kayak. 
+ 
+Tech stack: 
+● CrewAIInc for multi-agent orchestration 
+● BrowserbaseHQ's headless browser tool 
+● Ollama to locally serve DeepSeek-R1 
+Workﬂow: 
+● Parse the query (SF to New York on 21st September) to create a Kayak 
+search URL 
+● Visit the URL and extract top 5 ﬂights 
+● For each ﬂight, go to the details to ﬁnd available airlines 
+● Summarize ﬂight info 
+Let’s implement this! 
+46 
+
+ 
+DailyDoseofDS.com 
+#1) Deﬁne LLM 
+CrewAI nicely integrates with all the popular LLMs and providers out there. 
+Here's how you set up a local DeepSeek using Ollama: 
+ 
+#2) Flight Search Agent 
+This agent mimics a real human searching for ﬂights by browsing the web, 
+powered by Browserbase’s headless-browser tool and can look up ﬂights on sites 
+like Kayak. 
+ 
+#3) Summarisation Agent 
+47 
+
+ 
+DailyDoseofDS.com 
+After retrieving the ﬂight details, we need a concise summary of all available 
+options. 
+This is where our Summarization Agent steps in to make sense of the results for 
+easy reading. 
+ 
+Now that we have both our agents ready, it's time to understand the tools 
+powering them. 
+1. Kayak tool 
+2. Browserbase tool 
+Let's write their code one-by-one. 
+48 
+
+ 
+DailyDoseofDS.com 
+ 
+#4) Kayak tool 
+A custom Kayak tool to translate the user input into a valid Kayak search URL. 
+(FYI Kayak is a popular ﬁght and hotel booking) 
+ 
+49 
+
+ 
+DailyDoseofDS.com 
+#5) Browserbase Tool 
+The ﬂight search agent uses the Browserbase tool to simulate human browsing 
+and gather ﬂight data. 
+To be precise it automatically navigates the Kayak website and interacts with the 
+web page. Check this out: 
+ 
+#6) Setup Crew 
+Once the agents and tools are deﬁned, we orchestrate them using CrewAI. 
+Deﬁne their tasks, sequence their actions, and watch them collaborate in real 
+time. Check this out: 
+50 
+
+ 
+DailyDoseofDS.com 
+ 
+Note: here the ‘planning = True’ is using the planning pattern we discussed in the 5 
+Agentic AI Design Patterns above. 
+#7) Kickoﬀ and results 
+Finally, we feed the user’s request (departure city, arrival city, travel dates) into 
+the Crew and let it run: 
+51 
+
+ 
+DailyDoseofDS.com 
+ 
+Streamlit UI 
+To make this accessible, we wrapped the entire system in a Streamlit interface. 
+It’s a simple chat-like UI where you enter your ﬂight details and see the results in 
+real time.  
+Check this out: 
+52 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+ 
+ 
+The code is available here: 
+https://blog.dailydoseofds.com/p/hands-on-a-
+multi-agent-ﬂight-ﬁnder/ 
+ 
+ 
+ 
+ 
+ 
+53 
+
+ 
+DailyDoseofDS.com 
+#4) Financial Analyst 
+Build an AI agent that fetches, analyzes & generates insights on stock market 
+trends, right from Cursor or Claude Desktop. 
+ 
+Tech stack: 
+● CrewAI for multi-agent orchestration 
+● Ollama to locally serve DeepSeek-R1 LLM 
+● Cursor as the MCP host 
+Workﬂow: 
+● The user submits a query. 
+● The MCP agent kicks oﬀ the ﬁnancial analyst crew. 
+● The crew conducts research and creates an executable script. 
+● The agent runs the script to generate an analysis plot. 
+54 
+
+ 
+DailyDoseofDS.com 
+Let’s implement this! 
+#1) Setup LLM 
+We will use Deepseek-R1 as the LLM, served locally using Ollama. 
+ 
+Let's setup the Crew now 
+#2) Query Parser Agent 
+This agent accepts a natural language query and extracts structured output using 
+Pydantic. This guarantees clean and structured inputs for further processing! 
+ 
+55 
+
+ 
+DailyDoseofDS.com 
+#3) Code Writer Agent 
+This agent writes Python code to visualize stock data using Pandas, Matplotlib, 
+and Yahoo Finance libraries. 
+ 
+#4) Code Executor Agent 
+This agent reviews and executes the generated Python code for stock data 
+visualization. 
+It uses the code interpreter tool by CrewAI to execute the code in a secure 
+sandbox environment. 
+ 
+56 
+
+ 
+DailyDoseofDS.com 
+#5) Setup Crew and Kickoﬀ 
+We set up and kick oﬀ our ﬁnancial analysis crew to get the result shown below! 
+ 
+#6) Create MCP Server 
+Now, we encapsulate our ﬁnancial analyst within an MCP tool and add two more 
+tools to enhance the user experience. 
+● save_code -> Saves generated code to local directory 
+● run_code_and_show_plot -> Executes the code and generates a plot 
+ 
+57 
+
+ 
+DailyDoseofDS.com 
+#7) Integrate MCP server with Cursor 
+Go to: File → Preferences → Cursor Settings → MCP → Add new global MCP 
+server. In the JSON ﬁle, add what's shown below 
+ 
+Done! Our ﬁnancial analyst MCP server is live and connected to Cursor. 
+ 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/hands-on-bu
+ilding-an-mcp-powered-ﬁnancial-analyst/ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+58 
+
+ 
+DailyDoseofDS.com 
+ 
+#5) Brand Monitoring System 
+Build a multi agent brand monitoring app that scraps web mentions and 
+produces insights about a company. 
+ 
+Tech stack: 
+● Bright Data to scrape data at scale 
+● CrewAI for orchestration 
+● Ollama to serve DeepSeek locally 
+Workﬂow: 
+● Use Bright Data to scrape brand mentions across X, Instagram, YouTube, 
+websites, etc. 
+● Invoke platform-speciﬁc Crews to analyze the data and generate insights. 
+● Merge all insights to get the ﬁnal report. 
+Let's implement this! 
+59 
+
+ 
+DailyDoseofDS.com 
+ 
+#1) Scraping tool 
+To monitor a brand, we must scrape data across various sources—X, YouTube, 
+Instagram, websites, etc. 
+Thus, we'll ﬁrst gather recent search results from Bright Data's SERP API. 
+See this code: 
+ 
+#2) Platform-speciﬁc scraping function 
+60 
+
+ 
+DailyDoseofDS.com 
+The above output will contain links to web pages, X posts, YouTube videos, 
+Instagram posts, etc. 
+To scrape those sources, we use Bright Data's platform-speciﬁc scrapers. 
+Check this code: 
+ 
+#3) Set up DeepSeek R1 locally 
+We'll serve R1 locally through Ollama. 
+To do this: 
+● First, we download it locally. 
+● Next, we deﬁne it with the CrewAI's LLM class. 
+Here's the code: 
+61 
+
+ 
+DailyDoseofDS.com 
+ 
+#4) Crew Setup 
+We will have multiple Crews, one for each platform (X, Instagram, YouTube, etc.) 
+Each Crew will have two Agents: 
+● Analysis Agent → It analyses the scraped content. 
+● Writer Agent → It produces insights from the analysis. 
+Below, let's implement the X Crew! 
+ 
+ 
+62 
+
+ 
+DailyDoseofDS.com 
+#5) X Analyst Agent 
+This Agent analyzes the posts scraped by Bright Data and extracts key insights. It 
+is also assigned a task to do so. 
+Here's how it's done: 
+ 
+#6) X Writer Agent 
+The Agent takes the output of the X analyst agent and generates insights. 
+Here's the code:  
+63 
+
+ 
+DailyDoseofDS.com 
+ 
+#7) Create a Flow 
+Finally, we use CrewAI Flows to orchestrate the workﬂow: 
+● We start the Flow by using the Scraping tool. 
+● Next, we invoke platform-speciﬁc scrapers. 
+● Finally, we invoke platform-speciﬁc Crews. 
+Check this out: 
+64 
+
+ 
+DailyDoseofDS.com 
+ 
+#8) Streamlit UI and Kick oﬀ the Flow 
+Finally, we wrap the app in a clear Streamlit interface for interactivity and run 
+the Flow.  
+Check the ﬁnal outcome: 
+65 
+
+ 
+DailyDoseofDS.com 
+ 
+Done!  
+You're now ready to monitor any brand, track all mentions, and generate insights 
+about a company. 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/hands-on-bu
+ild-a-multi-agent-brand-monitoring-system/ 
+ 
+ 
+66 
+
+ 
+DailyDoseofDS.com 
+ 
+#6) Multi-agent Hotel Finder  
+Build an Agentic workﬂow that parses a travel query, fetches live ﬂights and 
+hotel data from Kayak, and summarizes the best options. 
+ 
+Tech stack: 
+● CrewAI for multi-agent orchestration 
+● Browserbase’s headless browser tool 
+● Ollama to locally serve DeepSeek-R1 
+Workﬂow: 
+● Parse the query (location, dates etc.) to create a Kayak search URL 
+● Visit the URL and extract top 5 ﬂights 
+● For each hotel, ﬁnd pricing and more info 
+● Summarize hotel info 
+67 
+
+ 
+DailyDoseofDS.com 
+Let’s implement this! 
+#1) Deﬁne LLM 
+CrewAI nicely integrates with all the popular LLMs and providers out there! 
+Here's how you set up a local DeepSeek using Ollama: 
+ 
+#2) Hotel Search Agent 
+This agent mimics a real human searching for hotels by browsing the web. It's 
+powered by browserbase's headless-browser tool and can look up hotels on sites 
+like Kayak. 
+68 
+
+ 
+DailyDoseofDS.com 
+ 
+#3) Summarisation Agent 
+After retrieving the hotel details, we need a concise summary of all available 
+options. 
+This is where our Summarization Agent steps in to make sense of the results for 
+easy reading.  
+Check this out: 
+69 
+
+ 
+DailyDoseofDS.com 
+ 
+Now that we have both our agents ready, it's time to understand the tools 
+powering them. 
+1. Kayak tool 
+2. Browserbase tool 
+Let's write their code one-by-one. 
+70 
+
+ 
+DailyDoseofDS.com 
+ 
+#4) Kayak tool 
+A custom Kayak tool to translate the user input into a valid Kayak search URL. 
+(FYI Kayak is a popular for hotel and ﬁght booking) 
+ 
+ 
+71 
+
+ 
+DailyDoseofDS.com 
+#5) Browserbase Tool 
+The hotel search agent uses the Browserbase tool to simulate human browsing 
+and gather hotel data. 
+To be precise it automatically navigates the Kayak website and interacts with the 
+web page. 
+Check this out: 
+ 
+72 
+
+ 
+DailyDoseofDS.com 
+#6) Setup Crew 
+Once the agents and tools are deﬁned, we orchestrate them using CrewAI. 
+Deﬁne their tasks, sequence their actions, and watch them collaborate in real 
+time! Check this out: 
+ 
+#7) Kickoﬀ and results 
+Finally, we feed the user’s request (location, dates etc.) into the Crew and let it 
+run!  Check this out: 
+ 
+73 
+
+ 
+DailyDoseofDS.com 
+Streamlit UI 
+To make this accessible, we wrapped the entire system in a @Streamlit interface. 
+It’s a simple chat-like UI where you enter your location and other details and see 
+the results in real time! 
+Check this out: 
+ 
+ 
+ 
+ 
+The code is available here: 
+https://github.com/patchy631/ai-engineering-
+hub/tree/main/hotel-booking-crew 
+ 
+ 
+ 
+74 
+
+ 
+DailyDoseofDS.com 
+#7) Multi-agent Deep Researcher 
+ChatGPT has a deep research feature. It helps you get detailed insights on any 
+topic. Learn how you can build a 100% local alternative to it. 
+ 
+Tech stack: 
+● Linkup platform for deep web research 
+● CrewAI for multi-agent orchestration 
+● Ollama to locally serve DeepSeek 
+● Cursor as MCP host 
+Workﬂow: 
+● User submits a query 
+● Web search agent runs deep web search via Linkup 
+● Research analyst veriﬁes and deduplicates results 
+● Technical writer crafts a coherent response with citations 
+75 
+
+ 
+DailyDoseofDS.com 
+Let’s implement this! 
+#1) Setup LLM 
+We'll use a locally served DeepSeek-R1 using Ollama. 
+  
+#2) Deﬁne Web Search Tool 
+We'll use Linkup platform's powerful search capabilities, which rival Perplexity 
+and OpenAI, to power our web search agent. This is done by deﬁning a custom 
+tool that our agent can use. 
+76 
+
+ 
+DailyDoseofDS.com 
+ 
+#3) Deﬁne Web Search Agent 
+The web search agent gathers up-to-date information from the internet based on 
+user query. The linkup tool we deﬁned earlier is used by this agent. 
+ 
+#4) Deﬁne Research Analyst Agent 
+77 
+
+ 
+DailyDoseofDS.com 
+This agent transforms raw web search results into structured insights, with 
+source URLs. It can also delegate tasks back to the web search agent for 
+veriﬁcation and fact-checking. 
+ 
+#5) Deﬁne Technical Writer Agent 
+It takes the analyzed and veriﬁed results from the analyst agent and drafts a 
+coherent response with citations for the end user. 
+ 
+#6) Setup Crew 
+78 
+
+ 
+DailyDoseofDS.com 
+Finally, once we have all the agents and tools deﬁned we set up and kickoﬀ our 
+deep researcher crew. 
+ 
+#7) Create MCP Server 
+Now, we'll encapsulate our deep research team within an MCP tool. With just a 
+few lines of code, our MCP server will be ready. 
+Let's see how to connect it with Cursor. 
+79 
+
+ 
+DailyDoseofDS.com 
+ 
+#8) Integrate MCP server with Cursor 
+Go to: File → Preferences → Cursor Settings → MCP → Add new global MCP 
+server 
+In the JSON ﬁle, add what's shown below  
+80 
+
+ 
+DailyDoseofDS.com 
+ 
+Done! Your deep research MCP server is live and connected to Cursor. 
+ 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/hands-
+on-mcp-powered-deep-researcher/ 
+81 
+
+ 
+DailyDoseofDS.com 
+#8) Human-like Memory for Agents 
+If a memory-less AI Agent is deployed in production, every interaction with the 
+Agent will be a blank slate. Learn how to build an AI Agent with human-like 
+memory to solve this. 
+ 
+Tech stack: 
+● Zep AI for the memory layer to AI agent 
+● Microsoft  AutoGen for agent orchestration 
+● Ollama to locally serve Qwen3 
+Workﬂow: 
+● User submits a query 
+82 
+
+ 
+DailyDoseofDS.com 
+● Agent saves the conversation and extracts facts into memory 
+● Agent retrieves facts and summarizes 
+● Uses facts and history for informed responses 
+Let’s implement this! 
+#1) Setup LLM 
+We'll use a locally served Qwen 3 via Ollama. Check this out: 
+ 
+#2) Initialise Zep Client 
+We're leveraging zep_ai's Foundational Memory Layer to equip our Autogen 
+agent with genuine task-completion capabilities. 
+ 
+83 
+
+ 
+DailyDoseofDS.com 
+#3) Create User Session 
+Create a Zep client session for the user, which the agent will use to manage 
+memory. A user can have multiple sessions. Here’s how it looks: 
+ 
+#4) Deﬁne Zep Conversable Agent 
+Our Zep Memory Agent builds on Autogen's Conversable Agent, drawing live 
+memory context from Zep Cloud with each user query. 
+It remains eﬃcient by utilizing the session we just established.  
+Here’s how it comes together: 
+84 
+
+ 
+DailyDoseofDS.com 
+ 
+#5) Setting up Agents 
+We initialize the Conversable Agent and a Stand-in Human Agent to manage 
+chat interactions. 
+Here’s the setup: 
+85 
+
+ 
+DailyDoseofDS.com 
+ 
+#6) Handle Agentic Chat 
+The Zep Conversable Agent steps in to create a coherent, personalized response. 
+It seamlessly integrates memory and conversation. Here’s how it works: 
+ 
+86 
+
+ 
+DailyDoseofDS.com 
+#7) Streamlit UI 
+We created a streamlined Streamlit UI to ensure smooth and simple interactions 
+with the Agent. 
+Here’s what it looks like: 
+ 
+#8) Visualize Knowledge Graph 
+We can interactively map users' conversations across multiple sessions with Zep 
+Cloud's UI. 
+This powerful tool allows us to visualize how knowledge evolves through a graph. 
+Take a look: 
+87 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/hands-on-bu
+ild-an-ai-agent-with-human-like-memory/ 
+ 
+ 
+ 
+88 
+
+ 
+DailyDoseofDS.com 
+ 
+#9) Multi-agent Book Writer  
+Build an Agentic workﬂow that writes a 20k-word book from a 3-5 word book 
+title. 
+ 
+Tech stack: 
+● Firecrawl for web scraping. 
+● CrewAI for orchestration. 
+● Ollama to serve Qwen 3 locally. 
+● LightningAI for development and hosting 
+Workﬂow: 
+89 
+
+ 
+DailyDoseofDS.com 
+● Using Firecrawl, Outline Crew scrapes data related to the book title and 
+decides the chapter count and titles. 
+● Multiple writer Crews work in parallel to write one chapter each. 
+● Combine all chapters to get the book. 
+Let's implement this! 
+#1) Scraping tool - SERP API 
+Books demand research. Thus, we'll use Firecrawl's SERP API to scrape data. 
+Tool usage: 
+● Outline Crew → to research the book title and prepare an outline. 
+● Writer Crew → to research the chapter title and write it. 
+See this code: 
+90 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+#2) Setup Qwen 3 locally 
+We'll serve Qwen 3 locally through Ollama. To do this: 
+● First, we download it locally. 
+● Next, we deﬁne it with the CrewAI's LLM class. 
+91 
+
+ 
+DailyDoseofDS.com 
+ 
+#3) Outline Crew 
+This Crew has two Agents: 
+● Research Agent → Uses the Firecrawl scraping tool to scrape data related 
+to the book's title and prepare insights. 
+● Outline Agent → Uses the insights to output total chapters and titles as 
+Pydantic output. 
+92 
+
+ 
+DailyDoseofDS.com 
+ 
+#4) Writer Crew 
+This Crew has two Agents: 
+● Research Agent → Uses the Firecrawl Scraping tool to scrape data related 
+to a chapter's title and prepare insights. 
+● Write Agent → Uses the insights to write a chapter. 
+Check this code: 
+93 
+
+ 
+DailyDoseofDS.com 
+ 
+#5) Create a Flow 
+We use CrewAI Flows to orchestrate the workﬂow. 
+First, the outline method invokes the Outline Crew, which: 
+● research the topic using the scraping tool. 
+● returns the total number of chapters and the corresponding titles. 
+This is implemented below: 
+94 
+
+ 
+DailyDoseofDS.com 
+ 
+#6) Save the book 
+Once all Writer Crews have ﬁnished execution, we save the book as a Markdown 
+ﬁle. 
+Check this code: 
+95 
+
+ 
+DailyDoseofDS.com 
+ 
+#7) Kickoﬀ the Flow 
+Finally, we run the Flow. 
+● First, the Outline Crew is invoked. It utilizes the Firecrawl scraping tool to 
+prepare the outline. 
+● Next, many Writer Crews are invoked in parallel to write one chapter each. 
+96 
+
+ 
+DailyDoseofDS.com 
+This workﬂow runs for ~2 minutes, and we get a neatly written book about the 
+speciﬁed topic—"Astronomy in 2025." Here's the book our Agentic workﬂow 
+wrote: 
+ 
+ 
+ 
+ 
+ 
+The code is available here: 
+https://blog.dailydoseofds.com/p/building-a-m
+ulti-agent-book-writer/ 
+ 
+ 
+ 
+97 
+
+ 
+DailyDoseofDS.com 
+#10) Multi-agent Content Creation System 
+Build an Agentic workﬂow that turns any URL into social media posts and 
+auto-schedules them via Typefully. 
+ 
+Tech stack: 
+● Motia as the uniﬁed backend framework 
+● Firecrawl to scrape web content 
+● Ollama to locally serve Deepseek-R1 LLM 
+98 
+
+ 
+DailyDoseofDS.com 
+Workﬂow: 
+● User submits URL to scrape 
+● Firecrawl scrapes content and converts it to markdown 
+● Twitter and LinkedIn agents run in parallel to generate content 
+● Generated content gets scheduled via Typefully 
+Let’s implement this: 
+Steps are the fundamental building blocks of Motia. 
+They consist of two main components: 
+● The Conﬁg object: It instructs Motia on how to interact with a step. 
+● The handler function: It deﬁnes the main logic of a step. 
+Check this out: 
+99 
+
+ 
+DailyDoseofDS.com 
+ 
+With that understanding in mind, let's start building our content creation 
+workﬂow. 
+#1) Entry point (API) 
+We start our content generation workﬂow by deﬁning an API step that takes in a 
+URL from the user via a POST request. 
+Check this out: 
+100 
+
+ 
+DailyDoseofDS.com 
+ 
+#2) Web scraping 
+This step scrapes the article content using Firecrawl and emits the next step in 
+the workﬂow. 
+Steps can be connected together in a sequence, where the output of one step 
+becomes the input for another. 
+Check this out: 
+101 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+ 
+#3) Content generation 
+The scraped content gets fed to the X and LinkedIn agents that run in parallel 
+and generate curated posts. 
+We deﬁne all our prompting and AI logic in the handler that runs automatically 
+when a step is triggered. 
+Check this out: 
+102 
+
+ 
+DailyDoseofDS.com 
+ 
+#4) Scheduling 
+After the content is generated we draft it in Typefully where we can easily review 
+our social media posts. 
+Motia also allows us to mix and match diﬀerent languages within the same 
+workﬂow providing great ﬂexibility. 
+Check this typescript code: 
+103 
+
+ 
+DailyDoseofDS.com 
+ 
+After deﬁning our steps, we install required dependencies using `npm install` and 
+run the Motia workbench using `npm run dev` commands. 
+Check this out: 
+104 
+
+ 
+DailyDoseofDS.com 
+ 
+Motia workbench provides an interactive UI to help build, monitor and debug 
+our ﬂows. 
+With one-click you can also deploy it to the cloud! 
+ 
+ 
+ 
+The code is available here: 
+https://blog.dailydoseofds.com/p/build-a-multi
+-agent-content-creation/ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+105 
+
+ 
+DailyDoseofDS.com 
+#11) Documentation Writer Flow 
+Build an Agentic workﬂow that generates full project documentation from just a 
+GitHub repo URL. 
+ 
+Tech stack: 
+● CrewAI for multi-agent orchestration 
+● Ollama to locally serve DeepSeek-R1 LLM 
+Workﬂow: 
+● User speciﬁes GitHub repo 
+● Planning crew creates documentation plan 
+● Documentation crew writes documentation according to plan 
+● Generated docs get saved to local directory  
+Let’s implement this! 
+106 
+
+ 
+DailyDoseofDS.com 
+#1) Setup LLM 
+We will use Deepseek-R1 as the LLM, served locally using Ollama. 
+ 
+#2) Deﬁne Pydantic schema 
+We deﬁne the following pydantic schemas for robust structured outputs. 
+This ensures data validation and integrity before generating the documentation 
+ﬁles. Check this code: 
+ 
+107 
+
+ 
+DailyDoseofDS.com 
+#3) Planning Crew 
+This crew oversees strategy for the outline via: 
+● Code explorer agent -> Analyzes codebase for key components, patterns 
+and relationships. 
+● Doc planner agent -> Creates outline based on codebase analysis as 
+pydantic output. 
+Check this out: 
+ 
+#4) Documentation Crew 
+This crew writes and reviews the documentation via: 
+● Doc writer agent -> Generates a high-level draft based on the planned 
+outline. 
+108 
+
+ 
+DailyDoseofDS.com 
+● Doc reviewer agent -> Reviews the draft for consistency, accuracy and 
+completeness. 
+Check this out: 
+  
+#5) Create Documentation Flow 
+After setting up our crews, we create the main workﬂow that: 
+● Clones the GitHub repo 
+● Plans and saves the outline 
+● Generates documentation based on the outline 
+● Saves ﬁnal docs to local directory 
+Check this code: 
+109 
+
+ 
+DailyDoseofDS.com 
+ 
+#6) Kickoﬀ the ﬂow 
+Finally, when we have everything ready, we kick oﬀ our documentation ﬂow with 
+the GitHub repo URL. 
+Check this out: 
+110 
+
+ 
+DailyDoseofDS.com 
+ 
+ 
+ 
+ 
+The code is available here: 
+https://github.com/patchy631/ai-engineering-
+hub/tree/main/documentation-writer-ﬂow 
+ 
+ 
+111 
+
+ 
+DailyDoseofDS.com 
+ 
+#12) News Generator 
+The app takes a user query, searches the web for it, and turns it into a 
+well-crafted news article, with citations. 
+ 
+Tech stack: 
+● Cohere ultra-fast Command R 7B as LLM 
+● CrewAI for multi-agent orchestration 
+Workﬂow:  
+We’ll have two agents in this multi-agent app: 
+Research analyst agent: 
+112 
+
+ 
+DailyDoseofDS.com 
+● Accepts a user query. 
+● Uses the Serper web search tool to fetch results from the internet. 
+● Consolidates the results. 
+Content writer agent: 
+● Uses the curated results to prepare a polished, publication-ready article. 
+Let’s implement this: 
+#1) Setup 
+Create a .env ﬁle for their corresponding API keys: 
+● Cohere API key 
+● Serper API key  
+Next, setup the LLM and web search tool as follows: 
+ 
+#2) Senior Research Analyst Agent 
+113 
+
+ 
+DailyDoseofDS.com 
+The web-search agent takes a user query and then uses the Serper web search 
+tool to fetch results from the internet and consolidate them. Check this out: 
+ 
+This is the research task that we assign to our senior research analyst agent, with 
+description and expected output. 
+ 
+#3) Content writer agent 
+114 
+
+ 
+DailyDoseofDS.com 
+The role of content writer is to use the curated results and turn them into a 
+polished, publication-ready news article . 
+ 
+This is how we describe the writing task with all the details and expected output: 
+ 
+#4) Setup Crew 
+115 
+
+ 
+DailyDoseofDS.com 
+And we're done!  
+Just build a crew and kick it oﬀ!  
+ 
+ 
+ 
+ 
+The code is available here: 
+https://www.dailydoseofds.com/p/hands-on-bu
+ilding-a-multi-agent-news-generator/ 
+ 
+ 
+ 
+ 
+ 
+116

@@ -39,6 +39,9 @@ class ReasoningAgent:
             "Return a JSON object with keys: 'answer' (string), 'trace' (list of {index:int, note:str}), and 'confidence' (float between 0 and 1).\n"
             "Be concise.\n"
         )
+        
+        logger.info("Built prompt (%d chars, %d passages)", len(prompt), len(passages))
+
 
         return prompt
 
