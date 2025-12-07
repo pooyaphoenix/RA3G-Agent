@@ -27,8 +27,9 @@ It allows you to:
 - Block or approve queries based on governance rules
 - Interact with the system using REST APIs
 - Easily run locally in Docker or manually with Python
-- Separated Logs system in each agent
-
+- Separated and Real-Time Logs system in each agent
+- Automatic PDF Document Upload & Vector Store Building
+- Fully Customizable Configuration
 ---
 ## Interface
 
