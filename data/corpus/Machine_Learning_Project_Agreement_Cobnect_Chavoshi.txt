@@ -1,0 +1,237 @@
+1 
+ 
+MACHINE LEARNING AND DATA ANALYSIS PROJECT AGREEMENT 
+ 
+This Agreement (“Agreement”) is entered into as of June 15 ,2025 (the “Effective Date”), by and 
+between: 
+Cobnect Inc., a corporation duly incorporated under the Canada Business Corporation Act, having 
+its principal office at: 2805-5 Soudan Ave, Toronto, ON M4S 0B1 with business number: 
+765302021RC0001 and official email address: info@cobnect.com, duly represented by its co-
+founders Mr. Saman Sakhaei and Mrs.Yalda Fazli (hereinafter referred to as the “Client” or 
+“Cobnect”), 
+AND 
+Mr. Pooya Chavoshi Asl, a private individual and legal resident of the Islamic Republic of Iran, 
+with email address: Pooyachavoshi@gmail.com (hereinafter referred to as the “Contractor”). 
+Collectively referred to as the "Parties" and individually as a "Party." 
+WHEREAS Cobnect Inc. is a Canadian technology startup providing an AI-powered platform for 
+remote home energy audit and sustainability assessments; 
+AND WHEREAS the Contractor possesses the technical capabilities to develop machine learning 
+models and data analytics solutions necessary to support Cobnect’s machine learning engine; 
+NOW, THEREFORE, in consideration of the mutual promises and covenants herein, the Parties 
+agree as follows: 
+ 
+1. Project Scope and Deliverables 
+ 
+The Contractor shall design, develop, and deliver an end-to-end data analysis and machine learning 
+solution to support Cobnect’s remote energy audit system. The scope of work includes, but is not 
+limited to: 
+ 
+• Acquisition and integration of relevant open-source and internal datasets (including 
+EnerGuide and housing data); 
+ 
+• Data cleaning and quality control, including the detection and handling of missing, 
+inconsistent, or outlier values using appropriate statistical or domain-based techniques; 
+ 
+• Performing exploratory data analysis to understand distributions, correlations, and data 
+gaps; 
+ 
+2 
+ 
+• Feature engineering, including the creation, transformation, and selection of predictive 
+variables to improve model accuracy and robustness; 
+ 
+• Designing, training, and validating multiple machine learning models using appropriate 
+algorithms (e.g., regression, tree-based models, ensemble methods); 
+ 
+• Conducting model evaluation using error metrics such as MAE, RMSE, and R², and 
+selecting the model with the lowest achievable and scientifically defensible error based on 
+cross-validation or holdout testing; 
+ 
+• Documenting the model selection and tuning process, including hyperparameters, 
+assumptions, and known limitations; 
+ 
+• Delivering complete, clean, and well-organized source code, notebooks, configuration 
+files, and other materials required for deployment; 
+ 
+• Developing a fully functional, documented, and testable API interface for the deployed 
+machine learning model, allowing the Client’s platform to interact with the model for real-
+time or batch predictions 
+ 
+• Providing a full written technical report and summary document that explains key methods, 
+outcomes, and final results in a format accessible to both technical and non-technical 
+audiences; 
+ 
+• Deploying the final selected model into Cobnect’s production or staging environment, in a 
+ready-to-integrate state; 
+ 
+• Offering 10 calendar days of post-deployment technical support.  
+ 
+ 
+2. Timeline and Progress Management 
+a) The Contractor shall use best efforts to complete the entire project within four (4) to six (6) 
+weeks from the official project start date. Notwithstanding the foregoing, the project must 
+be fully completed, delivered, and accepted within a maximum period of seventy (70) 
+business days from the start date. Any delay beyond this period shall constitute a material 
+breach and trigger the remedies described in Section 6 of this Agreement. 
+ 
+b) The Contractor agrees to actively participate in the project management process by 
+attending at least two scheduled progress meetings per week, with the understanding that 
+additional meetings may be scheduled as reasonably required, subject to the mutual 
+agreement of both Parties. The Contractor shall also conduct a demo session every fourteen 
+(14) days to present measurable model improvements or key milestones and shall submit 
+monthly written status reports outlining completed tasks, upcoming objectives, and any 
+outstanding issues or blockers. 
+3 
+ 
+c) The Client shall cooperate in good faith throughout the duration of the project and shall, 
+without undue delay, provide the Contractor with access to all internal data, documentation, 
+technical specifications, and platform-related resources reasonably necessary to perform 
+the services described herein. 
+ 
+d)  The Client agrees to attend scheduled meetings, including regular progress updates and 
+demo sessions, and to participate in decision-making and feedback processes in a timely 
+manner to facilitate the successful completion of the project. 
+ 
+3. Compensation and Payment Terms 
+a) The total project fee is seven hundred fifty million Iranian Rials (IRR 750,000,000), 
+payable in the following three stages:  
+o Thirty percent (30%), equal to two hundred twenty-five million Iranian Rials (IRR 
+225,000,000), shall be payable upon execution of this Agreement and formal 
+commencement of the project;  
+o Fifty percent (50%), equal to three hundred seventy-five million Iranian Rials (IRR 
+375,000,000), shall be payable upon successful delivery of the machine learning 
+model with the highest achievable performance, subject to written approval by the 
+Client; 
+o Twenty percent (20%), equal to one hundred fifty million Iranian Rials (IRR 
+150,000,000), shall be payable upon final delivery, full deployment, handover of 
+all files and documentation, and formal acceptance by the Client. 
+ 
+b) Payments shall be made to a bank account provided by the Contractor. All transaction fees, 
+taxes, and other bank charges are the responsibility of the Contractor. 
+ 
+4. Ownership and Intellectual Property 
+a) All tangible and intangible outputs of this engagement including but not limited to the final 
+machine learning model and architecture, all algorithms and training logic, cleaned and 
+prepared datasets, engineered features, preprocessing pipelines, data transformation code, 
+model tuning configurations, parameter files, model cards, documentation, performance 
+reports, source code, notebooks, metadata, and all intermediate work products shall become 
+the sole and exclusive property of the Client upon full payment for and delivery of each 
+corresponding milestone as specified in Section 3. 
+ 
+4 
+ 
+b) The Contractor irrevocably assigns all intellectual property rights in the deliverables to the 
+Client upon such payment and delivery, and agrees not to reuse, republish, disclose, or 
+license any portion of the deliverables or intermediate materials for any purpose without 
+the Client’s prior written consent. 
+ 
+c) The Contractor also waives all moral rights to the deliverables and agrees to cooperate in 
+executing any documents reasonably requested by the Client to confirm, register, or perfect 
+the Client’s full legal ownership of the work. 
+ 
+5. Confidentiality and Non-Disclosure 
+a) The Contractor agrees to protect and keep confidential all non-public information 
+belonging to the Client, including but not limited to technical data, machine learning model 
+structures, algorithm designs, source code, data engineering pipelines, internal scoring 
+methodologies, training, validation, and production datasets used or shared, the Client’s 
+business plan, strategic roadmap, startup ideas, future features, investor presentations, 
+customer targeting, and any test results, benchmarking metrics, or performance outputs. 
+ 
+b) The Contractor shall not disclose, reverse-engineer, reproduce, or use any such confidential 
+information for any purpose beyond this contract. 
+c) Any breach of this provision shall be considered a material breach, entitling the Client to 
+seek damages and legal costs. 
+ 
+6. Refunds and Delays 
+a) If the Contractor fails to deliver and deploy the final deliverables by the seventieth (70th) 
+day from the official project start date, the project shall be considered automatically null 
+and void. However, this deadline may be reasonably extended if the Contractor 
+demonstrates that the delay was caused solely by events beyond their reasonable control, 
+including but not limited to natural disasters, infrastructure failure, war, government 
+restrictions, or other force majeure circumstances, and not due to their own negligence, 
+inaction, or planning failure. Any such extension shall be subject to mutual written 
+agreement between the Parties. 
+b) If the Contractor fails to meet the delivery deadline specified in Section 6(a) , all payments 
+previously made by the Client shall be refunded in full within ten (10) business days. In 
+addition, all work completed up to the date of termination shall be promptly transferred to 
+the Client and shall become its sole and exclusive property, without any further 
+compensation, license, or obligation. 
+ 
+5 
+ 
+7. Independent Contractor Relationship 
+The Contractor is an independent contractor and not an employee, director, representative, or agent 
+of the Client. Nothing in this Agreement shall be construed to create a joint venture, partnership, 
+employer-employee relationship, agency, co-founder designation, or any form of equity, voting, 
+or shareholder interest in the Client’s business or legal structure.  
+ 
+8. Dispute Resolution and Governing Law 
+a) The Parties agree to resolve any disputes through good-faith discussion and mediation. 
+ 
+b) If no resolution is reached within fifteen (15) business days, the matter shall be governed 
+by and submitted to the laws and courts of the Islamic Republic of Iran for final resolution. 
+ 
+9. Severability 
+If any provision of this Agreement is held to be invalid, illegal, or unenforceable by a court of 
+competent jurisdiction, such provision shall be modified or narrowed by the court to the minimum 
+extent necessary to make it enforceable. If no feasible modification is possible, that provision shall 
+be severed, and the remaining provisions of this Agreement shall remain in full force and effect. 
+ 
+10. Survival 
+Sections concerning ownership, confidentiality, indemnity, dispute resolution, and governing law 
+shall survive termination or expiration of this Agreement. 
+ 
+11. Entire Agreement 
+(a) This Agreement constitutes the entire understanding of the Parties with respect to its subject 
+matter and supersedes all prior or contemporaneous agreements, representations, or 
+understandings, whether oral or written. 
+ 
+(b) No amendment or modification of this Agreement shall be valid unless in writing and 
+signed by both Parties. 
+ 
+ 
+ 
+(Signature page follows below) 
+6 
+ 
+12. Signature Method  
+ 
+(a) The Parties agree that this Agreement shall be executed exclusively by electronic signature, 
+and no physical signatures shall be required. 
+ 
+(b) This Agreement shall be signed using a legally recognized electronic signature method, 
+including but not limited to secure electronic signature platforms and encrypted digital 
+signatures. 
+                       
+(c) The Parties acknowledge and agree that electronic signatures shall have the same legal 
+effect, validity, and enforceability as original handwritten signatures. 
+ 
+(d) A copy of this Agreement signed electronically and generated by the electronic signature 
+platform shall be deemed to be an original. 
+ 
+ 
+ 
+IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date. 
+ 
+ 
+ 
+Pooya Chavoshi Asl  
+ 
+ 
+                               Cobnect Inc.  
+    (Contractor)                                                                                 (Client)                                                           
+                                                                                                                                                                               
+_________________   Date: ___                                            _________________   Date: ___ 
+                                                         
+ 
+ 
+ 
+                                                            Name: Saman Sakhaei                                                        
+                                                                                                         Title: President and Director of Company 
+                                                                                                         I have authority to bind the corporation 
+ 
+ 
+ 
+ 
+ 
+ 

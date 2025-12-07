@@ -9,9 +9,9 @@ from tab_documents import render_documents_tab  # ← NEW
 FASTAPI_PORT = os.getenv("FASTAPI_PORT", "8010")
 FASTAPI_URL = f"http://localhost:{FASTAPI_PORT}"
 
-st.set_page_config(page_title="Policy-Aware RAG", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="RA3G-Policy-Aware RAG", page_icon="🧠", layout="wide")
 st.title("RA3G")
-st.text("🧠 Policy-Aware RAG System with Governance Control")
+st.text("Policy-Aware RAG System with Governance Control")
 
 tab1, tab2, tab3, tab4 = st.tabs(["💬 Chat Interface", " Logs", "⚙️ Configuration", "📄 Documents"])
 
