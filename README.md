@@ -32,8 +32,7 @@ It allows you to:
 - Fully Customizable Configuration
 ---
 ## Interface
-
-![Recording2025-11-04140044-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/15462366-45d2-43a4-a014-a06bb9be94fe)
+![ezgif-15d16bdb52ed946c](https://github.com/user-attachments/assets/1b13b488-4c18-42c1-9ac9-149c07d6ca77)
 
 ## Architecture
 <img width="600" height="400" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/ec6b9b2e-569b-43af-89a5-6c81dbdb9f03" />
