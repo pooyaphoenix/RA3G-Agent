@@ -84,6 +84,9 @@ Thumbs.db
 *.log
 *.Logs
 
+#ignore corpora
+data/corpus/*
+data/corpus/
 # Ignore all contents of logs directory except .gitkeep
 logs/*
 !logs/.gitkeep
