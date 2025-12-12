@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Header
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Dict
 import asyncio
 import os
 import json
@@ -12,7 +12,8 @@ from app.agents.governance_agent import GovernanceAgent
 from app.utils.logger import get_logger
 from app.utils.memory import memory_store
 from app.routes.upload_routes import router as upload_router
-
+from app.config import Config
+import yaml
 
 logger = get_logger("gateway", "logs/gateway.log")
 
@@ -143,6 +144,98 @@ def clear_memory(session_id: Optional[str] = Header(default="default")):
         raise HTTPException(status_code=404, detail="This session not found")
     memory_store.clear(session_id)
     return {"message": f"Memory cleared for session {session_id}"}
+
+# PII Configuration endpoints
+@app.get("/pii/config")
+async def get_pii_config():
+    """Get current PII filter configuration."""
+    Config.reload_config()
+    pii_filters = getattr(Config, "PII_FILTERS", {
+        "REDACTED_EMAIL": True,
+        "REDACTED_PHONE": True,
+        "REDACTED_IP": True,
+        "REDACTED_DATE": True,
+        "REDACTED_ID": True,
+        "REDACTED_NAME": True,
+    })
+    return {"pii_filters": pii_filters}
+
+class PIIConfigUpdate(BaseModel):
+    pii_filters: Dict[str, bool]
+
+@app.put("/pii/config")
+async def update_pii_config(config_update: PIIConfigUpdate):
+    """Update PII filter configuration."""
+    config_path = "config.yml"
+    
+    # Load current config
+    if not os.path.exists(config_path):
+        raise HTTPException(status_code=404, detail="Configuration file not found")
+    
+    with open(config_path, "r", encoding="utf-8") as f:
+        config_data = yaml.safe_load(f) or {}
+    
+    # Update PII filters
+    config_data["PII_FILTERS"] = config_update.pii_filters
+    
+    # Save updated config
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(config_data, f, sort_keys=False, allow_unicode=True)
+    
+    # Reload config in memory
+    Config.reload_config()
+    
+    # Update governance agent instance if it exists
+    governor = get_governor()
+    if governor:
+        governor.pii_filters = config_update.pii_filters
+    
+    logger.info("PII filters updated: %s", config_update.pii_filters)
+    return {"message": "PII filters updated successfully", "pii_filters": config_update.pii_filters}
+
+class MasterTogglesUpdate(BaseModel):
+    pii_detection_enabled: bool
+    governance_enabled: bool
+
+@app.put("/config/master-toggles")
+async def update_master_toggles(toggles: MasterTogglesUpdate):
+    """Update master toggle settings for PII detection and governance."""
+    config_path = "config.yml"
+    
+    # Load current config
+    if not os.path.exists(config_path):
+        raise HTTPException(status_code=404, detail="Configuration file not found")
+    
+    with open(config_path, "r", encoding="utf-8") as f:
+        config_data = yaml.safe_load(f) or {}
+    
+    # Update master toggles
+    config_data["PII_DETECTION_ENABLED"] = toggles.pii_detection_enabled
+    config_data["GOVERNANCE_ENABLED"] = toggles.governance_enabled
+    
+    # Save updated config
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(config_data, f, sort_keys=False, allow_unicode=True)
+    
+    # Reload config in memory
+    Config.reload_config()
+    
+    logger.info("Master toggles updated: PII=%s, Governance=%s", 
+                toggles.pii_detection_enabled, toggles.governance_enabled)
+    return {
+        "message": "Master toggles updated successfully",
+        "pii_detection_enabled": toggles.pii_detection_enabled,
+        "governance_enabled": toggles.governance_enabled
+    }
+
+@app.get("/config/master-toggles")
+async def get_master_toggles():
+    """Get current master toggle settings."""
+    Config.reload_config()
+    return {
+        "pii_detection_enabled": getattr(Config, "PII_DETECTION_ENABLED", True),
+        "governance_enabled": getattr(Config, "GOVERNANCE_ENABLED", True)
+    }
 
 # Log streaming endpoint
 LOG_FILES = {

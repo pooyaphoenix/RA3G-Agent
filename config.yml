@@ -13,3 +13,12 @@ CORPUS_DIR: data/corpus
 THRESHOLDS:
   retriever: 0.72
   reasoner: 0.81
+PII_DETECTION_ENABLED: true
+PII_FILTERS:
+  REDACTED_EMAIL: false
+  REDACTED_PHONE: true
+  REDACTED_IP: true
+  REDACTED_DATE: true
+  REDACTED_ID: true
+  REDACTED_NAME: true
+GOVERNANCE_ENABLED: true

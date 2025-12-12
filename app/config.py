@@ -4,15 +4,25 @@ import yaml
 
 class Config:
     _config_data = None
+    _config_path = "config.yml"
 
     @classmethod
-    def load_config(cls, path: str = "config.yml"):
-        """Load YAML configuration file once."""
-        if cls._config_data is None:
-            if not os.path.exists(path):
-                raise FileNotFoundError(f"Configuration file not found: {path}")
-            with open(path, "r", encoding="utf-8") as file:
-                cls._config_data = yaml.safe_load(file)
+    def load_config(cls, path: str = None):
+        """Load YAML configuration file. If path is None, reloads from last known path."""
+        if path:
+            cls._config_path = path
+        if not os.path.exists(cls._config_path):
+            raise FileNotFoundError(f"Configuration file not found: {cls._config_path}")
+        with open(cls._config_path, "r", encoding="utf-8") as file:
+            cls._config_data = yaml.safe_load(file)
+        # Update class attributes dynamically
+        for key, value in cls._config_data.items():
+            setattr(cls, key, value)
+
+    @classmethod
+    def reload_config(cls):
+        """Reload configuration from the current config file."""
+        cls.load_config()
 
     @classmethod
     def get(cls, key: str, default=None):

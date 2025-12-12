@@ -9,6 +9,16 @@ logger = get_logger("governance", "logs/governance.log")
 BANNED_PHRASES = getattr(Config, "BANNED_PHRASES", [])
 CONFIDENCE_THRESHOLD = getattr(Config, "CONFIDENCE_THRESHOLD", 0.5)
 THRESHOLDS = getattr(Config, "THRESHOLDS", {})
+# Default PII filters - all enabled by default
+DEFAULT_PII_FILTERS = {
+    "REDACTED_EMAIL": True,
+    "REDACTED_PHONE": True,
+    "REDACTED_IP": True,
+    "REDACTED_DATE": True,
+    "REDACTED_ID": True,
+    "REDACTED_NAME": True,
+}
+PII_FILTERS = getattr(Config, "PII_FILTERS", DEFAULT_PII_FILTERS)
 # Simple regexes for crude PII detection/redaction
 RE_DATE = re.compile(r'\b(?:\d{4}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}[-/]\d{1,2}[-/]\d{2,4})\b')
 RE_ID = re.compile(r'\b(?:id|ssn|passport|card)[\s:]*[A-Za-z0-9-]{4,}\b', re.IGNORECASE)
@@ -28,6 +38,7 @@ class GovernanceAgent:
         banned_phrases=None,
         threshold: Optional[float] = None,
         thresholds: Optional[Dict[str, float]] = None,
+        pii_filters: Optional[Dict[str, bool]] = None,
     ):
         self.banned_phrases = banned_phrases or BANNED_PHRASES
         self.thresholds = dict(THRESHOLDS or {})
@@ -40,11 +51,20 @@ class GovernanceAgent:
 
         self.reasoner_threshold = self.thresholds.get("reasoner", CONFIDENCE_THRESHOLD)
         self.retriever_threshold = self.thresholds.get("retriever")
+        
+        # Load PII filters from config or use provided/default
+        if pii_filters is not None:
+            self.pii_filters = pii_filters
+        else:
+            # Reload config to get latest PII_FILTERS
+            Config.reload_config()
+            self.pii_filters = getattr(Config, "PII_FILTERS", DEFAULT_PII_FILTERS.copy())
 
         logger.info(
-            "GovernanceAgent initialized (reasoner_threshold=%.2f, retriever_threshold=%s)",
+            "GovernanceAgent initialized (reasoner_threshold=%.2f, retriever_threshold=%s, pii_filters=%s)",
             self.reasoner_threshold,
             f"{self.retriever_threshold:.2f}" if self.retriever_threshold is not None else "None",
+            self.pii_filters,
         )
 
     def _check_banned_phrases(self, text: str) -> List[str]:
@@ -58,50 +78,66 @@ class GovernanceAgent:
     def _redact_pii(self, text: str) -> str:
         original_text = text
         
+        # Reload PII filters from config to get latest settings
+        Config.reload_config()
+        pii_enabled = getattr(Config, "PII_DETECTION_ENABLED", True)
+        
+        # If PII detection is disabled globally, return original text
+        if not pii_enabled:
+            return text
+        
+        current_filters = getattr(Config, "PII_FILTERS", self.pii_filters.copy())
+        
         # Track redactions for logging
         redactions = []
         
-        # Redact emails
-        email_matches = RE_EMAIL.findall(text)
-        if email_matches:
-            text = RE_EMAIL.sub("[REDACTED_EMAIL]", text)
-            redactions.append(f"email(s): {len(email_matches)}")
-            logger.info("Redacted %d email(s) from text", len(email_matches))
+        # Redact emails (if enabled)
+        if current_filters.get("REDACTED_EMAIL", True):
+            email_matches = RE_EMAIL.findall(text)
+            if email_matches:
+                text = RE_EMAIL.sub("[REDACTED_EMAIL]", text)
+                redactions.append(f"email(s): {len(email_matches)}")
+                logger.info("Redacted %d email(s) from text", len(email_matches))
         
-        # Redact phone numbers
-        phone_matches = RE_PHONE.findall(text)
-        if phone_matches:
-            text = RE_PHONE.sub("[REDACTED_PHONE]", text)
-            redactions.append(f"phone(s): {len(phone_matches)}")
-            logger.info("Redacted %d phone number(s) from text", len(phone_matches))
+        # Redact phone numbers (if enabled)
+        if current_filters.get("REDACTED_PHONE", True):
+            phone_matches = RE_PHONE.findall(text)
+            if phone_matches:
+                text = RE_PHONE.sub("[REDACTED_PHONE]", text)
+                redactions.append(f"phone(s): {len(phone_matches)}")
+                logger.info("Redacted %d phone number(s) from text", len(phone_matches))
         
-        # Redact IP addresses
-        ip_matches = RE_IP.findall(text)
-        # Filter out false positives (like years 1920, 2024, etc.)
-        valid_ips = [ip for ip in ip_matches if self._is_valid_ip(ip)]
-        if valid_ips:
-            for ip in valid_ips:
-                text = text.replace(ip, "[REDACTED_IP]")
-            redactions.append(f"IP address(es): {len(valid_ips)}")
-            logger.info("Redacted %d IP address(es) from text", len(valid_ips))
+        # Redact IP addresses (if enabled)
+        if current_filters.get("REDACTED_IP", True):
+            ip_matches = RE_IP.findall(text)
+            # Filter out false positives (like years 1920, 2024, etc.)
+            valid_ips = [ip for ip in ip_matches if self._is_valid_ip(ip)]
+            if valid_ips:
+                for ip in valid_ips:
+                    text = text.replace(ip, "[REDACTED_IP]")
+                redactions.append(f"IP address(es): {len(valid_ips)}")
+                logger.info("Redacted %d IP address(es) from text", len(valid_ips))
         
-        # Redact dates
-        date_matches = RE_DATE.findall(text)
-        if date_matches:
-            text = RE_DATE.sub("[REDACTED_DATE]", text)
-            redactions.append(f"date(s): {len(date_matches)}")
+        # Redact dates (if enabled)
+        if current_filters.get("REDACTED_DATE", True):
+            date_matches = RE_DATE.findall(text)
+            if date_matches:
+                text = RE_DATE.sub("[REDACTED_DATE]", text)
+                redactions.append(f"date(s): {len(date_matches)}")
         
-        # Redact IDs
-        id_matches = RE_ID.findall(text)
-        if id_matches:
-            text = RE_ID.sub("[REDACTED_ID]", text)
-            redactions.append(f"ID(s): {len(id_matches)}")
+        # Redact IDs (if enabled)
+        if current_filters.get("REDACTED_ID", True):
+            id_matches = RE_ID.findall(text)
+            if id_matches:
+                text = RE_ID.sub("[REDACTED_ID]", text)
+                redactions.append(f"ID(s): {len(id_matches)}")
         
-        # Redact names
-        name_matches = RE_NAME.findall(text)
-        if name_matches:
-            text = RE_NAME.sub("[REDACTED_NAME]", text)
-            redactions.append(f"name(s): {len(name_matches)}")
+        # Redact names (if enabled)
+        if current_filters.get("REDACTED_NAME", True):
+            name_matches = RE_NAME.findall(text)
+            if name_matches:
+                text = RE_NAME.sub("[REDACTED_NAME]", text)
+                redactions.append(f"name(s): {len(name_matches)}")
         
         if redactions and text != original_text:
             logger.info("PII redaction summary: %s", ", ".join(redactions))
@@ -125,6 +161,15 @@ class GovernanceAgent:
         confidence: float,
         retriever_confidence: Optional[float] = None,
     ) -> Dict:
+        # Reload config to get latest governance settings
+        Config.reload_config()
+        governance_enabled = getattr(Config, "GOVERNANCE_ENABLED", True)
+        
+        # If governance is disabled, approve everything and skip all checks
+        if not governance_enabled:
+            logger.info("Governance disabled - approving all queries")
+            return {"approved": True, "reason": "governance_disabled", "redacted_answer": answer}
+        
         reasons = []
         approved = True
         if confidence is None:
