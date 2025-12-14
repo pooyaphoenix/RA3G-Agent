@@ -1,19 +1,20 @@
-BANNED_PHRASES:
-- diagnosis
-- prescription
-- classified
-- confidential
 CONFIDENCE_THRESHOLD: 0.5
+
 OLLAMA_URL: http://localhost:11434/api/generate
 OLLAMA_MODEL: qwen2.5:7b-instruct
+
 EMBED_MODEL: all-MiniLM-L6-v2
 EMBED_DIM: 384
+
 AUTO_BUILD_FAISS: true
 CORPUS_DIR: data/corpus
+
 THRESHOLDS:
   retriever: 0.72
   reasoner: 0.81
+
 PII_DETECTION_ENABLED: true
+
 PII_FILTERS:
   REDACTED_EMAIL: false
   REDACTED_PHONE: true
@@ -21,4 +22,11 @@ PII_FILTERS:
   REDACTED_DATE: true
   REDACTED_ID: true
   REDACTED_NAME: true
+
 GOVERNANCE_ENABLED: true
+
+BANNED_PHRASES:
+  - diagnosis
+  - prescription
+  - classified
+  - confidential
