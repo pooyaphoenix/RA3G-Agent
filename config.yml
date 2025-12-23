@@ -10,8 +10,8 @@ AUTO_BUILD_FAISS: true
 CORPUS_DIR: data/corpus
 
 THRESHOLDS:
-  retriever: 0.72
-  reasoner: 0.81
+  retriever: 0.2
+  reasoner: 0.3
 
 PII_DETECTION_ENABLED: true
 
