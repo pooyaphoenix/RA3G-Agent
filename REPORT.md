@@ -90,4 +90,4 @@ This separation allows easy scaling and swapping of components without modifying
 
 **Author:** Pooya Chavoshi | Pooyachavoshi@gmail.com
 **Stack:** FastAPI, FAISS, Ollama, Python, Docker  
-**Version:** 1.0.0
+
