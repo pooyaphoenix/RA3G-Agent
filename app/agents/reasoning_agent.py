@@ -1,3 +1,4 @@
+import asyncio
 import os
 import httpx
 from typing import List, Dict
@@ -10,6 +11,9 @@ logger = get_logger("reasoning", "logs/reasoning.log")
 
 OLLAMA_URL = os.getenv("OLLAMA_API_URL", Config.OLLAMA_URL)
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", Config.OLLAMA_MODEL)
+OLLAMA_MAX_RETRIES = 3
+OLLAMA_BACKOFF_BASE = 0.5  # seconds
+OLLAMA_TIMEOUT = httpx.Timeout(30.0, read=300.0)
 
 
 class ReasoningAgent:
@@ -45,9 +49,9 @@ class ReasoningAgent:
 
         return prompt
 
-    async def _call_ollama(self, prompt: str, timeout: int = 60) -> str:
+    async def _call_ollama(self, prompt: str) -> str:
         """
-        Call Ollama with streaming enabled and accumulate the 'response' chunks into a single string.
+        Call Ollama with retry, exponential backoff, and streaming enabled.
         """
         payload = {
             "model": self.model,
@@ -56,27 +60,53 @@ class ReasoningAgent:
             "stream": True
         }
 
-        logger.info("Calling Ollama (streaming) at %s", self.ollama_url)
-        response_text = ""
+        last_exception = None
 
-        timeout = httpx.Timeout(300.0, read=300.0)  # 5 minutes
-        async with httpx.AsyncClient(timeout=timeout) as client:
-            async with client.stream("POST", self.ollama_url, json=payload) as resp:
-                resp.raise_for_status()
-                async for line in resp.aiter_lines():
-                    if not line.strip():
-                        continue
-                    try:
-                        data = json.loads(line)
-                        if "response" in data:
-                            response_text += data["response"]
-                        if data.get("done"):
-                            break
-                    except Exception as e:
-                        logger.warning("Failed to parse streaming chunk: %s", e)
+        for attempt in range(OLLAMA_MAX_RETRIES):
+            try:
+                logger.info(
+                    "Calling Ollama (attempt %d/%d) at %s",
+                    attempt + 1,
+                    OLLAMA_MAX_RETRIES,
+                    self.ollama_url,
+                )
 
-        logger.info("Raw LLM output length: %d", len(response_text))
-        return response_text
+                response_text = ""
+
+                async with httpx.AsyncClient(timeout=OLLAMA_TIMEOUT) as client:
+                    async with client.stream("POST", self.ollama_url, json=payload) as resp:
+                        resp.raise_for_status()
+                        async for line in resp.aiter_lines():
+                            if not line.strip():
+                                continue
+                            try:
+                                data = json.loads(line)
+                                if "response" in data:
+                                    response_text += data["response"]
+                                if data.get("done"):
+                                    break
+                            except Exception as e:
+                                logger.warning("Failed to parse streaming chunk: %s", e)
+
+                logger.info("Raw LLM output length: %d", len(response_text))
+                return response_text
+
+            except (httpx.RequestError, httpx.HTTPStatusError) as e:
+                last_exception = e
+                logger.warning(
+                    "Ollama call failed (attempt %d/%d): %s",
+                    attempt + 1,
+                    OLLAMA_MAX_RETRIES,
+                    e,
+                )
+
+                if attempt < OLLAMA_MAX_RETRIES - 1:
+                    backoff = OLLAMA_BACKOFF_BASE * (2 ** attempt)
+                    logger.info("Retrying after %.2f seconds", backoff)
+                    await asyncio.sleep(backoff)
+
+        logger.error("Ollama unavailable after retries")
+        raise RuntimeError("Ollama unavailable") from last_exception
 
     def _parse_llm_output(self, raw_text: str) -> Dict:
         """
@@ -105,16 +135,11 @@ class ReasoningAgent:
             logger.info("Reasoning completed for query '%s'", query)
             return parsed
         except Exception as e:
-            logger.exception("Ollama call failed: %s", str(e))
-            # Fallback: return first passages with low confidence
-            fallback_answer = " ".join([p["text"] for p in passages[:2]])
+            logger.exception("ReasoningAgent fallback activated: %s", e)
             return {
-                "answer": fallback_answer,
-                "trace": [
-                    {"index": i, "note": "fallback used"}
-                    for i in range(min(2, len(passages)))
-                ],
-                "confidence": 0.4
+                "answer": "The reasoning agent is temporarily unavailable.",
+                "trace": [],
+                "confidence": 0.0
             }
         
     def _load_user_instructions(self) -> str:
