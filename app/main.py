@@ -14,6 +14,8 @@ from app.agents.governance_agent import GovernanceAgent
 from app.utils.logger import get_logger
 from app.utils.memory import memory_store
 from app.routes.upload_routes import router as upload_router
+from app.config import Config
+import yaml
 
 
 logger = get_logger("gateway", "logs/gateway.log")
@@ -80,6 +82,55 @@ def get_governor():
 class QueryRequest(BaseModel):
     query: str
     top_k: int = 5
+
+
+class PIIFiltersUpdate(BaseModel):
+    email: Optional[bool] = None
+    phone: Optional[bool] = None
+    ip: Optional[bool] = None
+    date: Optional[bool] = None
+    id: Optional[bool] = None
+    name: Optional[bool] = None
+
+
+def _get_config_path() -> str:
+    return getattr(Config, "_config_path", "config.yml")
+
+
+@app.get("/pii/config")
+async def get_pii_config():
+    """Fetch current PII filter settings (which types are redacted)."""
+    filters = Config.get("PII_FILTERS")
+    if not isinstance(filters, dict):
+        filters = {
+            "email": True, "phone": True, "ip": True,
+            "date": True, "id": True, "name": True,
+        }
+    return {"pii_filters": {k: bool(v) for k, v in filters.items()}}
+
+
+@app.put("/pii/config")
+async def update_pii_config(body: PIIFiltersUpdate):
+    """Update PII filter settings. Changes are saved to config file and take effect immediately."""
+    path = _get_config_path()
+    if not os.path.exists(path):
+        raise HTTPException(status_code=500, detail="Configuration file not found")
+    with open(path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    if "PII_FILTERS" not in data or not isinstance(data["PII_FILTERS"], dict):
+        data["PII_FILTERS"] = {
+            "email": True, "phone": True, "ip": True,
+            "date": True, "id": True, "name": True,
+        }
+    updates = body.model_dump(exclude_none=True)
+    for key, value in updates.items():
+        if key in data["PII_FILTERS"]:
+            data["PII_FILTERS"][key] = value
+    with open(path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
+    Config.reload(path)
+    return {"pii_filters": data["PII_FILTERS"], "message": "PII config updated and applied."}
+
 
 @app.get("/health")
 async def health_check():
