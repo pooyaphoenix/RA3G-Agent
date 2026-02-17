@@ -42,7 +42,8 @@ class Config:
 # Load configuration on import
 Config.load_config()
 
-# Provide sensible defaults if not supplied in config.yml
+# Per-agent confidence thresholds for GovernanceAgent (retriever, reasoner).
+# Override in config.yml under THRESHOLDS. See issue #12.
 if not hasattr(Config, "THRESHOLDS"):
     setattr(
         Config,
