@@ -55,57 +55,65 @@ class GovernanceAgent:
                 matches.append(p)
         return matches
 
+    def _get_pii_filters(self) -> Dict[str, bool]:
+        """Get current PII filter settings from config (respects runtime updates)."""
+        filters = getattr(Config, "PII_FILTERS", None) or Config.get("PII_FILTERS")
+        if not isinstance(filters, dict):
+            return {
+                "email": True, "phone": True, "ip": True,
+                "date": True, "id": True, "name": True,
+            }
+        return {k: bool(v) for k, v in filters.items()}
+
     def _redact_pii(self, text: str) -> str:
         original_text = text
-        
-        # Track redactions for logging
+        filters = self._get_pii_filters()
         redactions = []
-        
-        # Redact emails
-        email_matches = RE_EMAIL.findall(text)
-        if email_matches:
-            text = RE_EMAIL.sub("[REDACTED_EMAIL]", text)
-            redactions.append(f"email(s): {len(email_matches)}")
-            logger.info("Redacted %d email(s) from text", len(email_matches))
-        
-        # Redact phone numbers
-        phone_matches = RE_PHONE.findall(text)
-        if phone_matches:
-            text = RE_PHONE.sub("[REDACTED_PHONE]", text)
-            redactions.append(f"phone(s): {len(phone_matches)}")
-            logger.info("Redacted %d phone number(s) from text", len(phone_matches))
-        
-        # Redact IP addresses
-        ip_matches = RE_IP.findall(text)
-        # Filter out false positives (like years 1920, 2024, etc.)
-        valid_ips = [ip for ip in ip_matches if self._is_valid_ip(ip)]
-        if valid_ips:
-            for ip in valid_ips:
-                text = text.replace(ip, "[REDACTED_IP]")
-            redactions.append(f"IP address(es): {len(valid_ips)}")
-            logger.info("Redacted %d IP address(es) from text", len(valid_ips))
-        
-        # Redact dates
-        date_matches = RE_DATE.findall(text)
-        if date_matches:
-            text = RE_DATE.sub("[REDACTED_DATE]", text)
-            redactions.append(f"date(s): {len(date_matches)}")
-        
-        # Redact IDs
-        id_matches = RE_ID.findall(text)
-        if id_matches:
-            text = RE_ID.sub("[REDACTED_ID]", text)
-            redactions.append(f"ID(s): {len(id_matches)}")
-        
-        # Redact names
-        name_matches = RE_NAME.findall(text)
-        if name_matches:
-            text = RE_NAME.sub("[REDACTED_NAME]", text)
-            redactions.append(f"name(s): {len(name_matches)}")
-        
+
+        if filters.get("email", True):
+            email_matches = RE_EMAIL.findall(text)
+            if email_matches:
+                text = RE_EMAIL.sub("[REDACTED_EMAIL]", text)
+                redactions.append(f"email(s): {len(email_matches)}")
+                logger.info("Redacted %d email(s) from text", len(email_matches))
+
+        if filters.get("phone", True):
+            phone_matches = RE_PHONE.findall(text)
+            if phone_matches:
+                text = RE_PHONE.sub("[REDACTED_PHONE]", text)
+                redactions.append(f"phone(s): {len(phone_matches)}")
+                logger.info("Redacted %d phone number(s) from text", len(phone_matches))
+
+        if filters.get("ip", True):
+            ip_matches = RE_IP.findall(text)
+            valid_ips = [ip for ip in ip_matches if self._is_valid_ip(ip)]
+            if valid_ips:
+                for ip in valid_ips:
+                    text = text.replace(ip, "[REDACTED_IP]")
+                redactions.append(f"IP address(es): {len(valid_ips)}")
+                logger.info("Redacted %d IP address(es) from text", len(valid_ips))
+
+        if filters.get("date", True):
+            date_matches = RE_DATE.findall(text)
+            if date_matches:
+                text = RE_DATE.sub("[REDACTED_DATE]", text)
+                redactions.append(f"date(s): {len(date_matches)}")
+
+        if filters.get("id", True):
+            id_matches = RE_ID.findall(text)
+            if id_matches:
+                text = RE_ID.sub("[REDACTED_ID]", text)
+                redactions.append(f"ID(s): {len(id_matches)}")
+
+        if filters.get("name", True):
+            name_matches = RE_NAME.findall(text)
+            if name_matches:
+                text = RE_NAME.sub("[REDACTED_NAME]", text)
+                redactions.append(f"name(s): {len(name_matches)}")
+
         if redactions and text != original_text:
             logger.info("PII redaction summary: %s", ", ".join(redactions))
-        
+
         return text
     
     def _is_valid_ip(self, ip_str: str) -> bool:

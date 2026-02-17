@@ -13,3 +13,10 @@ CORPUS_DIR: data/corpus
 THRESHOLDS:
   retriever: 0.2
   reasoner: 0.3
+PII_FILTERS:
+  email: true
+  phone: true
+  ip: true
+  date: true
+  id: true
+  name: true

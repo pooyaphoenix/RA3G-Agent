@@ -23,7 +23,7 @@ with tab2:
     render_logs_tab(FASTAPI_URL)
 
 with tab3:
-    render_config_tab()
+    render_config_tab(FASTAPI_URL)
 
 with tab4:
     render_documents_tab(FASTAPI_URL)

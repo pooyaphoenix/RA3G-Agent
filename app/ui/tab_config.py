@@ -4,7 +4,7 @@ import requests
 import os
 
 
-def render_config_tab():
+def render_config_tab(fastapi_url: str = "http://localhost:8010"):
     st.subheader("⚙️ Configuration Settings")
 
     # ------------------------------------------------------------------
@@ -20,6 +20,14 @@ def render_config_tab():
 
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config_data = yaml.safe_load(f)
+
+    if not config_data:
+        config_data = {}
+    if "PII_FILTERS" not in config_data or not isinstance(config_data["PII_FILTERS"], dict):
+        config_data["PII_FILTERS"] = {
+            "email": True, "phone": True, "ip": True,
+            "date": True, "id": True, "name": True,
+        }
 
     editable_config = {}
 
@@ -65,6 +73,16 @@ def render_config_tab():
                 for k, v in value.items()
             }
 
+        elif key == "PII_FILTERS" and isinstance(value, dict):
+            st.markdown("**PII detection filters** — enable/disable redaction per type")
+            editable_config[key] = {}
+            for pii_key, pii_val in sorted(value.items()):
+                editable_config[key][pii_key] = st.checkbox(
+                    f"Redact {pii_key} ([REDACTED_{pii_key.upper()}])",
+                    value=bool(pii_val),
+                    key=f"pii_filter_{pii_key}",
+                )
+
         elif isinstance(value, bool):
             editable_config[key] = st.checkbox(key, value=value)
 
@@ -94,7 +112,19 @@ def render_config_tab():
                 editable_config, f, sort_keys=False, allow_unicode=True
             )
 
-        st.success("Config saved. Restart the service.")
+        # Propagate PII filters to backend so they take effect immediately
+        if "PII_FILTERS" in editable_config and isinstance(editable_config["PII_FILTERS"], dict):
+            try:
+                r = requests.put(
+                    f"{fastapi_url}/pii/config",
+                    json=editable_config["PII_FILTERS"],
+                    timeout=5,
+                )
+                r.raise_for_status()
+            except Exception as e:
+                st.warning(f"Config saved to file, but backend sync failed: {e}. Restart the service for PII changes.")
+
+        st.success("Config saved. PII filter changes are active immediately.")
 
     # ==================================================================
     # ==================================================================
