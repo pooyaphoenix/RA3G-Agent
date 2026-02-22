@@ -15,6 +15,15 @@ META_PATH = Path("app/index_meta.pkl")
 EMBED_MODEL = os.getenv("EMBED_MODEL", Config.EMBED_MODEL)
 EMBED_DIM = Config.EMBED_DIM
 
+
+def _use_pg_storage() -> bool:
+    try:
+        from app.db.store import is_pg_storage_enabled
+        return is_pg_storage_enabled()
+    except Exception:
+        return False
+
+
 class RetrieverAgent:
     def __init__(self, model_name: str = EMBED_MODEL):
         logger.info("Initializing RetrieverAgent with model %s", model_name)
@@ -84,13 +93,34 @@ class RetrieverAgent:
     def _load_index(self):
         logger.info("Loading FAISS index from %s", INDEX_PATH)
         self.index = faiss.read_index(str(INDEX_PATH))
-        with open(META_PATH, "rb") as f:
-            self.meta = pickle.load(f)
+        if _use_pg_storage():
+            try:
+                from app.db.store import get_all_passages_ordered_by_faiss_id, init_schema
+                init_schema()
+                self.meta = get_all_passages_ordered_by_faiss_id()
+                if len(self.meta) == 0 and META_PATH.exists():
+                    logger.warning("PostgreSQL has no passages; falling back to pickle meta")
+                    with open(META_PATH, "rb") as f:
+                        self.meta = pickle.load(f)
+            except Exception as e:
+                logger.warning("Failed to load meta from PostgreSQL: %s; using pickle", e)
+                with open(META_PATH, "rb") as f:
+                    self.meta = pickle.load(f)
+        else:
+            with open(META_PATH, "rb") as f:
+                self.meta = pickle.load(f)
         logger.info("Loaded %d passages", len(self.meta))
 
     def save_index(self, index, meta):
         logger.info("Saving FAISS index to %s", INDEX_PATH)
         faiss.write_index(index, str(INDEX_PATH))
+        if _use_pg_storage():
+            try:
+                from app.db.store import save_passages_batch, init_schema
+                init_schema()
+                save_passages_batch(meta)
+            except Exception as e:
+                logger.warning("Failed to save meta to PostgreSQL: %s; saving pickle fallback", e)
         with open(META_PATH, "wb") as f:
             pickle.dump(meta, f)
 
