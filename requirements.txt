@@ -13,4 +13,8 @@ requests
 pytest>=7.0.0
 fitz
 PyMuPDF
+psycopg2-binary>=2.9.0
+cryptography>=41.0.0
+sqlalchemy>=2.0.0
+PyYAML
 

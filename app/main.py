@@ -395,6 +395,18 @@ async def query(req: QueryRequest, session_id: Optional[str] = Header(default="d
     # 4) Save memory
     memory_store.add(session_id, req.query, final_answer, trace)
 
+    # 5) Audit log (PostgreSQL hybrid storage, Issue #38)
+    try:
+        from app.db.store import insert_query_log
+        insert_query_log(
+            session_id=session_id,
+            query_text=req.query,
+            redacted_response=final_answer,
+            governance_decision={"approved": decision["approved"], "reason": decision["reason"]},
+        )
+    except Exception:
+        pass
+
     response = {
         "query": req.query,
         "answer": final_answer,

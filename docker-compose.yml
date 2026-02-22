@@ -4,19 +4,44 @@ services:
     container_name: rag_gateway
     restart: always
     depends_on:
-      - ollama
+      ollama:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     environment:
       OLLAMA_API_URL: http://ollama:11434/api/generate
       OLLAMA_MODEL: llama3.1
+      DATABASE_URL: postgresql://raguser:ragpassword@postgres:5432/ragdb
+      USE_PG_STORAGE: "true"
+    env_file:
+      - .env
     ports:
       - "8010:8010"   # FastAPI
       - "8501:8501"   # Streamlit
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
-      - ./index:/app/index
     command: >
       python ra3g.py --api-port 8010 --ui-port 8501
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: rag_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: raguser
+      POSTGRES_PASSWORD: ragpassword
+      POSTGRES_DB: ragdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U raguser -d ragdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   ollama:
     image: ollama/ollama:latest
@@ -29,3 +54,4 @@ services:
 
 volumes:
   ollama_data:
+  postgres_data:
