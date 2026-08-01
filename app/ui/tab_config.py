@@ -166,3 +166,73 @@ def render_config_tab(fastapi_url: str = "http://localhost:8010"):
             st.success("Instructions saved successfully!")
         except Exception as e:
             st.error(f"Failed to save instructions: {e}")
+
+    # ==================================================================
+    # 📌 NEW SECTION: Per-Corpus Confidence Weights  (Issue #25)
+    # ==================================================================
+    st.markdown("---")
+    st.markdown("### ⚖️ Per-Corpus Reliability Weights")
+    st.caption(
+        "Assign a reliability factor (0.5 = less trusted, 1.0 = neutral, 2.0 = highly trusted) "
+        "to each corpus source. These weights influence confidence scoring for answers "
+        "drawn from that corpus."
+    )
+
+    # Fetch corpus list from backend
+    try:
+        doc_res = requests.get(f"{fastapi_url}/documents/list", timeout=3)
+        all_docs = doc_res.json().get("documents", []) if doc_res.status_code == 200 else []
+        # Only consider .txt files (the extracted corpus) or .pdf base names
+        corpus_names = sorted({
+            os.path.splitext(d)[0]
+            for d in all_docs
+            if d.lower().endswith((".pdf", ".txt"))
+        })
+    except Exception:
+        corpus_names = []
+
+    # Load current weights from config
+    current_weights: dict = config_data.get("CORPUS_WEIGHTS", {})
+
+    if not corpus_names:
+        st.info("No corpus documents found. Upload documents in the **Documents** tab first.")
+    else:
+        corpus_weights_edited = {}
+        for name in corpus_names:
+            default_weight = float(current_weights.get(name, 1.0))
+            corpus_weights_edited[name] = st.slider(
+                f"🗂️ {name}",
+                min_value=0.1,
+                max_value=2.0,
+                value=default_weight,
+                step=0.05,
+                key=f"corpus_weight_{name}",
+                help="0.1 = low trust  |  1.0 = neutral  |  2.0 = high trust",
+            )
+
+        if st.button("💾 Save Corpus Weights", key="save_corpus_weights_btn"):
+            try:
+                # Update config.yml
+                with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+                    live_config = yaml.safe_load(f) or {}
+                live_config["CORPUS_WEIGHTS"] = corpus_weights_edited
+                with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+                    yaml.safe_dump(live_config, f, sort_keys=False, allow_unicode=True)
+
+                # Propagate to backend
+                try:
+                    r = requests.put(
+                        f"{fastapi_url}/confidence/tuning",
+                        json={"weights": corpus_weights_edited},
+                        timeout=5,
+                    )
+                    if r.status_code == 200:
+                        st.success("Corpus weights saved and applied to backend.")
+                    else:
+                        st.success("Corpus weights saved to config file.")
+                        st.warning(f"Backend sync returned {r.status_code} — restart service to apply.")
+                except Exception:
+                    st.success("Corpus weights saved to config file.")
+                    st.info("Backend not reachable — weights will apply on next service restart.")
+            except Exception as e:
+                st.error(f"Failed to save corpus weights: {e}")

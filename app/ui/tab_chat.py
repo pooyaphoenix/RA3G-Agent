@@ -62,20 +62,24 @@ def render_chat_tab(FASTAPI_URL):
             st.sidebar.error("Failed to clear memory.")
 
     # --- Main Inputs ---
-    query = st.text_area("💬 Enter your question:", placeholder="Ask something...", key="query_input_tab1")
-    
-    col1, col2 = st.columns([1, 3])
-    with col1:
-        top_k = st.number_input(
-            "Top K Passages", 
-            min_value=1, 
-            max_value=20, 
-            value=5, 
-            step=1,
-            key="topk_input_tab1"
-        )
+    query = st.text_area(
+        "💬 Enter your question:",
+        placeholder="Ask something…",
+        key="query_input_tab1",
+        height=100,
+    )
 
-    if st.button("Submit Query", key="submit_btn_tab1"):
+    top_k = st.number_input(
+        "Top K Passages",
+        min_value=1,
+        max_value=20,
+        value=5,
+        step=1,
+        key="topk_input_tab1",
+        help="Number of corpus passages to retrieve",
+    )
+
+    if st.button("Submit Query", key="submit_btn_tab1", type="primary", use_container_width=True):
         if query.strip():
             payload = {"query": query, "top_k": top_k}
             headers = {"session_id": st.session_state.session_id}

@@ -132,193 +132,198 @@ async def update_pii_config(body: PIIFiltersUpdate):
     return {"pii_filters": data["PII_FILTERS"], "message": "PII config updated and applied."}
 
 
+class ConfidenceTuningRequest(BaseModel):
+    weights: Dict[str, float]
+
+
+@app.get("/confidence/tuning")
+async def get_confidence_tuning():
+    """Fetch current per-corpus confidence weights."""
+    weights = Config.get("CORPUS_WEIGHTS") or {}
+    return {"weights": weights}
+
+
+@app.put("/confidence/tuning")
+async def update_confidence_tuning(body: ConfidenceTuningRequest):
+    """Update per-corpus reliability weights and persist to config file."""
+    path = _get_config_path()
+    if not os.path.exists(path):
+        raise HTTPException(status_code=500, detail="Configuration file not found")
+    with open(path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+    data["CORPUS_WEIGHTS"] = {k: float(v) for k, v in body.weights.items()}
+    with open(path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
+    Config.reload(path)
+    return {"weights": data["CORPUS_WEIGHTS"], "message": "Corpus weights updated and saved."}
+
+
+def _check_ollama_reachable() -> bool:
+    """Lightweight check — does NOT call reason(), just pings the Ollama base URL."""
+    try:
+        import requests as _req
+        ollama_url = Config.get("OLLAMA_URL") or "http://localhost:11434/api/generate"
+        # Derive base: http://host:port
+        parts = ollama_url.split("/")
+        base = "/".join(parts[:3])
+        r = _req.get(f"{base}/", timeout=2)
+        return r.status_code < 500
+    except Exception:
+        return False
+
+
 @app.get("/health")
 async def health_check():
-    """Get overall health status of all services."""
-    retriever = get_retriever()
-    reasoner = get_reasoner()
-    governor = get_governor()
-    
-    # Check each agent
-    agents_status = {}
-    
-    # Gateway (always healthy if we can respond)
+    """Lightweight overall health summary — never initialises agents as a side-effect."""
+    agents_status: Dict[str, str] = {}
+
+    # Gateway: always alive if this handler runs
     agents_status["gateway"] = "healthy"
-    
-    # Retriever
-    if retriever and retriever.index is not None:
+
+    # Retriever: inspect global without forcing init
+    index_loaded = False
+    if _retriever is None:
+        agents_status["retriever"] = "not_started"
+    elif _retriever.index is None:
+        agents_status["retriever"] = "down"
+    else:
         agents_status["retriever"] = "healthy"
         index_loaded = True
+
+    # Reasoning: check Ollama reachability, no LLM call
+    ollama_ok = _check_ollama_reachable()
+    if _reasoner is None:
+        agents_status["reasoning"] = "not_started" if not ollama_ok else "healthy"
     else:
-        agents_status["retriever"] = "down"
-        index_loaded = False
-    
-    # Reasoning
-    try:
-        if reasoner and await reasoner.reason("ping", []):
-            agents_status["reasoning"] = "healthy"
-            ollama_status = True
-        else:
-            agents_status["reasoning"] = "down"
-            ollama_status = False
-    except Exception as e:
-        agents_status["reasoning"] = "error"
-        ollama_status = False
-        logger.error(f"Reasoning agent error: {e}")
-    
-    # Governance
-    if governor:
+        agents_status["reasoning"] = "healthy" if ollama_ok else "down"
+    ollama_status = ollama_ok
+
+    # Governance: inspect global
+    if _governor is None:
+        agents_status["governance"] = "not_started"
+    else:
         agents_status["governance"] = "healthy"
-    else:
-        agents_status["governance"] = "down"
-    
-    # Overall status
-    all_healthy = all(status == "healthy" for status in agents_status.values())
-    
-    if all_healthy:
-        logger.info("Health check passed")
-        return {
-            "status": "ok",
-            "index_loaded": index_loaded,
-            "ollama_status": ollama_status,
-            "agents": agents_status
-        }
-    else:
-        logger.error("Health check failed")
-        return {
-            "status": "degraded",
-            "index_loaded": index_loaded,
-            "ollama_status": ollama_status,
-            "agents": agents_status
-        }
+
+    any_down  = any(s in ("down", "error") for s in agents_status.values())
+    all_good  = all(s in ("healthy", "not_started") for s in agents_status.values())
+    overall   = "ok" if all_good and not any_down else "degraded"
+
+    logger.info("Health check: %s %s", overall, agents_status)
+    return {
+        "status": overall,
+        "index_loaded": index_loaded,
+        "ollama_status": ollama_status,
+        "agents": agents_status,
+        "timestamp": datetime.now().isoformat(),
+    }
 
 @app.get("/health/{agent}")
 async def get_agent_health(agent: str):
-    """Get detailed health status for a specific agent."""
+    """Detailed per-agent health — does NOT initialise agents as a side-effect."""
     agent = agent.lower()
     valid_agents = ["gateway", "retriever", "reasoning", "governance"]
-    
     if agent not in valid_agents:
-        raise HTTPException(status_code=404, detail=f"Unknown agent: {agent}. Valid agents: {', '.join(valid_agents)}")
-    
-    # Calculate uptime
+        raise HTTPException(
+            status_code=404,
+            detail=f"Unknown agent: {agent}. Valid: {', '.join(valid_agents)}",
+        )
+
+    # ── Uptime ────────────────────────────────────────────────
     start_time = _agent_start_times.get(agent)
-    uptime_str = "N/A"
     if start_time:
-        uptime_seconds = time.time() - start_time
-        uptime_str = str(timedelta(seconds=int(uptime_seconds)))
-    
-    # Get last activity
+        uptime_str = str(timedelta(seconds=int(time.time() - start_time)))
+    else:
+        uptime_str = "N/A"
+
+    # ── Last activity ─────────────────────────────────────────
     last_activity_time = _agent_last_activity.get(agent)
-    last_activity_str = "N/A"
     if last_activity_time:
-        last_activity_seconds = time.time() - last_activity_time
-        if last_activity_seconds < 60:
-            last_activity_str = f"{int(last_activity_seconds)}s ago"
-        elif last_activity_seconds < 3600:
-            last_activity_str = f"{int(last_activity_seconds / 60)}m ago"
+        secs = int(time.time() - last_activity_time)
+        if secs < 60:
+            last_activity_str = f"{secs}s ago"
+        elif secs < 3600:
+            last_activity_str = f"{secs // 60}m ago"
         else:
-            last_activity_str = f"{int(last_activity_seconds / 3600)}h ago"
-    
-    # Get error count
+            last_activity_str = f"{secs // 3600}h ago"
+    else:
+        last_activity_str = "N/A"
+
     error_count = _agent_error_counts.get(agent, 0)
-    errors = _agent_errors.get(agent, [])[-10:]  # Last 10 errors
-    
-    # Determine status
+    errors = _agent_errors.get(agent, [])[-10:]
     status = "unknown"
     response_latency = None
-    
+
     try:
         if agent == "gateway":
             status = "healthy"
-            response_latency = 0.001  # Very fast
-        
+            response_latency = 0.001
+
         elif agent == "retriever":
-            retriever = get_retriever()
-            start = time.time()
-            if retriever and retriever.index is not None:
-                # Test retrieval
+            # Inspect global — NO forced init
+            if _retriever is None:
+                status = "not_started"
+            elif _retriever.index is None:
+                status = "down"
+            else:
+                t0 = time.time()
                 try:
-                    test_result = retriever.retrieve("test", top_k=1)
-                    latency = time.time() - start
-                    response_latency = latency
-                    if latency < 0.1:
-                        status = "healthy"
-                    elif latency < 0.5:
-                        status = "slow"
-                    else:
-                        status = "slow"
-                except Exception as e:
+                    _retriever.retrieve("health check", top_k=1)
+                    response_latency = time.time() - t0
+                    status = "healthy" if response_latency < 0.5 else "slow"
+                except Exception as exc:
                     status = "error"
                     _agent_error_counts[agent] += 1
-                    _agent_errors[agent].append(f"{datetime.now()}: {str(e)}")
-            else:
-                status = "down"
-        
+                    _agent_errors[agent].append(f"{datetime.now()}: {exc}")
+
         elif agent == "reasoning":
-            reasoner = get_reasoner()
-            start = time.time()
-            try:
-                test_result = await reasoner.reason("ping", [])
-                latency = time.time() - start
-                response_latency = latency
-                if latency < 1.0:
-                    status = "healthy"
-                elif latency < 3.0:
-                    status = "slow"
-                else:
-                    status = "slow"
-            except Exception as e:
-                status = "error"
-                _agent_error_counts[agent] += 1
-                _agent_errors[agent].append(f"{datetime.now()}: {str(e)}")
-        
+            # Lightweight: ping Ollama base URL, never call reason()
+            t0 = time.time()
+            ok = _check_ollama_reachable()
+            response_latency = time.time() - t0
+            if _reasoner is None:
+                status = "not_started" if ok else "down"
+            else:
+                status = "healthy" if ok else "down"
+                if not ok:
+                    _agent_error_counts[agent] += 1
+                    _agent_errors[agent].append(f"{datetime.now()}: Ollama not reachable")
+
         elif agent == "governance":
-            governor = get_governor()
-            start = time.time()
-            if governor:
-                # Test evaluation
+            if _governor is None:
+                status = "not_started"
+            else:
+                t0 = time.time()
                 try:
-                    test_result = governor.evaluate("test", [], 0.8)
-                    latency = time.time() - start
-                    response_latency = latency
-                    if latency < 0.1:
-                        status = "healthy"
-                    elif latency < 0.5:
-                        status = "slow"
-                    else:
-                        status = "slow"
-                except Exception as e:
+                    _governor.evaluate("health check", [], 0.9)
+                    response_latency = time.time() - t0
+                    status = "healthy" if response_latency < 0.1 else "slow"
+                except Exception as exc:
                     status = "error"
                     _agent_error_counts[agent] += 1
-                    _agent_errors[agent].append(f"{datetime.now()}: {str(e)}")
-            else:
-                status = "down"
-    
-    except Exception as e:
+                    _agent_errors[agent].append(f"{datetime.now()}: {exc}")
+
+    except Exception as exc:
         status = "error"
         _agent_error_counts[agent] += 1
-        _agent_errors[agent].append(f"{datetime.now()}: {str(e)}")
-        logger.error(f"Error checking {agent} health: {e}")
-    
-    # Get recent logs (last 10 lines from log file)
-    recent_logs = []
+        _agent_errors[agent].append(f"{datetime.now()}: {exc}")
+        logger.error("Error checking %s health: %s", agent, exc)
+
+    # ── Recent logs ────────────────────────────────────────────
     log_file_map = {
-        "gateway": "logs/gateway.log",
-        "retriever": "logs/retriever.log",
-        "reasoning": "logs/reasoning.log",
-        "governance": "logs/governance.log"
+        "gateway":    "logs/gateway.log",
+        "retriever":  "logs/retriever.log",
+        "reasoning":  "logs/reasoning.log",
+        "governance": "logs/governance.log",
     }
-    
+    recent_logs: list = []
     log_file = log_file_map.get(agent)
     if log_file and os.path.exists(log_file):
         try:
             with open(log_file, "r", encoding="utf-8") as f:
-                lines = f.readlines()
-                recent_logs = [line.strip() for line in lines[-10:] if line.strip()]
-        except:
+                recent_logs = [ln.strip() for ln in f.readlines()[-10:] if ln.strip()]
+        except Exception:
             pass
-    
+
     return {
         "agent": agent,
         "status": status,
@@ -327,7 +332,8 @@ async def get_agent_health(agent: str):
         "response_latency": response_latency,
         "error_count": error_count,
         "errors": errors,
-        "recent_logs": recent_logs
+        "recent_logs": recent_logs,
+        "timestamp": datetime.now().isoformat(),
     }
 
 @app.post("/query")

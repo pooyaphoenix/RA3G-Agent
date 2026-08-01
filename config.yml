@@ -20,3 +20,4 @@ PII_FILTERS:
   date: true
   id: true
   name: true
+CORPUS_WEIGHTS: {}
